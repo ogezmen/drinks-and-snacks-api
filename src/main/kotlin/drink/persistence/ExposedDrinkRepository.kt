@@ -1,7 +1,7 @@
 package com.example.drink.repository
 
-import com.example.drink.persistence.table.DrinksTable
-import com.example.drink.repository.entity.Drink
+import com.example.drink.persistence.DrinksTable
+import com.example.drink.domain.Drink
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq

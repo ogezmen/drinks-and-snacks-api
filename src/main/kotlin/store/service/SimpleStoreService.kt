@@ -1,9 +1,8 @@
 package com.example.store.service
 
-import com.example.store.model.CreateStoreRequest
-import com.example.store.persistence.entity.Store
-import com.example.store.persistence.repository.StoreRepository
-import com.example.store.service.mapper.toDTO
+import com.example.store.api.model.CreateStoreRequest
+import com.example.store.domain.Store
+import com.example.store.persistence.StoreRepository
 import com.example.store.service.model.StoreDTO
 import java.util.UUID
 

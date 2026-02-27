@@ -1,6 +1,6 @@
-package com.example.drink.persistence.table
+package com.example.drink.persistence
 
-import com.example.store.persistence.table.StoresTable
+import com.example.store.persistence.StoresTable
 import org.jetbrains.exposed.sql.Table
 
 object DrinksTable : Table("drinks") {

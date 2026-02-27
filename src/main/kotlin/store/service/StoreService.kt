@@ -1,6 +1,6 @@
 package com.example.store.service
 
-import com.example.store.model.CreateStoreRequest
+import com.example.store.api.model.CreateStoreRequest
 import com.example.store.service.model.StoreDTO
 import java.util.UUID
 

@@ -1,7 +1,6 @@
-package com.example.store.persistence.repository
+package com.example.store.persistence
 
-import com.example.store.persistence.entity.Store
-import com.example.store.persistence.table.StoresTable
+import com.example.store.domain.Store
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.insert

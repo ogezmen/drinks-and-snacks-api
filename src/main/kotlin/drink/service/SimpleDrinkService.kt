@@ -1,9 +1,8 @@
 package com.example.drink.service
 
 import com.example.drink.repository.DrinkRepository
-import com.example.drink.repository.entity.Drink
-import com.example.drink.service.mapper.toDTO
-import com.example.drink.service.model.DrinkDTO
+import com.example.drink.domain.Drink
+import com.example.drink.api.model.DrinkDTO
 import java.util.UUID
 
 class SimpleDrinkService(

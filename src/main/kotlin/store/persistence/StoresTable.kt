@@ -1,4 +1,4 @@
-package com.example.store.persistence.table
+package com.example.store.persistence
 
 import org.jetbrains.exposed.sql.Table
 

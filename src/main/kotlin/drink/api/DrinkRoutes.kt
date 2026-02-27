@@ -1,7 +1,7 @@
-package com.example.drink
+package com.example.drink.api
 
 import com.example.drink.service.DrinkService
-import com.example.drink.service.model.DrinkDTO
+import com.example.drink.api.model.DrinkDTO
 import com.example.requireUUID
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive

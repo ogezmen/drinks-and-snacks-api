@@ -1,6 +1,6 @@
-package com.example.store.persistence.repository
+package com.example.store.persistence
 
-import com.example.store.persistence.entity.Store
+import com.example.store.domain.Store
 import java.util.UUID
 
 interface StoreRepository {

@@ -1,6 +1,6 @@
 package com.example.drink.service
 
-import com.example.drink.service.model.DrinkDTO
+import com.example.drink.api.model.DrinkDTO
 import java.util.UUID
 
 interface DrinkService {

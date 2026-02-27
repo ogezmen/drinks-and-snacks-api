@@ -2,9 +2,9 @@ package com.example
 
 import com.example.drink.repository.ExposedDrinkRepository
 import com.example.drink.service.SimpleDrinkService
-import com.example.store.persistence.repository.ExposedStoreRepository
+import com.example.store.persistence.ExposedStoreRepository
 import com.example.store.service.SimpleStoreService
-import com.example.store.storeRoutes
+import com.example.store.api.storeRoutes
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*

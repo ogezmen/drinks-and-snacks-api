@@ -1,9 +1,9 @@
-package com.example.store
+package com.example.store.api
 
-import com.example.drink.drinkRoutes
+import com.example.drink.api.drinkRoutes
 import com.example.drink.service.DrinkService
 import com.example.requireUUID
-import com.example.store.model.CreateStoreRequest
+import com.example.store.api.model.CreateStoreRequest
 import com.example.store.service.StoreService
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive

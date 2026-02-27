@@ -1,4 +1,4 @@
-package com.example.store.persistence.entity
+package com.example.store.domain
 
 import java.util.UUID
 

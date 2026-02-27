@@ -1,4 +1,4 @@
-package com.example.drink.repository.entity
+package com.example.drink.domain
 
 import java.util.UUID
 

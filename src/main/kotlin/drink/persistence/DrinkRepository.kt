@@ -1,6 +1,6 @@
 package com.example.drink.repository
 
-import com.example.drink.repository.entity.Drink
+import com.example.drink.domain.Drink
 import java.util.UUID
 
 interface DrinkRepository {
