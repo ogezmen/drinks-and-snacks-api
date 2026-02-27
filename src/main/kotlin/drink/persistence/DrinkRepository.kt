@@ -1,6 +1,6 @@
-package com.example.drink.repository
+package de.okan.drink_and_snack_api.drink.repository
 
-import com.example.drink.domain.Drink
+import de.okan.drink_and_snack_api.drink.domain.Drink
 import java.util.UUID
 
 interface DrinkRepository {

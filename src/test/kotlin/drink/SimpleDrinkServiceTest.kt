@@ -1,9 +1,9 @@
 package drink
 
-import com.example.drink.repository.DrinkRepository
-import com.example.drink.domain.Drink
-import com.example.drink.service.SimpleDrinkService
-import com.example.drink.api.model.DrinkDTO
+import de.okan.drink_and_snack_api.drink.repository.DrinkRepository
+import de.okan.drink_and_snack_api.drink.domain.Drink
+import de.okan.drink_and_snack_api.drink.service.SimpleDrinkService
+import de.okan.drink_and_snack_api.drink.api.model.DrinkDTO
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

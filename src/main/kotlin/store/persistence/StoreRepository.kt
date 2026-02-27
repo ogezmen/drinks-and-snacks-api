@@ -1,6 +1,6 @@
-package com.example.store.persistence
+package de.okan.drink_and_snack_api.store.persistence
 
-import com.example.store.domain.Store
+import de.okan.drink_and_snack_api.store.domain.Store
 import java.util.UUID
 
 interface StoreRepository {

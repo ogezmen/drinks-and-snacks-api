@@ -1,10 +1,10 @@
-package com.example
+package de.okan.drink_and_snack_api
 
-import com.example.drink.repository.ExposedDrinkRepository
-import com.example.drink.service.SimpleDrinkService
-import com.example.store.persistence.ExposedStoreRepository
-import com.example.store.service.SimpleStoreService
-import com.example.store.api.storeRoutes
+import de.okan.drink_and_snack_api.drink.repository.ExposedDrinkRepository
+import de.okan.drink_and_snack_api.drink.service.SimpleDrinkService
+import de.okan.drink_and_snack_api.store.persistence.ExposedStoreRepository
+import de.okan.drink_and_snack_api.store.service.SimpleStoreService
+import de.okan.drink_and_snack_api.store.api.storeRoutes
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*

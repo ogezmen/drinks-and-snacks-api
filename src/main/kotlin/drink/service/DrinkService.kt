@@ -1,6 +1,6 @@
-package com.example.drink.service
+package de.okan.drink_and_snack_api.drink.service
 
-import com.example.drink.api.model.DrinkDTO
+import de.okan.drink_and_snack_api.drink.api.model.DrinkDTO
 import java.util.UUID
 
 interface DrinkService {

@@ -1,4 +1,4 @@
-package com.example.store.persistence
+package de.okan.drink_and_snack_api.store.persistence
 
 import org.jetbrains.exposed.sql.Table
 

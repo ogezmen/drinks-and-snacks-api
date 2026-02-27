@@ -5,7 +5,7 @@ plugins {
     jacoco
 }
 
-group = "com.example"
+group = "de.okan.drink_and_snack_api"
 version = "0.0.1"
 
 application {

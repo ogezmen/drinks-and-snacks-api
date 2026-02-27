@@ -1,8 +1,8 @@
-package com.example.drink.api
+package de.okan.drink_and_snack_api.drink.api
 
-import com.example.drink.service.DrinkService
-import com.example.drink.api.model.DrinkDTO
-import com.example.requireUUID
+import de.okan.drink_and_snack_api.drink.service.DrinkService
+import de.okan.drink_and_snack_api.drink.api.model.DrinkDTO
+import de.okan.drink_and_snack_api.requireUUID
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond

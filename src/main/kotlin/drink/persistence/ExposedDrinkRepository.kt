@@ -1,7 +1,7 @@
-package com.example.drink.repository
+package de.okan.drink_and_snack_api.drink.repository
 
-import com.example.drink.persistence.DrinksTable
-import com.example.drink.domain.Drink
+import de.okan.drink_and_snack_api.drink.persistence.DrinksTable
+import de.okan.drink_and_snack_api.drink.domain.Drink
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq

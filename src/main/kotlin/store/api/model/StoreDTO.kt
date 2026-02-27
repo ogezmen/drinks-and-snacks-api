@@ -1,4 +1,4 @@
-package com.example.store.service.model
+package de.okan.drink_and_snack_api.store.service.model
 
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable

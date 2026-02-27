@@ -1,6 +1,6 @@
-package com.example.drink.persistence
+package de.okan.drink_and_snack_api.drink.persistence
 
-import com.example.store.persistence.StoresTable
+import de.okan.drink_and_snack_api.store.persistence.StoresTable
 import org.jetbrains.exposed.sql.Table
 
 object DrinksTable : Table("drinks") {

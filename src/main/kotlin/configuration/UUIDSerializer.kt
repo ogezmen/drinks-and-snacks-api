@@ -1,4 +1,4 @@
-package com.example.configuration
+package de.okan.drink_and_snack_api.configuration
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind

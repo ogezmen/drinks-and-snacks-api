@@ -1,6 +1,6 @@
-package com.example
+package de.okan.drink_and_snack_api
 
-import com.example.configuration.UUIDSerializer
+import de.okan.drink_and_snack_api.configuration.UUIDSerializer
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*

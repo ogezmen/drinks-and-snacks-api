@@ -1,9 +1,9 @@
-package com.example.store.service
+package de.okan.drink_and_snack_api.store.service
 
-import com.example.store.api.model.CreateStoreRequest
-import com.example.store.domain.Store
-import com.example.store.persistence.StoreRepository
-import com.example.store.service.model.StoreDTO
+import de.okan.drink_and_snack_api.store.api.model.CreateStoreRequest
+import de.okan.drink_and_snack_api.store.domain.Store
+import de.okan.drink_and_snack_api.store.persistence.StoreRepository
+import de.okan.drink_and_snack_api.store.service.model.StoreDTO
 import java.util.UUID
 
 class SimpleStoreService(
