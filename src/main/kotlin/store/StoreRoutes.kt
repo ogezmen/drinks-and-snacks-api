@@ -2,7 +2,7 @@ package com.example.store
 
 import com.example.drink.drinkRoutes
 import com.example.drink.service.DrinkService
-import com.example.getIdAsUUID
+import com.example.requireUUID
 import com.example.store.model.CreateStoreRequest
 import com.example.store.service.StoreService
 import io.ktor.http.HttpStatusCode
@@ -28,11 +28,7 @@ fun Route.storeRoutes(storeService: StoreService, drinkService: DrinkService) {
 
         route("/{id}") {
             get {
-                val id = call.getIdAsUUID()
-                if (id == null) {
-                    call.respond(message = "Missing or malformed id", status = HttpStatusCode.BadRequest)
-                    return@get
-                }
+                val id = call.requireUUID()
 
                 val store = storeService.getStoreById(id)
                 if (store == null) {
@@ -44,11 +40,7 @@ fun Route.storeRoutes(storeService: StoreService, drinkService: DrinkService) {
             }
 
             delete {
-                val id = call.getIdAsUUID()
-                if (id == null) {
-                    call.respond(message = "Missing or malformed id", status = HttpStatusCode.BadRequest)
-                    return@delete
-                }
+                val id = call.requireUUID()
 
                 storeService.deleteStore(id)
             }

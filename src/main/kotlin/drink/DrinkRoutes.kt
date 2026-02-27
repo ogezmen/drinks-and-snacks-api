@@ -2,7 +2,7 @@ package com.example.drink
 
 import com.example.drink.service.DrinkService
 import com.example.drink.service.model.DrinkDTO
-import com.example.getIdAsUUID
+import com.example.requireUUID
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
@@ -15,17 +15,14 @@ import io.ktor.server.routing.route
 fun Route.drinkRoutes(drinkService: DrinkService) {
     route("/{storeId}/drinks") {
         get {
-            val storeId = call.getIdAsUUID("storeId")
-            call.respond(drinkService.getAllDrinks())
+            val storeId = call.requireUUID("storeId")
+            call.respond(drinkService.getAllDrinks(storeId))
         }
 
         get("/{id}") {
-            val id = call.getIdAsUUID()
-            if (id == null) {
-                call.respond(message = "Missing or malformed id", status = HttpStatusCode.BadRequest)
-                return@get
-            }
-            val drink = drinkService.getDrinkById(id)
+            val id = call.requireUUID()
+            val storeId = call.requireUUID("storeId")
+            val drink = drinkService.getDrinkById(id, storeId)
             if (drink == null) {
                 call.respond(message = "Drink not found", status = HttpStatusCode.NotFound)
                 return@get
@@ -35,18 +32,17 @@ fun Route.drinkRoutes(drinkService: DrinkService) {
         }
 
         post {
+            val storeId = call.requireUUID("storeId")
             val drink = call.receive<DrinkDTO>()
-            val createdDrink = drinkService.addDrink(drink)
+            val createdDrink = drinkService.addDrink(drink, storeId)
             call.respond(message = createdDrink, status = HttpStatusCode.Created)
         }
 
         delete("/{id}") {
-            val id = call.getIdAsUUID()
-            if (id == null) {
-                call.respond(message = "Missing or malformed id", status = HttpStatusCode.BadRequest)
-                return@delete
-            }
-            // TODO: Implement delete logic using uuid
+            val storeId = call.requireUUID("storeId")
+            val id = call.requireUUID()
+            drinkService.deleteDrink(id, storeId)
+            call.respond(HttpStatusCode.NoContent)
         }
     }
 }

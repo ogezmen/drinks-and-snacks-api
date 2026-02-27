@@ -18,14 +18,17 @@ class SimpleDrinkServiceTest {
 
     @Test
     fun `should return all drinks`() {
-        val drink1 = Drink(UUID.randomUUID(), "Coca-Cola")
-        val drink2 = Drink(UUID.randomUUID(), "Pepsi")
+        val storeId = UUID.randomUUID()
 
-        every { drinkRepository.findAll() } returns listOf(drink1, drink2)
+        val drink1 = Drink(UUID.randomUUID(), "Coca-Cola", storeId)
+        val drink2 = Drink(UUID.randomUUID(), "Pepsi", storeId)
 
-        val drinks = service.getAllDrinks()
+        every { drinkRepository.findAll(any()) } returns listOf(drink1, drink2)
 
-        verify { drinkRepository.findAll() }
+
+        val drinks = service.getAllDrinks(storeId)
+
+        verify { drinkRepository.findAll(storeId) }
 
         assertEquals(2, drinks.size)
         assertEquals("Coca-Cola", drinks[0].name)
@@ -35,13 +38,16 @@ class SimpleDrinkServiceTest {
     @Test
     fun `should return a drink by id`() {
         val drinkId = UUID.randomUUID()
-        val drink = Drink(drinkId, "Coca-Cola")
+        val storeId = UUID.randomUUID()
 
-        every { drinkRepository.findById(drinkId) } returns drink
+        val drink = Drink(drinkId, "Coca-Cola", storeId)
 
-        val foundDrink = service.getDrinkById(drinkId)
 
-        verify { drinkRepository.findById(drinkId) }
+        every { drinkRepository.findById(drinkId, storeId) } returns drink
+
+        val foundDrink = service.getDrinkById(drinkId, storeId)
+
+        verify { drinkRepository.findById(drinkId, storeId) }
 
         assertEquals("Coca-Cola", foundDrink?.name)
         assertEquals(drinkId, foundDrink?.id)
@@ -50,12 +56,13 @@ class SimpleDrinkServiceTest {
     @Test
     fun `should not return a drink if id does not exist`() {
         val drinkId = UUID.randomUUID()
+        val storeId = UUID.randomUUID()
 
-        every { drinkRepository.findById(drinkId) } returns null
+        every { drinkRepository.findById(drinkId, storeId) } returns null
 
-        val foundDrink = service.getDrinkById(drinkId)
+        val foundDrink = service.getDrinkById(drinkId, storeId)
 
-        verify { drinkRepository.findById(drinkId) }
+        verify { drinkRepository.findById(drinkId, storeId) }
 
         assertEquals(null, foundDrink)
     }
@@ -67,14 +74,16 @@ class SimpleDrinkServiceTest {
             name = "Coca-Cola"
         )
 
-        every { drinkRepository.save(any()) } answers {
+        val storeId = UUID.randomUUID()
+
+        every { drinkRepository.save(any(), storeId) } answers {
             val drink = firstArg<Drink>()
             drink.copy(id = UUID.randomUUID())
         }
 
-        val createdDrink = service.addDrink(drinkDTO)
+        val createdDrink = service.addDrink(drinkDTO, storeId)
 
-        verify { drinkRepository.save(any()) }
+        verify { drinkRepository.save(any(), storeId) }
 
         assertEquals("Coca-Cola", createdDrink.name)
     }
@@ -82,11 +91,12 @@ class SimpleDrinkServiceTest {
     @Test
     fun `should delete a drink by id`() {
         val drinkId = UUID.randomUUID()
+        val storeId = UUID.randomUUID()
 
-        every { drinkRepository.deleteById(drinkId) } returns Unit
+        every { drinkRepository.deleteById(drinkId, storeId) } returns Unit
 
-        service.deleteDrink(drinkId)
+        service.deleteDrink(drinkId, storeId)
 
-        verify { drinkRepository.deleteById(drinkId) }
+        verify { drinkRepository.deleteById(drinkId, storeId) }
     }
 }

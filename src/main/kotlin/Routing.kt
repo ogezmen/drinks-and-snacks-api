@@ -39,11 +39,16 @@ fun Application.configureRouting() {
     }
 }
 
-fun ApplicationCall.getIdAsUUID(paramName: String = "id"): UUID? {
-    val id = parameters[paramName] ?: return null
+private fun ApplicationCall.getParameterAsUUID(parameterName: String): UUID? {
+    val id = parameters[parameterName] ?: return null
     return try {
         UUID.fromString(id)
     } catch (_: IllegalArgumentException) {
         null
     }
+}
+
+fun ApplicationCall.requireUUID(parameterName: String = "id"): UUID {
+    val uuid = getParameterAsUUID(parameterName)
+    return uuid ?: throw IllegalArgumentException("Missing or malformed $parameterName")
 }

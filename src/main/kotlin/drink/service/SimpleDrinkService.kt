@@ -10,21 +10,22 @@ class SimpleDrinkService(
     private val drinkRepository: DrinkRepository
 ) : DrinkService {
 
-    override fun getAllDrinks(): List<DrinkDTO> = drinkRepository.findAll().map { it.toDTO() }
+    override fun getAllDrinks(storeId: UUID): List<DrinkDTO> = drinkRepository.findAll(storeId).map { it.toDTO() }
 
-    override fun getDrinkById(id: UUID): DrinkDTO? = drinkRepository.findById(id)?.toDTO()
+    override fun getDrinkById(id: UUID, storeId: UUID): DrinkDTO? = drinkRepository.findById(id, storeId)?.toDTO()
 
-    override fun addDrink(drink: DrinkDTO): DrinkDTO {
+    override fun addDrink(drink: DrinkDTO, storeId: UUID): DrinkDTO {
         val drinkEntity = Drink(
             id = UUID.randomUUID(),
-            name = drink.name
+            name = drink.name,
+            storeId = storeId,
         )
 
-        val savedEntity = drinkRepository.save(drinkEntity)
+        val savedEntity = drinkRepository.save(drinkEntity, storeId)
         return DrinkDTO(savedEntity.id, savedEntity.name)
     }
 
-    override fun deleteDrink(id: UUID) {
-        drinkRepository.deleteById(id)
+    override fun deleteDrink(id: UUID, storeId: UUID) {
+        drinkRepository.deleteById(id, storeId)
     }
 }
