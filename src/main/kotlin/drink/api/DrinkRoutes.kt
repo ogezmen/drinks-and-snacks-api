@@ -1,7 +1,7 @@
 package de.okan.drink_and_snack_api.drink.api
 
+import de.okan.drink_and_snack_api.drink.api.model.CreateDrinkRequest
 import de.okan.drink_and_snack_api.drink.service.DrinkService
-import de.okan.drink_and_snack_api.drink.api.model.DrinkDTO
 import de.okan.drink_and_snack_api.requireUUID
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive
@@ -33,8 +33,8 @@ fun Route.drinkRoutes(drinkService: DrinkService) {
 
         post {
             val storeId = call.requireUUID("storeId")
-            val drink = call.receive<DrinkDTO>()
-            val createdDrink = drinkService.addDrink(drink, storeId)
+            val drink = call.receive<CreateDrinkRequest>()
+            val createdDrink = drinkService.createDrink(drink, storeId)
             call.respond(message = createdDrink, status = HttpStatusCode.Created)
         }
 

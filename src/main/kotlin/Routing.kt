@@ -1,9 +1,9 @@
 package de.okan.drink_and_snack_api
 
 import de.okan.drink_and_snack_api.drink.repository.ExposedDrinkRepository
-import de.okan.drink_and_snack_api.drink.service.SimpleDrinkService
+import de.okan.drink_and_snack_api.drink.service.DefaultDrinkService
 import de.okan.drink_and_snack_api.store.persistence.ExposedStoreRepository
-import de.okan.drink_and_snack_api.store.service.SimpleStoreService
+import de.okan.drink_and_snack_api.store.service.DefaultStoreService
 import de.okan.drink_and_snack_api.store.api.storeRoutes
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -25,10 +25,10 @@ fun Application.configureRouting() {
         )
 
         val drinkRepository = ExposedDrinkRepository(database)
-        val drinkService = SimpleDrinkService(drinkRepository)
+        val drinkService = DefaultDrinkService(drinkRepository)
 
         val storeRepository = ExposedStoreRepository(database)
-        val storeService = SimpleStoreService(storeRepository)
+        val storeService = DefaultStoreService(storeRepository)
 
         route("/api/v1") {
             storeRoutes(

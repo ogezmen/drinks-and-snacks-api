@@ -2,7 +2,7 @@ package store
 
 import kotlin.test.Test
 
-class SimpleStoreServiceTest {
+class DefaultStoreServiceTest {
 
     @Test
     fun `should create a new store`() {

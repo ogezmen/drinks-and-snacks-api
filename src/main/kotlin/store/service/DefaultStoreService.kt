@@ -6,17 +6,17 @@ import de.okan.drink_and_snack_api.store.persistence.StoreRepository
 import de.okan.drink_and_snack_api.store.service.model.StoreDTO
 import java.util.UUID
 
-class SimpleStoreService(
+class DefaultStoreService(
     private val storeRepository: StoreRepository,
 ) : StoreService {
-    override fun getAllStores(): List<StoreDTO> = storeRepository.findAll().map{ StoreDTO(id = it.id, name = it.name) }
+    override fun getAllStores(): List<StoreDTO> = storeRepository.findAll().map { it.toDTO() }
 
-    override fun getStoreById(id: UUID): StoreDTO? = storeRepository.findById(id)?.let { StoreDTO(id = it.id, name = it.name) }
+    override fun getStoreById(id: UUID): StoreDTO? = storeRepository.findById(id)?.toDTO()
 
     override fun createStore(store: CreateStoreRequest): StoreDTO {
         val storeEntity = Store(
             id = UUID.randomUUID(),
-            name = store.name
+            name = store.name,
         )
 
         val savedStore = storeRepository.save(storeEntity)

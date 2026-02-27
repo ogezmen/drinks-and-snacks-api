@@ -1,11 +1,12 @@
 package de.okan.drink_and_snack_api.drink.service
 
+import de.okan.drink_and_snack_api.drink.api.model.CreateDrinkRequest
 import de.okan.drink_and_snack_api.drink.repository.DrinkRepository
 import de.okan.drink_and_snack_api.drink.domain.Drink
 import de.okan.drink_and_snack_api.drink.api.model.DrinkDTO
 import java.util.UUID
 
-class SimpleDrinkService(
+class DefaultDrinkService(
     private val drinkRepository: DrinkRepository
 ) : DrinkService {
 
@@ -13,15 +14,15 @@ class SimpleDrinkService(
 
     override fun getDrinkById(id: UUID, storeId: UUID): DrinkDTO? = drinkRepository.findById(id, storeId)?.toDTO()
 
-    override fun addDrink(drink: DrinkDTO, storeId: UUID): DrinkDTO {
+    override fun createDrink(createDrinkRequest: CreateDrinkRequest, storeId: UUID): DrinkDTO {
         val drinkEntity = Drink(
             id = UUID.randomUUID(),
-            name = drink.name,
+            name = createDrinkRequest.name,
             storeId = storeId,
         )
 
         val savedEntity = drinkRepository.save(drinkEntity, storeId)
-        return DrinkDTO(savedEntity.id, savedEntity.name)
+        return savedEntity.toDTO()
     }
 
     override fun deleteDrink(id: UUID, storeId: UUID) {

@@ -6,6 +6,6 @@ import java.util.UUID
 
 @Serializable
 data class DrinkDTO(
-    @Contextual val id: UUID? = null,
+    @Contextual val id: UUID,
     val name: String,
 )

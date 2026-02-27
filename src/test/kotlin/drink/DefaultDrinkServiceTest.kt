@@ -1,8 +1,9 @@
 package drink
 
+import de.okan.drink_and_snack_api.drink.api.model.CreateDrinkRequest
 import de.okan.drink_and_snack_api.drink.repository.DrinkRepository
 import de.okan.drink_and_snack_api.drink.domain.Drink
-import de.okan.drink_and_snack_api.drink.service.SimpleDrinkService
+import de.okan.drink_and_snack_api.drink.service.DefaultDrinkService
 import de.okan.drink_and_snack_api.drink.api.model.DrinkDTO
 import io.mockk.every
 import io.mockk.mockk
@@ -11,10 +12,10 @@ import java.util.UUID
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class SimpleDrinkServiceTest {
+class DefaultDrinkServiceTest {
 
     private val drinkRepository = mockk<DrinkRepository>()
-    private val service = SimpleDrinkService(drinkRepository)
+    private val service = DefaultDrinkService(drinkRepository)
 
     @Test
     fun `should return all drinks`() {
@@ -70,7 +71,7 @@ class SimpleDrinkServiceTest {
     @Test
     fun `should create a new drink`() {
 
-        val drinkDTO = DrinkDTO(
+        val createDrinkRequest = CreateDrinkRequest(
             name = "Coca-Cola"
         )
 
@@ -81,7 +82,7 @@ class SimpleDrinkServiceTest {
             drink.copy(id = UUID.randomUUID())
         }
 
-        val createdDrink = service.addDrink(drinkDTO, storeId)
+        val createdDrink = service.createDrink(createDrinkRequest, storeId)
 
         verify { drinkRepository.save(any(), storeId) }
 
