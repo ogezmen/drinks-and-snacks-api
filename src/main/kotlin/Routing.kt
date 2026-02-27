@@ -2,16 +2,17 @@ package com.example
 
 import com.example.drink.repository.ExposedDrinkRepository
 import com.example.drink.service.SimpleDrinkService
-import com.example.store.routes.storeRoutes
+import com.example.store.persistence.repository.ExposedStoreRepository
+import com.example.store.service.SimpleStoreService
+import com.example.store.storeRoutes
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.jetbrains.exposed.sql.Database
+import java.util.UUID
+
 
 fun Application.configureRouting() {
-
-
-
     routing {
         get("/") {
             call.respondText("I'm alive!")
@@ -26,6 +27,21 @@ fun Application.configureRouting() {
         val drinkRepository = ExposedDrinkRepository(database)
         val drinkService = SimpleDrinkService(drinkRepository)
 
-        storeRoutes(drinkService)
+        val storeRepository = ExposedStoreRepository(database)
+        val storeService = SimpleStoreService(storeRepository)
+
+        storeRoutes(
+            storeService = storeService,
+            drinkService = drinkService,
+        )
+    }
+}
+
+fun ApplicationCall.getIdAsUUID(paramName: String = "id"): UUID? {
+    val id = parameters[paramName] ?: return null
+    return try {
+        UUID.fromString(id)
+    } catch (_: IllegalArgumentException) {
+        null
     }
 }

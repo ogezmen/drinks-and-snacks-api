@@ -1,11 +1,11 @@
 package com.example.drink.repository
 
-import com.example.drink.repository.entity.DrinkEntity
+import com.example.drink.repository.entity.Drink
 import java.util.UUID
 
 interface DrinkRepository {
-    fun findAll(): List<DrinkEntity>
-    fun findById(id: UUID): DrinkEntity?
-    fun save(drink: DrinkEntity): DrinkEntity
+    fun findAll(): List<Drink>
+    fun findById(id: UUID): Drink?
+    fun save(drink: Drink): Drink
     fun deleteById(id: UUID)
 }

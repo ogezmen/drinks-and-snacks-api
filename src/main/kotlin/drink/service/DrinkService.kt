@@ -7,4 +7,5 @@ interface DrinkService {
     fun getAllDrinks(): List<DrinkDTO>
     fun getDrinkById(id: UUID): DrinkDTO?
     fun addDrink(drink: DrinkDTO): DrinkDTO
+    fun deleteDrink(id: UUID)
 }

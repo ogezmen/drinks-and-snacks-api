@@ -1,9 +1,11 @@
 package com.example.drink.repository
 
 import com.example.drink.persistence.table.DrinksTable
-import com.example.drink.repository.entity.DrinkEntity
+import com.example.drink.repository.entity.Drink
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
@@ -20,25 +22,25 @@ class ExposedDrinkRepository(
         }
     }
 
-    override fun findAll(): List<DrinkEntity> = transaction(database){
+    override fun findAll(): List<Drink> = transaction(database) {
         DrinksTable.selectAll().map {
-            DrinkEntity(
+            Drink(
                 id = it[DrinksTable.id],
                 name = it[DrinksTable.name]
             )
         }
     }
 
-    override fun findById(id: UUID): DrinkEntity? = transaction(database) {
+    override fun findById(id: UUID): Drink? = transaction(database) {
         DrinksTable.select { DrinksTable.id eq id }.mapNotNull {
-            DrinkEntity(
+            Drink(
                 id = it[DrinksTable.id],
                 name = it[DrinksTable.name]
             )
         }.singleOrNull()
     }
 
-    override fun save(drink: DrinkEntity): DrinkEntity = transaction(database) {
+    override fun save(drink: Drink): Drink = transaction(database) {
         DrinksTable.insert {
             it[id] = drink.id
             it[name] = drink.name
@@ -47,6 +49,6 @@ class ExposedDrinkRepository(
     }
 
     override fun deleteById(id: UUID) {
-        TODO("Not yet implemented")
+        DrinksTable.deleteWhere { DrinksTable.id eq id }
     }
 }
