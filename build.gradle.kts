@@ -26,6 +26,10 @@ tasks.jacocoTestReport {
     }
 }
 
+val exposedVersion = "0.42.0"
+val h2Version = "2.2.222"
+val mockkVersion = "1.13.8"
+
 dependencies {
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.netty)
@@ -35,12 +39,12 @@ dependencies {
     implementation(libs.logback.classic)
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.config.yaml)
-    implementation("org.jetbrains.exposed:exposed-core:0.42.0")
-    implementation("org.jetbrains.exposed:exposed-dao:0.42.0")
-    implementation("org.jetbrains.exposed:exposed-jdbc:0.42.0")
+    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
 
-    implementation("com.h2database:h2:2.2.222")
+    implementation("com.h2database:h2:$h2Version")
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
-    testImplementation("io.mockk:mockk:1.13.8")
+    testImplementation("io.mockk:mockk:$mockkVersion")
 }
