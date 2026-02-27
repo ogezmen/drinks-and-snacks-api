@@ -44,6 +44,20 @@ class SimpleDrinkServiceTest {
         verify { drinkRepository.findById(drinkId) }
 
         assertEquals("Coca-Cola", foundDrink?.name)
+        assertEquals(drinkId, foundDrink?.id)
+    }
+
+    @Test
+    fun `should not return a drink if id does not exist`() {
+        val drinkId = UUID.randomUUID()
+
+        every { drinkRepository.findById(drinkId) } returns null
+
+        val foundDrink = service.getDrinkById(drinkId)
+
+        verify { drinkRepository.findById(drinkId) }
+
+        assertEquals(null, foundDrink)
     }
 
     @Test

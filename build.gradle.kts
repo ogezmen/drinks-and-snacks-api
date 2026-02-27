@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktor)
     kotlin("plugin.serialization") version "2.0.0"
+    jacoco
 }
 
 group = "com.example"
@@ -13,6 +14,16 @@ application {
 
 kotlin {
     jvmToolchain(21)
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+        csv.required.set(false)
+    }
 }
 
 dependencies {

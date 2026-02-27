@@ -15,16 +15,17 @@ import io.ktor.server.routing.route
 fun Route.drinkRoutes(drinkService: DrinkService) {
     route("/{storeId}/drinks") {
         get {
+            val storeId = call.getIdAsUUID("storeId")
             call.respond(drinkService.getAllDrinks())
         }
 
         get("/{id}") {
-            val uuid = call.getIdAsUUID()
-            if (uuid == null) {
+            val id = call.getIdAsUUID()
+            if (id == null) {
                 call.respond(message = "Missing or malformed id", status = HttpStatusCode.BadRequest)
                 return@get
             }
-            val drink = drinkService.getDrinkById(uuid)
+            val drink = drinkService.getDrinkById(id)
             if (drink == null) {
                 call.respond(message = "Drink not found", status = HttpStatusCode.NotFound)
                 return@get
@@ -40,8 +41,8 @@ fun Route.drinkRoutes(drinkService: DrinkService) {
         }
 
         delete("/{id}") {
-            val uuid = call.getIdAsUUID()
-            if (uuid == null) {
+            val id = call.getIdAsUUID()
+            if (id == null) {
                 call.respond(message = "Missing or malformed id", status = HttpStatusCode.BadRequest)
                 return@delete
             }

@@ -30,10 +30,12 @@ fun Application.configureRouting() {
         val storeRepository = ExposedStoreRepository(database)
         val storeService = SimpleStoreService(storeRepository)
 
-        storeRoutes(
-            storeService = storeService,
-            drinkService = drinkService,
-        )
+        route("/api/v1") {
+            storeRoutes(
+                storeService = storeService,
+                drinkService = drinkService,
+            )
+        }
     }
 }
 
