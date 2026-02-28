@@ -68,31 +68,27 @@ afterEvaluate {
     }
 }
 
-
-
-val exposedVersion = "0.42.0"
-val h2Version = "2.2.222"
-val mockkVersion = "1.13.8"
-val koinVersion = "3.5.3"
-
 dependencies {
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.netty)
-    implementation("io.ktor:ktor-server-content-negotiation")
-    implementation("io.ktor:ktor-serialization-kotlinx-json")
-    implementation("io.ktor:ktor-server-status-pages")
-    implementation(libs.logback.classic)
-    implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.content.negotiation)
+    implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.ktor.server.status.pages)
+
     implementation(libs.ktor.server.config.yaml)
-    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
-    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
-    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
-    implementation("io.insert-koin:koin-ktor:$koinVersion")
-    implementation("com.h2database:h2:$h2Version")
+
+    implementation(libs.logback.classic)
+
+    implementation(libs.exposed.core)
+    implementation(libs.exposed.dao)
+    implementation(libs.exposed.jdbc)
+
+    implementation(libs.koin.ktor)
+    implementation(libs.h2)
+
     testImplementation(libs.ktor.server.test.host)
-    testImplementation("io.ktor:ktor-client-core")
-    testImplementation("io.ktor:ktor-client-content-negotiation")
-    testImplementation("io.ktor:ktor-serialization-kotlinx-json")
+    testImplementation(libs.ktor.client.core)
+    testImplementation(libs.ktor.client.content.negotiation)
     testImplementation(libs.kotlin.test.junit)
-    testImplementation("io.mockk:mockk:$mockkVersion")
+    testImplementation(libs.mockk)
 }
