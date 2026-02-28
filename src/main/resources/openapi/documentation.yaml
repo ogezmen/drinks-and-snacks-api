@@ -1,0 +1,205 @@
+openapi: 3.0.3
+info:
+  title: Drink & Snack API
+  version: 1.0.0
+  description: API for managing stores and their drinks
+
+servers:
+  - url: http://localhost:8080
+
+paths:
+
+  /:
+    get:
+      summary: Health check
+      responses:
+        '200':
+          description: API is alive
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "I'm alive!"
+
+  /api/v1/stores:
+    get:
+      summary: Get all stores
+      responses:
+        '200':
+          description: List of stores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StoreDTO'
+
+    post:
+      summary: Create a new store
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStoreRequest'
+      responses:
+        '201':
+          description: Store created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreDTO'
+        '400':
+          description: Bad request
+
+  /api/v1/stores/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+
+    get:
+      summary: Get store by ID
+      responses:
+        '200':
+          description: Store found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreDTO'
+        '404':
+          description: Store not found
+        '400':
+          description: Missing or malformed id
+
+    delete:
+      summary: Delete store
+      responses:
+        '204':
+          description: Store deleted
+        '400':
+          description: Missing or malformed id
+
+  /api/v1/stores/{storeId}/drinks:
+    parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+
+    get:
+      summary: Get all drinks for a store
+      responses:
+        '200':
+          description: List of drinks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DrinkDTO'
+        '400':
+          description: Missing or malformed storeId
+
+    post:
+      summary: Create drink in store
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDrinkRequest'
+      responses:
+        '201':
+          description: Drink created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DrinkDTO'
+        '400':
+          description: Bad request
+
+  /api/v1/stores/{storeId}/drinks/{id}:
+    parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+
+    get:
+      summary: Get drink by ID
+      responses:
+        '200':
+          description: Drink found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DrinkDTO'
+        '404':
+          description: Drink not found
+        '400':
+          description: Missing or malformed id
+
+    delete:
+      summary: Delete drink
+      responses:
+        '204':
+          description: Drink deleted
+        '400':
+          description: Missing or malformed id
+
+components:
+  schemas:
+
+    StoreDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+      required:
+        - id
+        - name
+
+    CreateStoreRequest:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+        - name
+
+    DrinkDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+      required:
+        - id
+        - name
+
+    CreateDrinkRequest:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+        - name

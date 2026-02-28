@@ -51,7 +51,7 @@ class ExposedDrinkRepository(
         drink
     }
 
-    override fun deleteById(id: UUID, storeId: UUID) {
+    override fun deleteById(id: UUID, storeId: UUID): Unit = transaction(database) {
         DrinksTable.deleteWhere { (DrinksTable.id eq id) and (DrinksTable.storeId eq storeId) }
     }
 }

@@ -3,6 +3,8 @@ package de.okan.drink_and_snack_api.store.persistence
 import de.okan.drink_and_snack_api.store.domain.Store
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
@@ -45,7 +47,7 @@ class ExposedStoreRepository(
         store
     }
 
-    override fun deleteById(id: UUID) {
-        TODO("Not yet implemented")
+    override fun deleteById(id: UUID): Unit = transaction(database) {
+        StoresTable.deleteWhere { StoresTable.id eq id }
     }
 }
