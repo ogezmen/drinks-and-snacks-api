@@ -28,7 +28,9 @@ tasks.jacocoTestReport {
 
 val classesExcludedForTests = listOf(
     "/de/okan/drink_and_snack_api/ApplicationKt*",
-    "/de/okan/drink_and_snack_api/configuration/**",
+    "**/configuration/**",
+    "**/di/**",
+    "**/model/**",
 )
 
 afterEvaluate {
@@ -71,6 +73,7 @@ afterEvaluate {
 val exposedVersion = "0.42.0"
 val h2Version = "2.2.222"
 val mockkVersion = "1.13.8"
+val koinVersion = "3.5.3"
 
 dependencies {
     implementation(libs.ktor.server.core)
@@ -84,7 +87,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
-
+    implementation("io.insert-koin:koin-ktor:$koinVersion")
     implementation("com.h2database:h2:$h2Version")
     testImplementation(libs.ktor.server.test.host)
     testImplementation("io.ktor:ktor-client-core")
