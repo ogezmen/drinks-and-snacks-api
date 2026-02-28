@@ -1,4 +1,4 @@
-package de.okan.drink_and_snack_api.drink.di
+package de.okan.drink_and_snack_api.drink.configuration
 
 import de.okan.drink_and_snack_api.drink.repository.DrinkRepository
 import de.okan.drink_and_snack_api.drink.repository.ExposedDrinkRepository

@@ -1,9 +1,9 @@
 package de.okan.drink_and_snack_api
 
-import de.okan.drink_and_snack_api.di.databaseModule
-import de.okan.drink_and_snack_api.drink.di.drinkModule
+import de.okan.drink_and_snack_api.configuration.databaseModule
+import de.okan.drink_and_snack_api.drink.configuration.drinkModule
 import de.okan.drink_and_snack_api.drink.service.DrinkService
-import de.okan.drink_and_snack_api.store.di.storeModule
+import de.okan.drink_and_snack_api.store.configuration.storeModule
 import de.okan.drink_and_snack_api.store.service.StoreService
 import io.ktor.server.application.*
 import org.koin.ktor.ext.inject

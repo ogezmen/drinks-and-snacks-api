@@ -1,4 +1,4 @@
-package de.okan.drink_and_snack_api.store.di
+package de.okan.drink_and_snack_api.store.configuration
 
 import de.okan.drink_and_snack_api.store.persistence.ExposedStoreRepository
 import de.okan.drink_and_snack_api.store.persistence.StoreRepository

@@ -1,4 +1,4 @@
-package de.okan.drink_and_snack_api.di
+package de.okan.drink_and_snack_api.configuration
 
 import org.jetbrains.exposed.sql.Database
 import org.koin.dsl.module
