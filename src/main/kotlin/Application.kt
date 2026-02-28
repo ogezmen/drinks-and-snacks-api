@@ -1,36 +1,31 @@
 package de.okan.drink_and_snack_api
 
-import de.okan.drink_and_snack_api.configuration.UUIDSerializer
-import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
+import de.okan.drink_and_snack_api.drink.repository.ExposedDrinkRepository
+import de.okan.drink_and_snack_api.drink.service.DefaultDrinkService
+import de.okan.drink_and_snack_api.store.persistence.ExposedStoreRepository
+import de.okan.drink_and_snack_api.store.service.DefaultStoreService
 import io.ktor.server.application.*
-import io.ktor.server.plugins.contentnegotiation.*
-import io.ktor.server.plugins.statuspages.*
-import io.ktor.server.response.*
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.modules.SerializersModule
-import java.util.*
+import org.jetbrains.exposed.sql.Database
 
 fun main(args: Array<String>) {
     io.ktor.server.netty.EngineMain.main(args)
 }
 
 fun Application.module() {
-    install(ContentNegotiation) {
-        json(
-            Json {
-                serializersModule = SerializersModule {
-                    contextual(UUID::class, UUIDSerializer)
-                }
-            }
-        )
-    }
 
-    install(StatusPages) {
-        exception<IllegalArgumentException> { call, cause ->
-            call.respondText(cause.message ?: "Bad request", status = HttpStatusCode.BadRequest)
-        }
-    }
+    val database = Database.connect(
+        url = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;",
+        driver = "org.h2.Driver"
+    )
 
-    configureRouting()
+    val drinkRepository = ExposedDrinkRepository(database)
+    val drinkService = DefaultDrinkService(drinkRepository)
+
+    val storeRepository = ExposedStoreRepository(database)
+    val storeService = DefaultStoreService(storeRepository)
+
+    configureRouting(
+        storeService = storeService,
+        drinkService = drinkService,
+    )
 }

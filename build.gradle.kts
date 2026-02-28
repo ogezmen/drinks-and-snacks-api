@@ -26,6 +26,48 @@ tasks.jacocoTestReport {
     }
 }
 
+val classesExcludedForTests = listOf(
+    "/de/okan/drink_and_snack_api/ApplicationKt*",
+    "/de/okan/drink_and_snack_api/configuration/**",
+)
+
+afterEvaluate {
+    tasks.jacocoTestReport {
+        classDirectories.setFrom(
+            files(classDirectories.files.map {
+                fileTree(it) {
+                    exclude(classesExcludedForTests)
+                }
+            })
+        )
+    }
+
+    tasks.jacocoTestCoverageVerification {
+        classDirectories.setFrom(
+            files(classDirectories.files.map {
+                fileTree(it) {
+                    exclude(classesExcludedForTests)
+                }
+            })
+        )
+
+        violationRules {
+
+            rule {
+                element = "CLASS"
+
+                limit {
+                    counter = "LINE"
+                    value = "COVEREDRATIO"
+                    minimum = "0.90".toBigDecimal()
+                }
+            }
+        }
+    }
+}
+
+
+
 val exposedVersion = "0.42.0"
 val h2Version = "2.2.222"
 val mockkVersion = "1.13.8"
@@ -45,6 +87,9 @@ dependencies {
 
     implementation("com.h2database:h2:$h2Version")
     testImplementation(libs.ktor.server.test.host)
+    testImplementation("io.ktor:ktor-client-core")
+    testImplementation("io.ktor:ktor-client-content-negotiation")
+    testImplementation("io.ktor:ktor-serialization-kotlinx-json")
     testImplementation(libs.kotlin.test.junit)
     testImplementation("io.mockk:mockk:$mockkVersion")
 }

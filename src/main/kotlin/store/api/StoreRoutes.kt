@@ -43,6 +43,8 @@ fun Route.storeRoutes(storeService: StoreService, drinkService: DrinkService) {
                 val id = call.requireUUID()
 
                 storeService.deleteStore(id)
+
+                call.respond(HttpStatusCode.NoContent)
             }
 
         }
