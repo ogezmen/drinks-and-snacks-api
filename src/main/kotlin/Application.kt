@@ -2,9 +2,9 @@ package de.okan.drink_and_snack_api
 
 import de.okan.drink_and_snack_api.di.databaseModule
 import de.okan.drink_and_snack_api.drink.di.drinkModule
-import de.okan.drink_and_snack_api.drink.service.DefaultDrinkService
+import de.okan.drink_and_snack_api.drink.service.DrinkService
 import de.okan.drink_and_snack_api.store.di.storeModule
-import de.okan.drink_and_snack_api.store.service.DefaultStoreService
+import de.okan.drink_and_snack_api.store.service.StoreService
 import io.ktor.server.application.*
 import org.koin.ktor.ext.inject
 import org.koin.ktor.plugin.Koin
@@ -19,8 +19,8 @@ fun Application.module() {
         modules(databaseModule, storeModule, drinkModule)
     }
 
-    val drinkService by inject<DefaultDrinkService>()
-    val storeService by inject<DefaultStoreService>()
+    val drinkService by inject<DrinkService>()
+    val storeService by inject<StoreService>()
 
     configureRouting(
         storeService = storeService,
