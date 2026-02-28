@@ -1,5 +1,7 @@
 package de.okan.drink_and_snack_api
 
+import de.okan.drink_and_snack_api.auth.api.authRoutes
+import de.okan.drink_and_snack_api.auth.service.AuthService
 import de.okan.drink_and_snack_api.configuration.UUIDSerializer
 import de.okan.drink_and_snack_api.drink.service.DrinkService
 import de.okan.drink_and_snack_api.store.api.storeRoutes
@@ -17,7 +19,11 @@ import kotlinx.serialization.modules.SerializersModule
 import java.util.UUID
 
 
-fun Application.configureRouting(storeService: StoreService, drinkService: DrinkService) {
+fun Application.configureRouting(
+    storeService: StoreService,
+    drinkService: DrinkService,
+    authService: AuthService,
+) {
     install(ContentNegotiation) {
         json(
             Json {
@@ -49,6 +55,7 @@ fun Application.configureRouting(storeService: StoreService, drinkService: Drink
                 storeService = storeService,
                 drinkService = drinkService,
             )
+            authRoutes(authService)
         }
     }
 }

@@ -1,11 +1,14 @@
 package de.okan.drink_and_snack_api
 
+import de.okan.drink_and_snack_api.auth.configuration.authConfiguration
+import de.okan.drink_and_snack_api.auth.configuration.authModule
+import de.okan.drink_and_snack_api.auth.configuration.jwtConfigurationModule
+import de.okan.drink_and_snack_api.auth.configuration.model.JwtConfiguration
 import de.okan.drink_and_snack_api.configuration.databaseModule
 import de.okan.drink_and_snack_api.drink.configuration.drinkModule
-import de.okan.drink_and_snack_api.drink.service.DrinkService
 import de.okan.drink_and_snack_api.store.configuration.storeModule
-import de.okan.drink_and_snack_api.store.service.StoreService
 import io.ktor.server.application.*
+import org.koin.ktor.ext.getKoin
 import org.koin.ktor.ext.inject
 import org.koin.ktor.plugin.Koin
 
@@ -18,16 +21,20 @@ fun Application.module() {
     install(Koin) {
         modules(
             databaseModule(environment.config),
+            jwtConfigurationModule(environment.config),
             storeModule,
             drinkModule,
+            authModule,
         )
     }
 
-    val drinkService by inject<DrinkService>()
-    val storeService by inject<StoreService>()
+    val jwtConfiguration by inject<JwtConfiguration>()
+
+    authConfiguration(jwtConfiguration)
 
     configureRouting(
-        storeService = storeService,
-        drinkService = drinkService,
+        storeService = getKoin().get(),
+        drinkService = getKoin().get(),
+        authService = getKoin().get(),
     )
 }

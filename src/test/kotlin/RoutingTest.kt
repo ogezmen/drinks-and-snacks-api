@@ -14,6 +14,7 @@ class RoutingTest {
             configureRouting(
                 storeService = mockk(),
                 drinkService = mockk(),
+                authService = mockk(),
             )
         }
 

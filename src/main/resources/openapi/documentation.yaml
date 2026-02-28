@@ -7,6 +7,14 @@ info:
 servers:
   - url: http://localhost:8080
 
+tags:
+  - name: Users
+    description: Operations related to users
+  - name: Stores
+    description: Operations related to stores
+  - name: Drinks
+    description: Operations related to drinks
+
 paths:
 
   /:
@@ -21,8 +29,34 @@ paths:
                 type: string
                 example: "I'm alive!"
 
+
+  /api/v1/auth/register:
+    post:
+      tags:
+        - Users
+      summary: Register new user
+      responses:
+        '201':
+          description: User registered
+        '400':
+          description: Username already taken
+
+  /api/v1/auth/login:
+    post:
+      tags:
+        - Users
+      summary: Login user
+      responses:
+        '200':
+          description: Logged in
+        '400':
+          description: Wrong username or password
+
+
   /api/v1/stores:
     get:
+      tags:
+        - Stores
       summary: Get all stores
       responses:
         '200':
@@ -35,6 +69,8 @@ paths:
                   $ref: '#/components/schemas/StoreDTO'
 
     post:
+      tags:
+        - Stores
       summary: Create a new store
       requestBody:
         required: true
@@ -62,6 +98,8 @@ paths:
           format: uuid
 
     get:
+      tags:
+        - Stores
       summary: Get store by ID
       responses:
         '200':
@@ -76,6 +114,8 @@ paths:
           description: Missing or malformed id
 
     delete:
+      tags:
+        - Stores
       summary: Delete store
       responses:
         '204':
@@ -93,6 +133,8 @@ paths:
           format: uuid
 
     get:
+      tags:
+        - Drinks
       summary: Get all drinks for a store
       responses:
         '200':
@@ -107,6 +149,8 @@ paths:
           description: Missing or malformed storeId
 
     post:
+      tags:
+        - Drinks
       summary: Create drink in store
       requestBody:
         required: true
@@ -140,6 +184,8 @@ paths:
           format: uuid
 
     get:
+      tags:
+        - Drinks
       summary: Get drink by ID
       responses:
         '200':
@@ -154,6 +200,8 @@ paths:
           description: Missing or malformed id
 
     delete:
+      tags:
+        - Drinks
       summary: Delete drink
       responses:
         '204':
@@ -203,3 +251,39 @@ components:
           type: string
       required:
         - name
+
+    SessionDTO:
+      type: object
+      properties:
+        accessToken:
+          type: string
+      required:
+        - accessToken
+
+    RegisterRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        firstName:
+          type: string
+        lastname:
+          type: string
+      required:
+        - username
+        - password
+        - firstName
+        - lastname
+
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required:
+        - username
+        - password

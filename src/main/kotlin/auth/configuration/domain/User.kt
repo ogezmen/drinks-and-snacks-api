@@ -1,0 +1,11 @@
+package de.okan.drink_and_snack_api.auth.configuration.domain
+
+import java.util.UUID
+
+data class User(
+    val id: UUID,
+    val username: String,
+    val passwordHash: String,
+    val firstName: String,
+    val lastName: String,
+)
