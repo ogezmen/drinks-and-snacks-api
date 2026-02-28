@@ -4,3 +4,9 @@ ktor:
             - de.okan.drink_and_snack_api.ApplicationKt.module
     deployment:
         port: 8080
+
+db:
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;
+    driver: org.h2.Driver
+    username: ""
+    password: ""

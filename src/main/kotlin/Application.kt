@@ -16,7 +16,11 @@ fun main(args: Array<String>) {
 fun Application.module() {
 
     install(Koin) {
-        modules(databaseModule, storeModule, drinkModule)
+        modules(
+            databaseModule(environment.config),
+            storeModule,
+            drinkModule,
+        )
     }
 
     val drinkService by inject<DrinkService>()
