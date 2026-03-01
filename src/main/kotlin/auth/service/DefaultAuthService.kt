@@ -3,7 +3,7 @@ package de.okan.drink_and_snack_api.auth.service
 import de.okan.drink_and_snack_api.auth.api.model.LoginRequest
 import de.okan.drink_and_snack_api.auth.api.model.RegisterRequest
 import de.okan.drink_and_snack_api.auth.api.model.SessionDTO
-import de.okan.drink_and_snack_api.auth.configuration.domain.User
+import de.okan.drink_and_snack_api.auth.domain.User
 import de.okan.drink_and_snack_api.auth.persistence.UserRepository
 import java.util.UUID
 

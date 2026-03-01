@@ -2,7 +2,7 @@ package auth.service
 
 import de.okan.drink_and_snack_api.auth.api.model.LoginRequest
 import de.okan.drink_and_snack_api.auth.api.model.RegisterRequest
-import de.okan.drink_and_snack_api.auth.configuration.domain.User
+import de.okan.drink_and_snack_api.auth.domain.User
 import de.okan.drink_and_snack_api.auth.persistence.UserRepository
 import de.okan.drink_and_snack_api.auth.service.DefaultAuthService
 import de.okan.drink_and_snack_api.auth.service.JwtService
@@ -110,14 +110,6 @@ class DefaultAuthServiceTest {
         val loginRequest = LoginRequest(
             username = "testuser",
             password = "password",
-        )
-
-        val user = User(
-            id = UUID.randomUUID(),
-            username = loginRequest.username,
-            passwordHash = "encryptedPassword",
-            firstName = "Test",
-            lastName = "User",
         )
 
         every { userRepository.findByUsername(any()) } returns null

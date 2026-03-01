@@ -3,7 +3,6 @@ package auth.api
 import de.okan.drink_and_snack_api.auth.api.model.LoginRequest
 import de.okan.drink_and_snack_api.auth.api.model.RegisterRequest
 import de.okan.drink_and_snack_api.auth.api.model.SessionDTO
-import de.okan.drink_and_snack_api.auth.configuration.domain.User
 import de.okan.drink_and_snack_api.auth.service.AuthService
 import de.okan.drink_and_snack_api.configuration.UUIDSerializer
 import de.okan.drink_and_snack_api.configureRouting

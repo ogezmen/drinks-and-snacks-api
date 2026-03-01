@@ -1,6 +1,6 @@
 package de.okan.drink_and_snack_api.auth.persistence
 
-import de.okan.drink_and_snack_api.auth.configuration.domain.User
+import de.okan.drink_and_snack_api.auth.domain.User
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.insert
