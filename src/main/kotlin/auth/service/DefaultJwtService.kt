@@ -19,13 +19,15 @@ class DefaultJwtService(
             .sign(algorithm)
     }
 
-    override fun validateAccessToken(token: String): String? {
+    override fun validateAccessToken(token: String): UUID? {
         val algorithm = Algorithm.HMAC256(jwtConfiguration.secret)
         val verifier = JWT.require(algorithm)
             .withAudience(jwtConfiguration.audience)
             .withIssuer(jwtConfiguration.issuer)
             .build()
         val decodedJWT = verifier.verify(token)
-        return decodedJWT.getClaim("userId").asString()
+
+        val userId = decodedJWT.getClaim("userId").asString()
+        return UUID.fromString(userId)
     }
 }

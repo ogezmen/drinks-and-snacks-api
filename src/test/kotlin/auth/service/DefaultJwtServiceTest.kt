@@ -33,7 +33,7 @@ class DefaultJwtServiceTest {
 
         val validatedUserId = jwtService.validateAccessToken(token)
 
-        assertEquals(userId.toString(), validatedUserId)
+        assertEquals(userId, validatedUserId)
     }
 
     @Test(expected = JWTDecodeException::class)
@@ -52,7 +52,6 @@ class DefaultJwtServiceTest {
         val jwtService2 = DefaultJwtService(jwtConfiguration2)
 
         val userId = UUID.randomUUID()
-        val token = jwtService.generateAccessToken(userId)
         val token2 = jwtService2.generateAccessToken(userId)
 
         jwtService.validateAccessToken(token2)

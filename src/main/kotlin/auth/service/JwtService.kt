@@ -4,5 +4,5 @@ import java.util.UUID
 
 interface JwtService {
     fun generateAccessToken(userId: UUID): String
-    fun validateAccessToken(token: String): String?
+    fun validateAccessToken(token: String): UUID?
 }
