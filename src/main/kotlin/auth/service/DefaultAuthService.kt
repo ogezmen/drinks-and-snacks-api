@@ -16,7 +16,7 @@ class DefaultAuthService(
     override fun register(registerRequest: RegisterRequest): SessionDTO {
 
         require(userRepository.findByUsername(registerRequest.username) == null) {
-            throw IllegalArgumentException("Username already exists")
+            "Username already exists"
         }
 
         val user = User(
@@ -41,7 +41,7 @@ class DefaultAuthService(
             ?: throw IllegalArgumentException("Invalid username or password")
 
         require(passwordService.matches(loginRequest.password, user.passwordHash)) {
-            throw IllegalArgumentException("Invalid username or password")
+            "Invalid username or password"
         }
 
         val accessToken = jwtService.generateAccessToken(user.id)

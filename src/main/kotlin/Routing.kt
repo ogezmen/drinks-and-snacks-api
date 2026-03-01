@@ -40,6 +40,12 @@ fun Application.configureRouting(
         exception<IllegalArgumentException> { call, cause ->
             call.respondText(cause.message ?: "Bad request", status = HttpStatusCode.BadRequest)
         }
+        exception<NoSuchElementException> { call, cause ->
+            call.respondText(cause.message ?: "Resource not found", status = HttpStatusCode.NotFound)
+        }
+        exception<Throwable> { call, _ ->
+            call.respondText("Unknown error", status = HttpStatusCode.InternalServerError)
+        }
     }
 
     routing {
@@ -62,18 +68,11 @@ fun Application.configureRouting(
     }
 }
 
-private fun ApplicationCall.getParameterAsUUID(parameterName: String): UUID? {
-    val id = parameters[parameterName]
-    return try {
-        UUID.fromString(id)
-    } catch (_: IllegalArgumentException) {
-        null
-    }
-}
 
 fun ApplicationCall.requireUUID(parameterName: String = "id"): UUID {
-    val uuid = getParameterAsUUID(parameterName)
-    return uuid ?: throw IllegalArgumentException("Missing or malformed $parameterName")
+    return parameters[parameterName]
+        ?.let { UUID.fromString(it)}
+        ?: throw IllegalArgumentException("Missing or malformed $parameterName")
 }
 
 fun ApplicationCall.requireUserIDFromJWT(): UUID {

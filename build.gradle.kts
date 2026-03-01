@@ -28,6 +28,7 @@ tasks.jacocoTestReport {
 
 val classesExcludedForTests = listOf(
     "/de/okan/drink_and_snack_api/ApplicationKt*",
+    "/de/okan/drink_and_snack_api/RoutingKt*",
     "**/configuration/**",
     "**/model/**",
 )

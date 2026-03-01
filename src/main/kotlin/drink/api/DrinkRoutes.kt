@@ -25,11 +25,7 @@ fun Route.drinkRoutes(drinkService: DrinkService, storeService: StoreService) {
         get("/{id}") {
             val id = call.requireUUID()
             val storeId = call.requireUUID("storeId")
-            val drink = drinkService.getDrinkById(id, storeId)
-            require(drink != null) {
-                call.respond(message = "Drink not found", status = HttpStatusCode.NotFound)
-                return@get
-            }
+            val drink = drinkService.getDrinkById(id, storeId) ?: throw NoSuchElementException("Drink not found")
             call.respond(drink)
 
         }
@@ -40,7 +36,7 @@ fun Route.drinkRoutes(drinkService: DrinkService, storeService: StoreService) {
                 val storeOwnerUserId = call.requireUserIDFromJWT()
 
                 require(storeService.isOwnerOfStore(storeOwnerUserId, storeId)) {
-                    throw IllegalArgumentException("Store with id $storeId not owned by owner with id $storeOwnerUserId")
+                    "Store with id $storeId not owned by owner with id $storeOwnerUserId"
                 }
 
                 val drink = call.receive<CreateDrinkRequest>()
@@ -53,7 +49,7 @@ fun Route.drinkRoutes(drinkService: DrinkService, storeService: StoreService) {
                 val storeOwnerUserId = call.requireUserIDFromJWT()
 
                 require(storeService.isOwnerOfStore(storeOwnerUserId, storeId)) {
-                    throw IllegalArgumentException("Store with id $storeId not owned by owner with id $storeOwnerUserId")
+                    "Store with id $storeId not owned by owner with id $storeOwnerUserId"
                 }
 
                 val id = call.requireUUID()

@@ -25,11 +25,7 @@ fun Route.storeRoutes(storeService: StoreService, drinkService: DrinkService) {
         get("/{id}") {
             val id = call.requireUUID()
 
-            val store = storeService.getStoreById(id)
-            require(store != null) {
-                call.respond(message = "Store not found", status = HttpStatusCode.NotFound)
-                return@get
-            }
+            val store = storeService.getStoreById(id) ?: throw NoSuchElementException("Store not found")
 
             call.respond(store)
         }
