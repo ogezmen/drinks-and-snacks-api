@@ -24,5 +24,5 @@ class DefaultStoreService(
         return savedStore.toDTO()
     }
 
-    override fun deleteStore(id: UUID) = storeRepository.deleteById(id)
+    override fun deleteStore(id: UUID, ownerUserId: UUID) = storeRepository.deleteById(id, ownerUserId)
 }

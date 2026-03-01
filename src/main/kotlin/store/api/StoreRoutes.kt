@@ -46,12 +46,15 @@ fun Route.storeRoutes(storeService: StoreService, drinkService: DrinkService) {
                 call.respond(store)
             }
 
-            delete {
-                val id = call.requireUUID()
+            authenticate("auth-jwt") {
+                delete {
+                    val id = call.requireUUID()
+                    val ownerUserId = call.requireUserIDFromJWT()
 
-                storeService.deleteStore(id)
+                    storeService.deleteStore(id, ownerUserId)
 
-                call.respond(HttpStatusCode.NoContent)
+                    call.respond(HttpStatusCode.NoContent)
+                }
             }
 
         }

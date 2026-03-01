@@ -38,6 +38,7 @@ interface StoreRepository {
      * Deletes a [Store] by ID
      *
      * @param id the ID of the [Store]
+     * @param ownerUserId the ID of the store owner
      */
-    fun deleteById(id: UUID)
+    fun deleteById(id: UUID, ownerUserId: UUID)
 }

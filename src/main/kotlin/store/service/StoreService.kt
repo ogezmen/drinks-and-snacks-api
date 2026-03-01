@@ -39,6 +39,7 @@ interface StoreService {
      * Deletes a store by its unique identifier.
      *
      * @param id the unique identifier of the store to delete
+     * @param ownerUserId the unique identifier of the store owner
      */
-    fun deleteStore(id: UUID)
+    fun deleteStore(id: UUID, ownerUserId: UUID)
 }

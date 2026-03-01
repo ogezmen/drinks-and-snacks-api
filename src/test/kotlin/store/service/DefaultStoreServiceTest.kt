@@ -89,13 +89,14 @@ class DefaultStoreServiceTest {
     fun `should delete a store by id`() {
         // Given
         val storeId = UUID.randomUUID()
+        val ownerUserId = UUID.randomUUID()
 
-        every { storeRepository.deleteById(storeId) } returns Unit
+        every { storeRepository.deleteById(storeId, ownerUserId) } returns Unit
 
         // When
-        service.deleteStore(storeId)
+        service.deleteStore(storeId, ownerUserId)
 
         // Then
-        verify { storeRepository.deleteById(storeId) }
+        verify { storeRepository.deleteById(storeId, ownerUserId) }
     }
 }

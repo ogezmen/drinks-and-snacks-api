@@ -86,7 +86,7 @@ class ExposedStoreRepositoryTest {
         repository.create(store, user.id)
 
         // When
-        repository.deleteById(store.id)
+        repository.deleteById(store.id, user.id)
         val deletedStore = repository.findById(store.id)
 
         // Then

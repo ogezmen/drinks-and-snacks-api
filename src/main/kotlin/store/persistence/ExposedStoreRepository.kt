@@ -4,6 +4,7 @@ import de.okan.drink_and_snack_api.auth.persistence.UsersTable
 import de.okan.drink_and_snack_api.store.domain.Store
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
@@ -44,7 +45,7 @@ class ExposedStoreRepository(
         store
     }
 
-    override fun deleteById(id: UUID): Unit = transaction(database) {
-        StoresTable.deleteWhere { StoresTable.id eq id }
+    override fun deleteById(id: UUID, ownerUserId: UUID): Unit = transaction(database) {
+        StoresTable.deleteWhere { (StoresTable.id eq id) and (StoresTable.ownerUserId eq ownerUserId) }
     }
 }

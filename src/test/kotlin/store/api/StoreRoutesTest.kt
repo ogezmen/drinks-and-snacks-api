@@ -154,12 +154,12 @@ class StoreRoutesTest {
     fun `should delete a store`() {
         val storeId = UUID.randomUUID()
 
-        every { storeService.deleteStore(any()) } returns Unit
+        every { storeService.deleteStore(any(), userId) } returns Unit
 
         setupTestApplication { client ->
             val response = client.delete("/api/v1/stores/$storeId")
 
-            verify { storeService.deleteStore(storeId) }
+            verify { storeService.deleteStore(storeId, userId) }
 
             assertEquals(HttpStatusCode.NoContent, response.status)
         }
