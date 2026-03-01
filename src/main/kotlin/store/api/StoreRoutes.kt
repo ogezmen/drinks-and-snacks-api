@@ -22,8 +22,19 @@ fun Route.storeRoutes(storeService: StoreService, drinkService: DrinkService) {
             call.respond(storeService.getAllStores())
         }
 
-        authenticate("auth-jwt") {
+        get("/{id}") {
+            val id = call.requireUUID()
 
+            val store = storeService.getStoreById(id)
+            if (store == null) {
+                call.respond(message = "Store not found", status = HttpStatusCode.NotFound)
+                return@get
+            }
+
+            call.respond(store)
+        }
+
+        authenticate("auth-jwt") {
             post {
                 val userId = call.requireUserIDFromJWT()
 
@@ -31,32 +42,15 @@ fun Route.storeRoutes(storeService: StoreService, drinkService: DrinkService) {
                 val createdStore = storeService.createStore(createStoreRequest, userId)
                 call.respond(message = createdStore, status = HttpStatusCode.Created)
             }
-        }
 
-        route("/{id}") {
-            get {
+            delete("/{id}") {
                 val id = call.requireUUID()
+                val ownerUserId = call.requireUserIDFromJWT()
 
-                val store = storeService.getStoreById(id)
-                if (store == null) {
-                    call.respond(message = "Store not found", status = HttpStatusCode.NotFound)
-                    return@get
-                }
+                storeService.deleteStore(id, ownerUserId)
 
-                call.respond(store)
+                call.respond(HttpStatusCode.NoContent)
             }
-
-            authenticate("auth-jwt") {
-                delete {
-                    val id = call.requireUUID()
-                    val ownerUserId = call.requireUserIDFromJWT()
-
-                    storeService.deleteStore(id, ownerUserId)
-
-                    call.respond(HttpStatusCode.NoContent)
-                }
-            }
-
         }
 
         drinkRoutes(drinkService)
