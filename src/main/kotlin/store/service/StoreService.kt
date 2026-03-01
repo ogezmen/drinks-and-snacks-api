@@ -42,4 +42,14 @@ interface StoreService {
      * @param ownerUserId the unique identifier of the store owner
      */
     fun deleteStore(id: UUID, ownerUserId: UUID)
+
+    /**
+     * Checks if user with given id is owner of store with given id
+     *
+     * @param ownerUserId the unique identifier of the user
+     * @param storeId the unique identifier of the store
+     *
+     * @return `true` if the user is the owner store, `false` otherwise
+     */
+    fun isOwnerOfStore(ownerUserId: UUID, storeId: UUID): Boolean
 }

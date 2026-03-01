@@ -26,7 +26,7 @@ fun Route.storeRoutes(storeService: StoreService, drinkService: DrinkService) {
             val id = call.requireUUID()
 
             val store = storeService.getStoreById(id)
-            if (store == null) {
+            require(store != null) {
                 call.respond(message = "Store not found", status = HttpStatusCode.NotFound)
                 return@get
             }
@@ -40,6 +40,7 @@ fun Route.storeRoutes(storeService: StoreService, drinkService: DrinkService) {
 
                 val createStoreRequest = call.receive<CreateStoreRequest>()
                 val createdStore = storeService.createStore(createStoreRequest, userId)
+
                 call.respond(message = createdStore, status = HttpStatusCode.Created)
             }
 
@@ -53,6 +54,6 @@ fun Route.storeRoutes(storeService: StoreService, drinkService: DrinkService) {
             }
         }
 
-        drinkRoutes(drinkService)
+        drinkRoutes(drinkService, storeService)
     }
 }

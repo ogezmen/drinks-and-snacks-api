@@ -1,12 +1,12 @@
 package drink.api
 
-import de.okan.drink_and_snack_api.auth.configuration.authConfiguration
-import de.okan.drink_and_snack_api.auth.configuration.model.JwtConfiguration
+import configuration.authTestConfiguration
 import de.okan.drink_and_snack_api.configuration.UUIDSerializer
 import de.okan.drink_and_snack_api.configureRouting
 import de.okan.drink_and_snack_api.drink.api.model.CreateDrinkRequest
 import de.okan.drink_and_snack_api.drink.api.model.DrinkDTO
 import de.okan.drink_and_snack_api.drink.service.DrinkService
+import de.okan.drink_and_snack_api.store.service.StoreService
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -30,21 +30,18 @@ import kotlin.test.assertEquals
 
 class DrinkRoutesTest {
 
-    private val drinkService: DrinkService = mockk()
-    private val storeId: UUID = UUID.randomUUID()
+    val drinkService: DrinkService = mockk()
+    val storeService: StoreService = mockk()
+    val storeId: UUID = UUID.randomUUID()
+    val userId: UUID = UUID.randomUUID()
 
     fun setupTestApplication(block: suspend (HttpClient) -> Unit) = testApplication {
 
         application {
-            val jwtConfiguration = JwtConfiguration(
-                secret = "secret",
-                issuer = "issuer",
-                audience = "audience",
-            )
-            authConfiguration(jwtConfiguration)
+            authTestConfiguration(userId)
 
             configureRouting(
-                storeService = mockk(),
+                storeService = storeService,
                 drinkService = drinkService,
                 authService = mockk(),
             )
@@ -132,7 +129,8 @@ class DrinkRoutesTest {
             name = createDrinkRequest.name,
         )
 
-        every { drinkService.createDrink(createDrinkRequest, storeId) } returns createdDrink
+        every { drinkService.createDrink(any(), any()) } returns createdDrink
+        every { storeService.isOwnerOfStore(any(), any()) } returns true
 
         setupTestApplication { client ->
             val response = client.post("/api/v1/stores/$storeId/drinks") {
@@ -141,8 +139,31 @@ class DrinkRoutesTest {
             }
             val responseBody = response.body<DrinkDTO>()
 
+            verify { drinkService.createDrink(createDrinkRequest, storeId) }
+            verify { storeService.isOwnerOfStore(userId, storeId) }
+
             assertEquals(HttpStatusCode.Created, response.status)
             assertEquals(createdDrink, responseBody)
+        }
+    }
+
+    @Test
+    fun `should add not a new drink to a store if user is not owner of store`() {
+        val createDrinkRequest = CreateDrinkRequest(
+            name = "Coke",
+        )
+
+        every { storeService.isOwnerOfStore(any(), any()) } returns false
+
+        setupTestApplication { client ->
+            val response = client.post("/api/v1/stores/$storeId/drinks") {
+                setBody(createDrinkRequest)
+                contentType(ContentType.Application.Json)
+            }
+
+            verify { storeService.isOwnerOfStore(userId, storeId) }
+
+            assertEquals(HttpStatusCode.BadRequest, response.status)
         }
     }
 
@@ -150,14 +171,31 @@ class DrinkRoutesTest {
     fun `should delete a drink from a store`() {
         val drinkId = UUID.randomUUID()
 
-        every { drinkService.deleteDrink(drinkId, storeId) } returns Unit
+        every { drinkService.deleteDrink(any(), any()) } returns Unit
+        every { storeService.isOwnerOfStore(any(), any()) } returns true
 
         setupTestApplication { client ->
             val response = client.delete("/api/v1/stores/$storeId/drinks/$drinkId")
 
             verify { drinkService.deleteDrink(drinkId, storeId) }
+            verify { storeService.isOwnerOfStore(userId, storeId) }
 
             assertEquals(HttpStatusCode.NoContent, response.status)
+        }
+    }
+
+    @Test
+    fun `should not delete if user is not owner of store`() {
+        val drinkId = UUID.randomUUID()
+
+        every { storeService.isOwnerOfStore(any(), any()) } returns false
+
+        setupTestApplication { client ->
+            val response = client.delete("/api/v1/stores/$storeId/drinks/$drinkId")
+
+            verify { storeService.isOwnerOfStore(userId, storeId) }
+
+            assertEquals(HttpStatusCode.BadRequest, response.status)
         }
     }
 }

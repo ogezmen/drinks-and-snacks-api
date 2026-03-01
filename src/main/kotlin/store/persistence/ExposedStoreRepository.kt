@@ -21,6 +21,7 @@ class ExposedStoreRepository(
             Store(
                 id = it[StoresTable.id],
                 name = it[StoresTable.name],
+                ownerUserId = it[StoresTable.ownerUserId],
                 ownerUsername = it[UsersTable.username],
             )
         }
@@ -31,18 +32,20 @@ class ExposedStoreRepository(
             Store(
                 id = it[StoresTable.id],
                 name = it[StoresTable.name],
+                ownerUserId = it[StoresTable.ownerUserId],
                 ownerUsername = it[UsersTable.username],
             )
         }.singleOrNull()
     }
 
-    override fun create(store: Store, ownerUserId: UUID): Store = transaction(database) {
+    override fun create(store: Store): Store = transaction(database) {
         StoresTable.insert {
             it[StoresTable.id] = store.id
             it[StoresTable.name] = store.name
-            it[StoresTable.ownerUserId] = ownerUserId
+            it[StoresTable.ownerUserId] = store.ownerUserId
         }
-        store
+        val username = findById(store.id)?.ownerUsername
+        store.copy(ownerUsername = username)
     }
 
     override fun deleteById(id: UUID, ownerUserId: UUID): Unit = transaction(database) {

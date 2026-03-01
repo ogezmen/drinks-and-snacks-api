@@ -37,11 +37,12 @@ class ExposedStoreRepositoryTest {
         val store = Store(
             id = UUID.randomUUID(),
             name = "Test Store",
+            ownerUserId = user.id,
             ownerUsername = user.username,
         )
 
         // When
-        repository.create(store, user.id)
+        repository.create(store)
         val retrievedStore = repository.findById(store.id)
 
         // Then
@@ -55,16 +56,18 @@ class ExposedStoreRepositoryTest {
         val store1 = Store(
             id = UUID.randomUUID(),
             name = "Store 1",
+            ownerUserId = user.id,
             ownerUsername = user.username,
         )
         val store2 = Store(
             id = UUID.randomUUID(),
             name = "Store 2",
+            ownerUserId = user.id,
             ownerUsername = user.username,
         )
 
-        repository.create(store1, user.id)
-        repository.create(store2, user.id)
+        repository.create(store1)
+        repository.create(store2)
 
         // When
         val stores = repository.findAll()
@@ -81,9 +84,10 @@ class ExposedStoreRepositoryTest {
         val store = Store(
             id = UUID.randomUUID(),
             name = "Test Store",
+            ownerUserId = user.id,
             ownerUsername = user.username,
         )
-        repository.create(store, user.id)
+        repository.create(store)
 
         // When
         repository.deleteById(store.id, user.id)

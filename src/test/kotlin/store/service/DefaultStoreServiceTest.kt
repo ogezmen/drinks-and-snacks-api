@@ -7,6 +7,8 @@ import de.okan.drink_and_snack_api.store.service.DefaultStoreService
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import junit.framework.TestCase.assertFalse
+import junit.framework.TestCase.assertTrue
 import java.util.UUID
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -20,9 +22,14 @@ class DefaultStoreServiceTest {
     fun `should create a new store`() {
         // Given
         val createRequest = CreateStoreRequest(name = "Test Store")
-        val storeEntity = Store(id = UUID.randomUUID(), name = createRequest.name, ownerUsername = null)
+        val storeEntity = Store(
+            id = UUID.randomUUID(),
+            name = createRequest.name,
+            ownerUserId = UUID.randomUUID(),
+            ownerUsername = null,
+        )
 
-        every { storeRepository.create(any(), any()) } returns storeEntity
+        every { storeRepository.create(any()) } returns storeEntity
 
         // When
         val result = service.createStore(createRequest, UUID.randomUUID())
@@ -35,8 +42,18 @@ class DefaultStoreServiceTest {
     @Test
     fun `should return all stores`() {
         // Given
-        val store1 = Store(id = UUID.randomUUID(), name = "Store 1", ownerUsername = null)
-        val store2 = Store(id = UUID.randomUUID(), name = "Store 2", ownerUsername = null)
+        val store1 = Store(
+            id = UUID.randomUUID(),
+            name = "Store 1",
+            ownerUserId = UUID.randomUUID(),
+            ownerUsername = null
+        )
+        val store2 = Store(
+            id = UUID.randomUUID(),
+            name = "Store 2",
+            ownerUserId = UUID.randomUUID(),
+            ownerUsername = null
+        )
 
         every { storeRepository.findAll() } returns listOf(store1, store2)
 
@@ -58,6 +75,7 @@ class DefaultStoreServiceTest {
         val storeEntity = Store(
             id = storeId,
             name = "Test Store",
+            ownerUserId = UUID.randomUUID(),
             ownerUsername = null,
         )
 
@@ -98,5 +116,68 @@ class DefaultStoreServiceTest {
 
         // Then
         verify { storeRepository.deleteById(storeId, ownerUserId) }
+    }
+
+    @Test
+    fun `should return true if user is store owner`() {
+        // Given
+        val storeId = UUID.randomUUID()
+        val ownerUserId = UUID.randomUUID()
+
+        val store = Store(
+            id = storeId,
+            name = "Test Store",
+            ownerUserId = ownerUserId,
+            ownerUsername = "Test User",
+        )
+
+        every { storeRepository.findById(any()) } returns store
+
+        // When
+        val isOwnerOfStore = service.isOwnerOfStore(ownerUserId, storeId)
+
+        // Then
+        assertTrue(isOwnerOfStore)
+        verify { storeRepository.findById(storeId) }
+    }
+
+    @Test
+    fun `should return false if user is not store owner`() {
+        // Given
+        val storeId = UUID.randomUUID()
+        val ownerUserId = UUID.randomUUID()
+        val otherUserId = UUID.randomUUID()
+
+        val store = Store(
+            id = storeId,
+            name = "Test Store",
+            ownerUserId = otherUserId,
+            ownerUsername = "Test User",
+        )
+
+        every { storeRepository.findById(any()) } returns store
+
+        // When
+        val isOwnerOfStore = service.isOwnerOfStore(ownerUserId, storeId)
+
+        // Then
+        assertFalse(isOwnerOfStore)
+        verify { storeRepository.findById(storeId) }
+    }
+
+    @Test
+    fun `should return false if store isn't found`() {
+        // Given
+        val storeId = UUID.randomUUID()
+        val ownerUserId = UUID.randomUUID()
+
+        every { storeRepository.findById(any()) } returns null
+
+        // When
+        val isOwnerOfStore = service.isOwnerOfStore(ownerUserId, storeId)
+
+        // Then
+        assertFalse(isOwnerOfStore)
+        verify { storeRepository.findById(storeId) }
     }
 }

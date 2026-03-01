@@ -17,12 +17,15 @@ class DefaultStoreService(
         val storeEntity = Store(
             id = UUID.randomUUID(),
             name = createStoreRequest.name,
+            ownerUserId = ownerUserId,
             ownerUsername = null,
         )
 
-        val savedStore = storeRepository.create(storeEntity, ownerUserId)
+        val savedStore = storeRepository.create(storeEntity)
         return savedStore.toDTO()
     }
 
     override fun deleteStore(id: UUID, ownerUserId: UUID) = storeRepository.deleteById(id, ownerUserId)
+
+    override fun isOwnerOfStore(ownerUserId: UUID, storeId: UUID): Boolean = storeRepository.findById(storeId)?.ownerUserId == ownerUserId
 }

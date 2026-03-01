@@ -39,9 +39,10 @@ class ExposedDrinkRepositoryTest {
         val store = Store(
             id = storeId,
             name = "Test Store",
+            ownerUserId = user.id,
             ownerUsername = null,
         )
-        storeRepository.create(store, user.id)
+        storeRepository.create(store)
     }
 
     @Test

@@ -28,11 +28,10 @@ interface StoreRepository {
      * Creates a new [Store]
      *
      * @param store the [Store] to be created
-     * @param ownerUserId the unique identifier of the store owner
      *
      * @return the created [Store]
      */
-    fun create(store: Store, ownerUserId: UUID): Store
+    fun create(store: Store): Store
 
     /**
      * Deletes a [Store] by ID
