@@ -22,7 +22,7 @@ class DefaultAuthService(
         val user = User(
             id = UUID.randomUUID(),
             username = registerRequest.username,
-            passwordHash = passwordService.encrypt(registerRequest.password),
+            passwordHash = passwordService.hash(registerRequest.password),
             firstName = registerRequest.firstName,
             lastName = registerRequest.lastName,
         )
@@ -40,7 +40,7 @@ class DefaultAuthService(
         val user = userRepository.findByUsername(loginRequest.username)
             ?: throw IllegalArgumentException("Invalid username or password")
 
-        require(passwordService.checkPassword(loginRequest.password, user.passwordHash)) {
+        require(passwordService.matches(loginRequest.password, user.passwordHash)) {
             throw IllegalArgumentException("Invalid username or password")
         }
 

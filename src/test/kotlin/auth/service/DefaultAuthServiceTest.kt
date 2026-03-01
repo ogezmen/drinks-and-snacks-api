@@ -38,7 +38,7 @@ class DefaultAuthServiceTest {
         val randomId = UUID.randomUUID()
 
         every { userRepository.findByUsername(any()) } returns null
-        every { passwordService.encrypt(any()) } returns "encryptedPassword"
+        every { passwordService.hash(any()) } returns "encryptedPassword"
         every { jwtService.generateAccessToken(any()) } returns "accessToken"
         every { userRepository.create(any()) } returns User(
             id = randomId,
@@ -51,7 +51,7 @@ class DefaultAuthServiceTest {
         val sessionDTO = authService.register(registerRequest)
 
         verify { userRepository.findByUsername(registerRequest.username) }
-        verify { passwordService.encrypt(registerRequest.password) }
+        verify { passwordService.hash(registerRequest.password) }
         verify { userRepository.create(any()) }
         verify { jwtService.generateAccessToken(randomId) }
 
@@ -94,7 +94,7 @@ class DefaultAuthServiceTest {
         )
 
         every { userRepository.findByUsername(any()) } returns user
-        every { passwordService.checkPassword(any(), any())} returns true
+        every { passwordService.matches(any(), any())} returns true
         every { jwtService.generateAccessToken(any()) } returns "accessToken"
 
         val sessionDTO = authService.login(loginRequest)
@@ -134,7 +134,7 @@ class DefaultAuthServiceTest {
         )
 
         every { userRepository.findByUsername(any()) } returns user
-        every { passwordService.checkPassword(any(), any())} returns false
+        every { passwordService.matches(any(), any())} returns false
 
 
         authService.login(loginRequest)

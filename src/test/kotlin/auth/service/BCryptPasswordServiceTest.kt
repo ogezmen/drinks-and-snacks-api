@@ -11,13 +11,13 @@ class BCryptPasswordServiceTest {
     @Test
     fun `generate password`() {
         val passwordService = BCryptPasswordService()
-        val passwordHash1 = passwordService.encrypt("password")
-        val passwordHash2 = passwordService.encrypt("password")
+        val passwordHash1 = passwordService.hash("password")
+        val passwordHash2 = passwordService.hash("password")
 
         assertNotEquals(passwordHash1, passwordHash2)
 
-        assertTrue(passwordService.checkPassword("password", passwordHash1))
-        assertTrue(passwordService.checkPassword("password", passwordHash2))
-        assertFalse(passwordService.checkPassword("wrong_password", passwordHash1))
+        assertTrue(passwordService.matches("password", passwordHash1))
+        assertTrue(passwordService.matches("password", passwordHash2))
+        assertFalse(passwordService.matches("wrong_password", passwordHash1))
     }
 }

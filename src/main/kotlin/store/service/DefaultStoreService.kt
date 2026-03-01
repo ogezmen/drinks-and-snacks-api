@@ -13,10 +13,10 @@ class DefaultStoreService(
 
     override fun getStoreById(id: UUID): StoreDTO? = storeRepository.findById(id)?.toDTO()
 
-    override fun createStore(store: CreateStoreRequest): StoreDTO {
+    override fun createStore(createStoreRequest: CreateStoreRequest): StoreDTO {
         val storeEntity = Store(
             id = UUID.randomUUID(),
-            name = store.name,
+            name = createStoreRequest.name,
         )
 
         val savedStore = storeRepository.create(storeEntity)
