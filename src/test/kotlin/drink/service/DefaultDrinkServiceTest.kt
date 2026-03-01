@@ -82,7 +82,7 @@ class DefaultDrinkServiceTest {
 
         val storeId = UUID.randomUUID()
 
-        every { drinkRepository.save(any(), storeId) } answers {
+        every { drinkRepository.create(any(), storeId) } answers {
             val drink = firstArg<Drink>()
             drink.copy(id = UUID.randomUUID())
         }
@@ -91,7 +91,7 @@ class DefaultDrinkServiceTest {
         val createdDrink = service.createDrink(createDrinkRequest, storeId)
 
         // Then
-        verify { drinkRepository.save(any(), storeId) }
+        verify { drinkRepository.create(any(), storeId) }
 
         assertEquals("Coca-Cola", createdDrink.name)
     }

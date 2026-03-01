@@ -34,7 +34,7 @@ class ExposedUsersRepositoryTest {
             lastName = "testUserLastName",
         )
 
-        val createdUser = repository.save(user)
+        val createdUser = repository.create(user)
 
         val foundUser = repository.findByUsername("testUser")
 

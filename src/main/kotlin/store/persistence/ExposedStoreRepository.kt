@@ -39,7 +39,7 @@ class ExposedStoreRepository(
         }.singleOrNull()
     }
 
-    override fun save(store: Store): Store = transaction(database) {
+    override fun create(store: Store): Store = transaction(database) {
         StoresTable.insert {
             it[id] = store.id
             it[name] = store.name

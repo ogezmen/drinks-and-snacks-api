@@ -40,7 +40,7 @@ class DefaultAuthServiceTest {
         every { userRepository.findByUsername(any()) } returns null
         every { passwordService.encrypt(any()) } returns "encryptedPassword"
         every { jwtService.generateAccessToken(any()) } returns "accessToken"
-        every { userRepository.save(any()) } returns User(
+        every { userRepository.create(any()) } returns User(
             id = randomId,
             username = registerRequest.username,
             passwordHash = "encryptedPassword",
@@ -52,7 +52,7 @@ class DefaultAuthServiceTest {
 
         verify { userRepository.findByUsername(registerRequest.username) }
         verify { passwordService.encrypt(registerRequest.password) }
-        verify { userRepository.save(any()) }
+        verify { userRepository.create(any()) }
         verify { jwtService.generateAccessToken(randomId) }
 
         assertEquals("accessToken", sessionDTO.accessToken)

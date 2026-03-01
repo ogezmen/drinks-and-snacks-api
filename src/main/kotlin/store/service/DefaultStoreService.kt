@@ -19,7 +19,7 @@ class DefaultStoreService(
             name = store.name,
         )
 
-        val savedStore = storeRepository.save(storeEntity)
+        val savedStore = storeRepository.create(storeEntity)
         return savedStore.toDTO()
     }
 

@@ -27,7 +27,7 @@ class DefaultAuthService(
             lastName = registerRequest.lastName,
         )
 
-        val createdUser = userRepository.save(user)
+        val createdUser = userRepository.create(user)
 
         val accessToken = jwtService.generateAccessToken(createdUser.id)
 

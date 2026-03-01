@@ -1,13 +1,10 @@
 package drink.persistence
 
 import de.okan.drink_and_snack_api.drink.domain.Drink
-import de.okan.drink_and_snack_api.drink.persistence.DrinksTable
 import de.okan.drink_and_snack_api.drink.repository.ExposedDrinkRepository
 import de.okan.drink_and_snack_api.store.domain.Store
 import de.okan.drink_and_snack_api.store.persistence.ExposedStoreRepository
-import de.okan.drink_and_snack_api.store.persistence.StoresTable
 import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.transactions.transaction
 import java.util.*
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -35,7 +32,7 @@ class ExposedDrinkRepositoryTest {
             id = storeId,
             name = "Test Store",
         )
-        storeRepository.save(store)
+        storeRepository.create(store)
     }
 
     @Test
@@ -51,8 +48,8 @@ class ExposedDrinkRepositoryTest {
             name = "Pepsi",
             storeId = storeId,
         )
-        repository.save(drink1, storeId)
-        repository.save(drink2, storeId)
+        repository.create(drink1, storeId)
+        repository.create(drink2, storeId)
 
         // When
         val drinks = repository.findAll(storeId)
@@ -73,7 +70,7 @@ class ExposedDrinkRepositoryTest {
         )
 
         // When
-        repository.save(drink, storeId)
+        repository.create(drink, storeId)
 
         // Then
         val savedDrink = repository.findById(drink.id, storeId)
@@ -90,7 +87,7 @@ class ExposedDrinkRepositoryTest {
             name = "Pepsi",
             storeId = storeId,
         )
-        repository.save(drink, storeId)
+        repository.create(drink, storeId)
 
         // When
         repository.deleteById(drink.id, storeId)

@@ -21,7 +21,7 @@ class DefaultDrinkService(
             storeId = storeId,
         )
 
-        val savedEntity = drinkRepository.save(drinkEntity, storeId)
+        val savedEntity = drinkRepository.create(drinkEntity, storeId)
         return savedEntity.toDTO()
     }
 

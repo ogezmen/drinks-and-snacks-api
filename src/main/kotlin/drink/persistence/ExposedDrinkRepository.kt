@@ -42,7 +42,7 @@ class ExposedDrinkRepository(
         }.singleOrNull()
     }
 
-    override fun save(drink: Drink, storeId: UUID): Drink = transaction(database) {
+    override fun create(drink: Drink, storeId: UUID): Drink = transaction(database) {
         DrinksTable.insert {
             it[id] = drink.id
             it[name] = drink.name

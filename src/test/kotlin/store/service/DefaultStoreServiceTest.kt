@@ -22,7 +22,7 @@ class DefaultStoreServiceTest {
         val createRequest = CreateStoreRequest(name = "Test Store")
         val storeEntity = Store(id = UUID.randomUUID(), name = createRequest.name)
 
-        every { storeRepository.save(any()) } returns storeEntity
+        every { storeRepository.create(any()) } returns storeEntity
 
         // When
         val result = service.createStore(createRequest)

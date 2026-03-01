@@ -29,7 +29,7 @@ class ExposedUserRepository(
         }.singleOrNull()
     }
 
-    override fun save(user: User): User {
+    override fun create(user: User): User {
         transaction(database) {
             UsersTable.insert {
                 it[id] = user.id

@@ -2,10 +2,7 @@ package store.persistence
 
 import de.okan.drink_and_snack_api.store.domain.Store
 import de.okan.drink_and_snack_api.store.persistence.ExposedStoreRepository
-import de.okan.drink_and_snack_api.store.persistence.StoresTable
 import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.SchemaUtils
-import org.jetbrains.exposed.sql.transactions.transaction
 import java.util.UUID
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -39,7 +36,7 @@ class ExposedStoreRepositoryTest {
         )
 
         // When
-        repository.save(store)
+        repository.create(store)
         val retrievedStore = repository.findById(store.id)
 
         // Then
@@ -58,8 +55,8 @@ class ExposedStoreRepositoryTest {
             id = UUID.randomUUID(),
             name = "Store 2",
         )
-        repository.save(store1)
-        repository.save(store2)
+        repository.create(store1)
+        repository.create(store2)
 
         // When
         val stores = repository.findAll()
@@ -77,7 +74,7 @@ class ExposedStoreRepositoryTest {
             id = UUID.randomUUID(),
             name = "Test Store",
         )
-        repository.save(store)
+        repository.create(store)
 
         // When
         repository.deleteById(store.id)
