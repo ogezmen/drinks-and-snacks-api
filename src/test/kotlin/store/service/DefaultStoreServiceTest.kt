@@ -20,12 +20,12 @@ class DefaultStoreServiceTest {
     fun `should create a new store`() {
         // Given
         val createRequest = CreateStoreRequest(name = "Test Store")
-        val storeEntity = Store(id = UUID.randomUUID(), name = createRequest.name)
+        val storeEntity = Store(id = UUID.randomUUID(), name = createRequest.name, ownerUsername = null)
 
-        every { storeRepository.create(any()) } returns storeEntity
+        every { storeRepository.create(any(), any()) } returns storeEntity
 
         // When
-        val result = service.createStore(createRequest)
+        val result = service.createStore(createRequest, UUID.randomUUID())
 
         // Then
         assertEquals(storeEntity.id, result.id)
@@ -35,8 +35,8 @@ class DefaultStoreServiceTest {
     @Test
     fun `should return all stores`() {
         // Given
-        val store1 = Store(id = UUID.randomUUID(), name = "Store 1")
-        val store2 = Store(id = UUID.randomUUID(), name = "Store 2")
+        val store1 = Store(id = UUID.randomUUID(), name = "Store 1", ownerUsername = null)
+        val store2 = Store(id = UUID.randomUUID(), name = "Store 2", ownerUsername = null)
 
         every { storeRepository.findAll() } returns listOf(store1, store2)
 
@@ -55,7 +55,11 @@ class DefaultStoreServiceTest {
     fun `should return a store by id`() {
         // Given
         val storeId = UUID.randomUUID()
-        val storeEntity = Store(id = storeId, name = "Test Store")
+        val storeEntity = Store(
+            id = storeId,
+            name = "Test Store",
+            ownerUsername = null,
+        )
 
         every { storeRepository.findById(storeId) } returns storeEntity
 

@@ -1,8 +1,8 @@
 package store.api
 
+import configuration.authTestConfiguration
 import de.okan.drink_and_snack_api.configuration.UUIDSerializer
 import de.okan.drink_and_snack_api.configureRouting
-import de.okan.drink_and_snack_api.drink.service.DrinkService
 import de.okan.drink_and_snack_api.store.api.model.CreateStoreRequest
 import de.okan.drink_and_snack_api.store.service.StoreService
 import de.okan.drink_and_snack_api.store.service.model.StoreDTO
@@ -25,9 +25,12 @@ import kotlin.test.assertTrue
 
 class StoreRoutesTest {
     private val storeService: StoreService = mockk()
+    val userId: UUID = UUID.randomUUID()
 
     private fun setupTestApplication(block: suspend (HttpClient) -> Unit) = testApplication {
         application {
+            authTestConfiguration(userId)
+
             configureRouting(
                 storeService = storeService,
                 drinkService = mockk(),
@@ -64,7 +67,7 @@ class StoreRoutesTest {
             )
         )
 
-        io.mockk.every { storeService.getAllStores() } returns stores
+        every { storeService.getAllStores() } returns stores
 
         setupTestApplication { client ->
             val response = client.get("/api/v1/stores")
@@ -85,12 +88,14 @@ class StoreRoutesTest {
             name = "Store 1",
         )
 
-        io.mockk.every { storeService.getStoreById(storeId) } returns store
+        every { storeService.getStoreById(any()) } returns store
 
         setupTestApplication { client ->
             val response = client.get("/api/v1/stores/$storeId")
 
             val responseBody = response.body<StoreDTO>()
+
+            verify { storeService.getStoreById(storeId) }
             assertTrue(response.status.isSuccess())
             assertEquals(store, responseBody)
         }
@@ -100,11 +105,12 @@ class StoreRoutesTest {
     fun `should return 404 if store not found`() {
         val storeId = UUID.randomUUID()
 
-        io.mockk.every { storeService.getStoreById(storeId) } returns null
+        every { storeService.getStoreById(any()) } returns null
 
         setupTestApplication { client ->
             val response = client.get("/api/v1/stores/$storeId")
 
+            verify { storeService.getStoreById(storeId) }
             assertEquals(HttpStatusCode.NotFound, response.status)
         }
     }
@@ -129,13 +135,14 @@ class StoreRoutesTest {
             name = createStoreRequest.name,
         )
 
-        every { storeService.createStore(any()) } returns createdStore
+        every { storeService.createStore(any(), any()) } returns createdStore
 
         setupTestApplication { client ->
             val response = client.post("/api/v1/stores") {
                 contentType(ContentType.Application.Json)
                 setBody(createStoreRequest)
             }
+            verify { storeService.createStore(createStoreRequest, userId) }
 
             val responseBody = response.body<StoreDTO>()
             assertEquals(HttpStatusCode.Created, response.status)

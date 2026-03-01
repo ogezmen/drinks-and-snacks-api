@@ -29,10 +29,11 @@ interface StoreService {
      * Creates a new store.
      *
      * @param createStoreRequest the data required to create the store
+     * @param ownerUserId the unique identifier of the store owner
      *
      * @return the [StoreDTO] representing the created store
      */
-    fun createStore(createStoreRequest: CreateStoreRequest): StoreDTO
+    fun createStore(createStoreRequest: CreateStoreRequest, ownerUserId: UUID): StoreDTO
 
     /**
      * Deletes a store by its unique identifier.

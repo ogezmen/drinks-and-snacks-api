@@ -1,5 +1,6 @@
 package de.okan.drink_and_snack_api.store.persistence
 
+import de.okan.drink_and_snack_api.auth.persistence.UsersTable
 import de.okan.drink_and_snack_api.store.domain.Store
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
@@ -15,27 +16,30 @@ class ExposedStoreRepository(
 ) : StoreRepository {
 
     override fun findAll(): List<Store> = transaction(database) {
-        StoresTable.selectAll().map {
+        (StoresTable innerJoin UsersTable).selectAll().map {
             Store(
                 id = it[StoresTable.id],
-                name = it[StoresTable.name]
+                name = it[StoresTable.name],
+                ownerUsername = it[UsersTable.username],
             )
         }
     }
 
     override fun findById(id: UUID): Store? = transaction(database) {
-        StoresTable.select { StoresTable.id eq id }.mapNotNull {
+        (StoresTable innerJoin UsersTable).select { StoresTable.id eq id }.mapNotNull {
             Store(
                 id = it[StoresTable.id],
-                name = it[StoresTable.name]
+                name = it[StoresTable.name],
+                ownerUsername = it[UsersTable.username],
             )
         }.singleOrNull()
     }
 
-    override fun create(store: Store): Store = transaction(database) {
+    override fun create(store: Store, ownerUserId: UUID): Store = transaction(database) {
         StoresTable.insert {
-            it[id] = store.id
-            it[name] = store.name
+            it[StoresTable.id] = store.id
+            it[StoresTable.name] = store.name
+            it[StoresTable.ownerUserId] = ownerUserId
         }
         store
     }

@@ -1,11 +1,12 @@
 package drink.api
 
+import de.okan.drink_and_snack_api.auth.configuration.authConfiguration
+import de.okan.drink_and_snack_api.auth.configuration.model.JwtConfiguration
 import de.okan.drink_and_snack_api.configuration.UUIDSerializer
 import de.okan.drink_and_snack_api.configureRouting
 import de.okan.drink_and_snack_api.drink.api.model.CreateDrinkRequest
 import de.okan.drink_and_snack_api.drink.api.model.DrinkDTO
 import de.okan.drink_and_snack_api.drink.service.DrinkService
-import de.okan.drink_and_snack_api.store.service.StoreService
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -35,6 +36,13 @@ class DrinkRoutesTest {
     fun setupTestApplication(block: suspend (HttpClient) -> Unit) = testApplication {
 
         application {
+            val jwtConfiguration = JwtConfiguration(
+                secret = "secret",
+                issuer = "issuer",
+                audience = "audience",
+            )
+            authConfiguration(jwtConfiguration)
+
             configureRouting(
                 storeService = mockk(),
                 drinkService = drinkService,

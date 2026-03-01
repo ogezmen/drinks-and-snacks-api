@@ -1,0 +1,2 @@
+ALTER TABLE stores
+    ADD COLUMN owner_user_id UUID REFERENCES users (id) ON DELETE CASCADE

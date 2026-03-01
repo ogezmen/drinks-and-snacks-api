@@ -1,6 +1,8 @@
 package store.persistence
 
 import configuration.setupTestDatabase
+import de.okan.drink_and_snack_api.auth.domain.User
+import de.okan.drink_and_snack_api.auth.persistence.ExposedUserRepository
 import de.okan.drink_and_snack_api.store.domain.Store
 import de.okan.drink_and_snack_api.store.persistence.ExposedStoreRepository
 import java.util.*
@@ -8,11 +10,23 @@ import kotlin.test.*
 
 class ExposedStoreRepositoryTest {
 
-    private lateinit var repository: ExposedStoreRepository
+    lateinit var repository: ExposedStoreRepository
+    lateinit var user: User
 
     @BeforeTest
     fun setUp() {
         val database = setupTestDatabase()
+        user = User(
+            id = UUID.randomUUID(),
+            username = "test",
+            passwordHash = "test",
+            firstName = "test",
+            lastName = "test",
+        )
+
+        val userRepository = ExposedUserRepository(database)
+        userRepository.create(user)
+
         repository = ExposedStoreRepository(database)
     }
 
@@ -23,10 +37,11 @@ class ExposedStoreRepositoryTest {
         val store = Store(
             id = UUID.randomUUID(),
             name = "Test Store",
+            ownerUsername = user.username,
         )
 
         // When
-        repository.create(store)
+        repository.create(store, user.id)
         val retrievedStore = repository.findById(store.id)
 
         // Then
@@ -40,13 +55,16 @@ class ExposedStoreRepositoryTest {
         val store1 = Store(
             id = UUID.randomUUID(),
             name = "Store 1",
+            ownerUsername = user.username,
         )
         val store2 = Store(
             id = UUID.randomUUID(),
             name = "Store 2",
+            ownerUsername = user.username,
         )
-        repository.create(store1)
-        repository.create(store2)
+
+        repository.create(store1, user.id)
+        repository.create(store2, user.id)
 
         // When
         val stores = repository.findAll()
@@ -63,8 +81,9 @@ class ExposedStoreRepositoryTest {
         val store = Store(
             id = UUID.randomUUID(),
             name = "Test Store",
+            ownerUsername = user.username,
         )
-        repository.create(store)
+        repository.create(store, user.id)
 
         // When
         repository.deleteById(store.id)

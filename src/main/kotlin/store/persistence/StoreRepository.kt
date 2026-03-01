@@ -18,6 +18,8 @@ interface StoreRepository {
     /**
      * Retrieves a [Store] by ID
      *
+     * @param id the unique identifier of the [Store]
+     *
      * @return the [Store] if found, or `null` if no user exists with the given ID
      */
     fun findById(id: UUID): Store?
@@ -25,9 +27,12 @@ interface StoreRepository {
     /**
      * Creates a new [Store]
      *
+     * @param store the [Store] to be created
+     * @param ownerUserId the unique identifier of the store owner
+     *
      * @return the created [Store]
      */
-    fun create(store: Store): Store
+    fun create(store: Store, ownerUserId: UUID): Store
 
     /**
      * Deletes a [Store] by ID

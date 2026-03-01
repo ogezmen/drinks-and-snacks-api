@@ -3,6 +3,8 @@ package auth.api
 import de.okan.drink_and_snack_api.auth.api.model.LoginRequest
 import de.okan.drink_and_snack_api.auth.api.model.RegisterRequest
 import de.okan.drink_and_snack_api.auth.api.model.SessionDTO
+import de.okan.drink_and_snack_api.auth.configuration.authConfiguration
+import de.okan.drink_and_snack_api.auth.configuration.model.JwtConfiguration
 import de.okan.drink_and_snack_api.auth.service.AuthService
 import de.okan.drink_and_snack_api.configuration.UUIDSerializer
 import de.okan.drink_and_snack_api.configureRouting
@@ -30,6 +32,13 @@ class AuthRoutesTest {
     fun setupTestApplication(block: suspend (HttpClient) -> Unit) = testApplication {
 
         application {
+            val jwtConfiguration = JwtConfiguration(
+                secret = "secret",
+                issuer = "issuer",
+                audience = "audience",
+            )
+            authConfiguration(jwtConfiguration)
+
             configureRouting(
                 storeService = mockk(),
                 drinkService = mockk(),

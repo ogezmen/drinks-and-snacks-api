@@ -1,6 +1,8 @@
 package drink.persistence
 
 import configuration.setupTestDatabase
+import de.okan.drink_and_snack_api.auth.domain.User
+import de.okan.drink_and_snack_api.auth.persistence.ExposedUserRepository
 import de.okan.drink_and_snack_api.drink.domain.Drink
 import de.okan.drink_and_snack_api.drink.repository.ExposedDrinkRepository
 import de.okan.drink_and_snack_api.store.domain.Store
@@ -22,13 +24,24 @@ class ExposedDrinkRepositoryTest {
         val database = setupTestDatabase()
 
         repository = ExposedDrinkRepository(database)
-        val storeRepository = ExposedStoreRepository(database)
 
+        val userRepository = ExposedUserRepository(database)
+        val user = User(
+            id = UUID.randomUUID(),
+            username = "test",
+            passwordHash = "test",
+            firstName = "test",
+            lastName = "test",
+        )
+        userRepository.create(user)
+
+        val storeRepository = ExposedStoreRepository(database)
         val store = Store(
             id = storeId,
             name = "Test Store",
+            ownerUsername = null,
         )
-        storeRepository.create(store)
+        storeRepository.create(store, user.id)
     }
 
     @Test

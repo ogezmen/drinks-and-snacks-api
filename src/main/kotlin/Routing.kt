@@ -9,6 +9,8 @@ import de.okan.drink_and_snack_api.store.service.StoreService
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.*
+import io.ktor.server.auth.jwt.JWTPrincipal
+import io.ktor.server.auth.principal
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.plugins.swagger.swaggerUI
@@ -72,4 +74,15 @@ private fun ApplicationCall.getParameterAsUUID(parameterName: String): UUID? {
 fun ApplicationCall.requireUUID(parameterName: String = "id"): UUID {
     val uuid = getParameterAsUUID(parameterName)
     return uuid ?: throw IllegalArgumentException("Missing or malformed $parameterName")
+}
+
+fun ApplicationCall.requireUserIDFromJWT(): UUID {
+
+    val principal = principal<JWTPrincipal>()
+    return principal
+        ?.payload
+        ?.getClaim("userId")
+        ?.asString()
+        ?.let { UUID.fromString(it) }
+        ?: throw IllegalArgumentException("Missing id in claims")
 }
