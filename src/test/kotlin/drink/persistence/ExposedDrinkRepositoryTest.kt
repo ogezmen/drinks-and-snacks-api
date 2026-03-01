@@ -1,10 +1,10 @@
 package drink.persistence
 
+import configuration.setupTestDatabase
 import de.okan.drink_and_snack_api.drink.domain.Drink
 import de.okan.drink_and_snack_api.drink.repository.ExposedDrinkRepository
 import de.okan.drink_and_snack_api.store.domain.Store
 import de.okan.drink_and_snack_api.store.persistence.ExposedStoreRepository
-import org.jetbrains.exposed.sql.Database
 import java.util.*
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -19,11 +19,7 @@ class ExposedDrinkRepositoryTest {
 
     @BeforeTest
     fun setupDatabase() {
-        val uniqueDbName = "test_${UUID.randomUUID()}"
-        val database = Database.connect(
-            "jdbc:h2:mem:$uniqueDbName;DB_CLOSE_DELAY=-1;",
-            driver = "org.h2.Driver",
-        )
+        val database = setupTestDatabase()
 
         repository = ExposedDrinkRepository(database)
         val storeRepository = ExposedStoreRepository(database)

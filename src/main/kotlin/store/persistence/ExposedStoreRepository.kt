@@ -2,7 +2,6 @@ package de.okan.drink_and_snack_api.store.persistence
 
 import de.okan.drink_and_snack_api.store.domain.Store
 import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
@@ -14,12 +13,6 @@ import java.util.UUID
 class ExposedStoreRepository(
     private val database: Database
 ) : StoreRepository {
-
-    init {
-        transaction(database) {
-            SchemaUtils.create(StoresTable)
-        }
-    }
 
     override fun findAll(): List<Store> = transaction(database) {
         StoresTable.selectAll().map {

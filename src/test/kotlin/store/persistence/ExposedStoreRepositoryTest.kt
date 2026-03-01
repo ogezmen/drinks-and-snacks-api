@@ -1,28 +1,18 @@
 package store.persistence
 
+import configuration.setupTestDatabase
 import de.okan.drink_and_snack_api.store.domain.Store
 import de.okan.drink_and_snack_api.store.persistence.ExposedStoreRepository
-import org.jetbrains.exposed.sql.Database
-import java.util.UUID
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertNull
+import java.util.*
+import kotlin.test.*
 
 class ExposedStoreRepositoryTest {
 
     private lateinit var repository: ExposedStoreRepository
-    private lateinit var database: Database
 
     @BeforeTest
     fun setUp() {
-        val uniqueDbName = "test_${UUID.randomUUID()}"
-        database = Database.connect(
-            url = "jdbc:h2:mem:$uniqueDbName;DB_CLOSE_DELAY=-1;",
-            driver = "org.h2.Driver",
-        )
-
+        val database = setupTestDatabase()
         repository = ExposedStoreRepository(database)
     }
 

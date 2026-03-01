@@ -6,7 +6,6 @@ logback = "1.5.32"
 exposed = "0.42.0"
 #exposed = "1.1.1"
 mockk = "1.13.8"
-h2 = "2.2.222"
 
 [libraries]
 ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
@@ -33,7 +32,9 @@ exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "e
 
 koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
 
-h2 = { module = "com.h2database:h2", version.ref = "h2" }
+h2 = { module = "com.h2database:h2", version = "2.2.222" }
+
+flyway-core = { module = "org.flywaydb:flyway-core", version = "9.22.3"}
 
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 ktor-server-config-yaml = { module = "io.ktor:ktor-server-config-yaml", version.ref = "ktor" }

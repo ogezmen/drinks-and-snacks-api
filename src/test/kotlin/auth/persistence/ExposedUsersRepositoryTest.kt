@@ -1,8 +1,8 @@
 package auth.persistence
 
+import configuration.setupTestDatabase
 import de.okan.drink_and_snack_api.auth.domain.User
 import de.okan.drink_and_snack_api.auth.persistence.ExposedUserRepository
-import org.jetbrains.exposed.sql.Database
 import java.util.UUID
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -14,11 +14,7 @@ class ExposedUsersRepositoryTest {
 
     @BeforeTest
     fun setup() {
-        val uniqueDbName = "test_${UUID.randomUUID()}"
-        val database = Database.connect(
-            "jdbc:h2:mem:$uniqueDbName;DB_CLOSE_DELAY=-1;",
-            driver = "org.h2.Driver",
-        )
+        val database = setupTestDatabase()
 
         repository = ExposedUserRepository(database)
     }

@@ -3,7 +3,6 @@ package de.okan.drink_and_snack_api.drink.repository
 import de.okan.drink_and_snack_api.drink.persistence.DrinksTable
 import de.okan.drink_and_snack_api.drink.domain.Drink
 import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.deleteWhere
@@ -15,12 +14,6 @@ import java.util.UUID
 class ExposedDrinkRepository(
     private val database: Database
 ) : DrinkRepository {
-
-    init {
-        transaction(database) {
-            SchemaUtils.create(DrinksTable)
-        }
-    }
 
     override fun findAll(storeId: UUID): List<Drink> = transaction(database) {
         DrinksTable.select { DrinksTable.storeId eq storeId }.map {

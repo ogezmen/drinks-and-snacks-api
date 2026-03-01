@@ -4,7 +4,10 @@ import de.okan.drink_and_snack_api.auth.configuration.authConfiguration
 import de.okan.drink_and_snack_api.auth.configuration.authModule
 import de.okan.drink_and_snack_api.auth.configuration.jwtConfigurationModule
 import de.okan.drink_and_snack_api.auth.configuration.model.JwtConfiguration
+import de.okan.drink_and_snack_api.configuration.databaseConfigurationModule
 import de.okan.drink_and_snack_api.configuration.databaseModule
+import de.okan.drink_and_snack_api.configuration.model.DatabaseConfiguration
+import de.okan.drink_and_snack_api.configuration.migrateDatabase
 import de.okan.drink_and_snack_api.drink.configuration.drinkModule
 import de.okan.drink_and_snack_api.store.configuration.storeModule
 import io.ktor.server.application.*
@@ -20,13 +23,18 @@ fun Application.module() {
 
     install(Koin) {
         modules(
-            databaseModule(environment.config),
+            databaseConfigurationModule(environment.config),
+            databaseModule,
             jwtConfigurationModule(environment.config),
             storeModule,
             drinkModule,
             authModule,
         )
     }
+
+    val databaseConfiguration by inject<DatabaseConfiguration>()
+
+    migrateDatabase(databaseConfiguration)
 
     val jwtConfiguration by inject<JwtConfiguration>()
 

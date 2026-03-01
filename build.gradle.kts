@@ -94,6 +94,8 @@ dependencies {
     implementation(libs.koin.ktor)
     implementation(libs.h2)
 
+    implementation(libs.flyway.core)
+
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.ktor.client.core)
     testImplementation(libs.ktor.client.content.negotiation)
