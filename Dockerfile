@@ -12,4 +12,4 @@ WORKDIR /app
 
 COPY --from=build /app/build/libs/drink-and-snack-api-all.jar app.jar
 
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
