@@ -1,4 +1,4 @@
-rootProject.name = "drink-and-snack-api"
+rootProject.name = "drinks-and-snacks-api"
 
 dependencyResolutionManagement {
     repositories {

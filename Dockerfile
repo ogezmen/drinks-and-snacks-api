@@ -10,6 +10,6 @@ FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
-COPY --from=build /app/build/libs/drink-and-snack-api-all.jar app.jar
+COPY --from=build /app/build/libs/drinks-and-snacks-api-all.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar"]

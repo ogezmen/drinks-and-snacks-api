@@ -14,7 +14,7 @@ db:
 auth:
     jwt:
         secret: ${JWT_SECRET}
-        issuer: "drink-and-snack-api"
-        audience: "drink-and-snack-api-users"
+        issuer: "drinks-and-snacks-api"
+        audience: "drinks-and-snacks-api-users"
         realm: "Access to the '/api' path"
         duration_in_ms: 60000

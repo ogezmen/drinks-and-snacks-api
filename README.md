@@ -1,4 +1,4 @@
-# drink-and-snack-api
+# drinks-and-snacks-api
 
 This is a drink and snack project for learning Ktor and Exposed.
 
