@@ -3,18 +3,18 @@ ktor:
         modules:
             - de.okan.drink_and_snack_api.ApplicationKt.module
     deployment:
-        port: 8080
+        port: ${PORT}
 
 db:
-    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;
-    driver: org.h2.Driver
-    username: ""
-    password: ""
+    url: ${DB_URL}
+    driver: ${DB_DRIVER}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
 auth:
     jwt:
-        secret: "your-256-bit-secret"
-        issuer: "your-app"
-        audience: "your-app-users"
+        secret: ${JWT_SECRET}
+        issuer: "drink-and-snack-api"
+        audience: "drink-and-snack-api-users"
         realm: "Access to the '/api' path"
         duration_in_ms: 60000
