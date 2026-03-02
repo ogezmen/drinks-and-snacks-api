@@ -1,6 +1,6 @@
 # drinks-and-snacks-api
 
-This is a drink and snack project for learning Ktor and Exposed.
+This is a drinks and snacks project for learning Ktor and Exposed.
 
 This project was created using the [Ktor Project Generator](https://start.ktor.io).
 
