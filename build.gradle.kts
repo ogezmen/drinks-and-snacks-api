@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktor)
+    alias(libs.plugins.kover)
     kotlin("plugin.serialization") version "2.0.0"
-    jacoco
 }
 
 group = "de.okan.drink_and_snack_api"
@@ -16,52 +16,23 @@ kotlin {
     jvmToolchain(21)
 }
 
-tasks.jacocoTestReport {
-    dependsOn(tasks.test)
-
+kover {
     reports {
-        xml.required.set(true)
-        html.required.set(true)
-        csv.required.set(false)
-    }
-}
+        filters {
+            excludes {
+                classes(
+                    "de.okan.drink_and_snack_api.ApplicationKt*",
+                    "de.okan.drink_and_snack_api.RoutingKt*",
+                    "*.configuration.*",
+                    "*.model.*",
+                )
+            }
+        }
 
-val classesExcludedForTests = listOf(
-    "/de/okan/drink_and_snack_api/ApplicationKt*",
-    "/de/okan/drink_and_snack_api/RoutingKt*",
-    "**/configuration/**",
-    "**/model/**",
-)
-
-afterEvaluate {
-    tasks.jacocoTestReport {
-        classDirectories.setFrom(
-            files(classDirectories.files.map {
-                fileTree(it) {
-                    exclude(classesExcludedForTests)
-                }
-            })
-        )
-    }
-
-    tasks.jacocoTestCoverageVerification {
-        classDirectories.setFrom(
-            files(classDirectories.files.map {
-                fileTree(it) {
-                    exclude(classesExcludedForTests)
-                }
-            })
-        )
-
-        violationRules {
-
+        verify {
             rule {
-                element = "CLASS"
-
-                limit {
-                    counter = "LINE"
-                    value = "COVEREDRATIO"
-                    minimum = "0.90".toBigDecimal()
+                bound {
+                    minValue = 90
                 }
             }
         }

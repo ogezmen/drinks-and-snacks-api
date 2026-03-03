@@ -45,3 +45,4 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
+kover = { id = "org.jetbrains.kotlinx.kover", version = "0.9.7" }

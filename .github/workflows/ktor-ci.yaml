@@ -33,4 +33,4 @@ jobs:
             gradle-${{ runner.os }}-
 
       - name: Run tests & JaCoCo
-        run: ./gradlew test jacocoTestCoverageVerification
+        run: ./gradlew test koverVerify
