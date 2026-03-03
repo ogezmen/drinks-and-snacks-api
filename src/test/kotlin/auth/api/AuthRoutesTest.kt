@@ -3,6 +3,7 @@ package auth.api
 import de.okan.drink_and_snack_api.auth.api.model.LoginRequest
 import de.okan.drink_and_snack_api.auth.api.model.RegisterRequest
 import de.okan.drink_and_snack_api.auth.api.model.SessionDTO
+import de.okan.drink_and_snack_api.auth.api.setupAuthRoutes
 import de.okan.drink_and_snack_api.auth.configuration.authConfiguration
 import de.okan.drink_and_snack_api.auth.configuration.model.JwtConfiguration
 import de.okan.drink_and_snack_api.auth.service.AuthService
@@ -16,6 +17,7 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
+import io.ktor.server.routing.routing
 import io.ktor.server.testing.testApplication
 import io.mockk.every
 import io.mockk.mockk
@@ -39,11 +41,13 @@ class AuthRoutesTest {
             )
             authConfiguration(jwtConfiguration)
 
-            configureRouting(
-                storeService = mockk(),
-                drinkService = mockk(),
-                authService = authService,
-            )
+            configureRouting()
+
+            routing {
+                setupAuthRoutes(
+                    authService = authService,
+                )
+            }
         }
 
         val client = createClient {

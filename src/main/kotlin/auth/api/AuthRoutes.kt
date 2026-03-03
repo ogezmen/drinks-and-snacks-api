@@ -10,8 +10,8 @@ import io.ktor.server.routing.Route
 import io.ktor.server.routing.post
 import io.ktor.server.routing.route
 
-fun Route.authRoutes(authService: AuthService) {
-    route("/auth") {
+fun Route.setupAuthRoutes(authService: AuthService) {
+    route("/api/v1/auth") {
         post("/register") {
             val request = call.receive<RegisterRequest>()
 

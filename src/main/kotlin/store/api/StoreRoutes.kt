@@ -1,23 +1,19 @@
 package de.okan.drink_and_snack_api.store.api
 
-import de.okan.drink_and_snack_api.drink.api.drinkRoutes
-import de.okan.drink_and_snack_api.drink.service.DrinkService
 import de.okan.drink_and_snack_api.requireUUID
 import de.okan.drink_and_snack_api.requireUserIDFromJWT
 import de.okan.drink_and_snack_api.store.api.model.CreateStoreRequest
 import de.okan.drink_and_snack_api.store.service.StoreService
-import io.ktor.http.HttpStatusCode
-import io.ktor.server.auth.authenticate
-import io.ktor.server.request.receive
-import io.ktor.server.response.respond
-import io.ktor.server.routing.Route
-import io.ktor.server.routing.delete
-import io.ktor.server.routing.get
-import io.ktor.server.routing.post
-import io.ktor.server.routing.route
+import io.ktor.http.*
+import io.ktor.server.auth.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 
-fun Route.storeRoutes(storeService: StoreService, drinkService: DrinkService) {
-    route("/stores") {
+fun Route.setupStoreRoutes(
+    storeService: StoreService,
+) {
+    route("/api/v1/stores") {
         get {
             call.respond(storeService.getAllStores())
         }
@@ -49,7 +45,5 @@ fun Route.storeRoutes(storeService: StoreService, drinkService: DrinkService) {
                 call.respond(HttpStatusCode.NoContent)
             }
         }
-
-        drinkRoutes(drinkService, storeService)
     }
 }

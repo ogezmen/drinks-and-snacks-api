@@ -1,10 +1,11 @@
 import de.okan.drink_and_snack_api.auth.configuration.authConfiguration
 import de.okan.drink_and_snack_api.auth.configuration.model.JwtConfiguration
 import de.okan.drink_and_snack_api.configureRouting
+import de.okan.drink_and_snack_api.setupRootRoutes
 import io.ktor.client.request.*
 import io.ktor.http.*
+import io.ktor.server.routing.routing
 import io.ktor.server.testing.*
-import io.mockk.mockk
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -20,11 +21,11 @@ class RoutingTest {
             )
             authConfiguration(jwtConfiguration)
 
-            configureRouting(
-                storeService = mockk(),
-                drinkService = mockk(),
-                authService = mockk(),
-            )
+            configureRouting()
+
+            routing {
+                setupRootRoutes()
+            }
         }
 
         val response = client.get("/")

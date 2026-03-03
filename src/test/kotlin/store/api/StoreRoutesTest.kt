@@ -4,6 +4,7 @@ import configuration.authTestConfiguration
 import de.okan.drink_and_snack_api.configuration.UUIDSerializer
 import de.okan.drink_and_snack_api.configureRouting
 import de.okan.drink_and_snack_api.store.api.model.CreateStoreRequest
+import de.okan.drink_and_snack_api.store.api.setupStoreRoutes
 import de.okan.drink_and_snack_api.store.service.StoreService
 import de.okan.drink_and_snack_api.store.service.model.StoreDTO
 import io.ktor.client.HttpClient
@@ -12,6 +13,7 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.routing.routing
 import io.ktor.server.testing.*
 import io.mockk.every
 import io.mockk.mockk
@@ -31,11 +33,11 @@ class StoreRoutesTest {
         application {
             authTestConfiguration(userId)
 
-            configureRouting(
-                storeService = storeService,
-                drinkService = mockk(),
-                authService = mockk(),
-            )
+            configureRouting()
+
+            routing {
+                setupStoreRoutes(storeService)
+            }
         }
 
         val client = createClient {

@@ -1,10 +1,11 @@
 package de.okan.drink_and_snack_api
 
-import de.okan.drink_and_snack_api.auth.api.authRoutes
+import de.okan.drink_and_snack_api.auth.api.setupAuthRoutes
 import de.okan.drink_and_snack_api.auth.service.AuthService
 import de.okan.drink_and_snack_api.configuration.UUIDSerializer
+import de.okan.drink_and_snack_api.drink.api.setupDrinkRoutes
 import de.okan.drink_and_snack_api.drink.service.DrinkService
-import de.okan.drink_and_snack_api.store.api.storeRoutes
+import de.okan.drink_and_snack_api.store.api.setupStoreRoutes
 import de.okan.drink_and_snack_api.store.service.StoreService
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
@@ -18,14 +19,11 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
+import org.koin.java.KoinJavaComponent.getKoin
 import java.util.UUID
 
 
-fun Application.configureRouting(
-    storeService: StoreService,
-    drinkService: DrinkService,
-    authService: AuthService,
-) {
+fun Application.configureRouting() {
     install(ContentNegotiation) {
         json(
             Json {
@@ -47,27 +45,32 @@ fun Application.configureRouting(
             call.respondText("Unknown error", status = HttpStatusCode.InternalServerError)
         }
     }
+}
 
-    routing {
-        swaggerUI(
-            path = "swagger-ui"
-        )
+fun Route.setupSwaggerRoute() {
+    swaggerUI(
+        path = "swagger-ui"
+    )
+}
 
-        get("/") {
-            call.respondText("I'm alive!")
-        }
-
-
-        route("/api/v1") {
-            storeRoutes(
-                storeService = storeService,
-                drinkService = drinkService,
-            )
-            authRoutes(authService)
-        }
+fun Route.setupRootRoutes() {
+    get("/") {
+        call.respondText("I'm alive!")
     }
 }
 
+
+fun Route.setupRoutes(
+    storeService: StoreService = getKoin().get(),
+    drinkService: DrinkService = getKoin().get(),
+    authService: AuthService = getKoin().get(),
+) {
+    setupRootRoutes()
+    setupSwaggerRoute()
+    setupStoreRoutes(storeService)
+    setupDrinkRoutes(drinkService, storeService)
+    setupAuthRoutes(authService)
+}
 
 fun ApplicationCall.requireUUID(parameterName: String = "id"): UUID {
     return parameters[parameterName]

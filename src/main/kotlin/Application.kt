@@ -11,7 +11,7 @@ import de.okan.drink_and_snack_api.configuration.migrateDatabase
 import de.okan.drink_and_snack_api.drink.configuration.drinkModule
 import de.okan.drink_and_snack_api.store.configuration.storeModule
 import io.ktor.server.application.*
-import org.koin.ktor.ext.getKoin
+import io.ktor.server.routing.routing
 import org.koin.ktor.ext.inject
 import org.koin.ktor.plugin.Koin
 
@@ -40,9 +40,9 @@ fun Application.module() {
 
     authConfiguration(jwtConfiguration)
 
-    configureRouting(
-        storeService = getKoin().get(),
-        drinkService = getKoin().get(),
-        authService = getKoin().get(),
-    )
+    configureRouting()
+
+    routing {
+        setupRoutes()
+    }
 }
