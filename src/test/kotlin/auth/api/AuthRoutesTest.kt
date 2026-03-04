@@ -5,8 +5,8 @@ import de.okan.drink_and_snack_api.auth.api.model.LoginRequest
 import de.okan.drink_and_snack_api.auth.api.model.RegisterRequest
 import de.okan.drink_and_snack_api.auth.api.model.SessionDTO
 import de.okan.drink_and_snack_api.auth.api.setupAuthRoutes
-import de.okan.drink_and_snack_api.auth.configuration.authConfiguration
-import de.okan.drink_and_snack_api.auth.configuration.model.JwtConfiguration
+import de.okan.drink_and_snack_api.configuration.authConfiguration
+import de.okan.drink_and_snack_api.configuration.model.JwtConfigurationProperties
 import de.okan.drink_and_snack_api.auth.service.AuthService
 import de.okan.drink_and_snack_api.configureRouting
 import io.ktor.client.*
@@ -26,12 +26,12 @@ class AuthRoutesTest {
     fun setupTestApplication(block: suspend (HttpClient) -> Unit) = testApplication {
 
         application {
-            val jwtConfiguration = JwtConfiguration(
+            val jwtConfigurationProperties = JwtConfigurationProperties(
                 secret = "secret",
                 issuer = "issuer",
                 audience = "audience",
             )
-            authConfiguration(jwtConfiguration)
+            authConfiguration(jwtConfigurationProperties)
 
             configureRouting()
 

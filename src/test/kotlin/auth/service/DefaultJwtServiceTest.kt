@@ -2,15 +2,12 @@ package auth.service
 
 import com.auth0.jwt.exceptions.JWTDecodeException
 import com.auth0.jwt.exceptions.SignatureVerificationException
-import de.okan.drink_and_snack_api.auth.configuration.model.JwtConfiguration
+import de.okan.drink_and_snack_api.configuration.model.JwtConfigurationProperties
 import de.okan.drink_and_snack_api.auth.service.DefaultJwtService
-import io.ktor.util.encodeBase64
 import java.util.UUID
-import kotlin.io.encoding.Base64
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNull
 
 class DefaultJwtServiceTest {
 
@@ -18,12 +15,12 @@ class DefaultJwtServiceTest {
 
     @BeforeTest
     fun setup() {
-        val jwtConfiguration = JwtConfiguration(
+        val jwtConfigurationProperties = JwtConfigurationProperties(
             secret = "secret",
             issuer = "issuer",
             audience = "audience",
         )
-        jwtService = DefaultJwtService(jwtConfiguration)
+        jwtService = DefaultJwtService(jwtConfigurationProperties)
     }
 
     @Test
@@ -44,12 +41,12 @@ class DefaultJwtServiceTest {
 
     @Test(expected = SignatureVerificationException::class)
     fun `should fail validation of invalid JWT token`() {
-        val jwtConfiguration2 = JwtConfiguration(
+        val jwtConfigurationProperties2 = JwtConfigurationProperties(
             secret = "secret2",
             issuer = "issuer2",
             audience = "audience2",
         )
-        val jwtService2 = DefaultJwtService(jwtConfiguration2)
+        val jwtService2 = DefaultJwtService(jwtConfigurationProperties2)
 
         val userId = UUID.randomUUID()
         val token2 = jwtService2.generateAccessToken(userId)

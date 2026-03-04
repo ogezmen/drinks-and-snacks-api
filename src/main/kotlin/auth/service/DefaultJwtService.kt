@@ -2,28 +2,28 @@ package de.okan.drink_and_snack_api.auth.service
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
-import de.okan.drink_and_snack_api.auth.configuration.model.JwtConfiguration
+import de.okan.drink_and_snack_api.configuration.model.JwtConfigurationProperties
 import java.util.Date
 import java.util.UUID
 
 class DefaultJwtService(
-    private val jwtConfiguration: JwtConfiguration
+    private val jwtConfigurationProperties: JwtConfigurationProperties
 ) : JwtService {
     override fun generateAccessToken(userId: UUID): String {
-        val algorithm = Algorithm.HMAC256(jwtConfiguration.secret)
+        val algorithm = Algorithm.HMAC256(jwtConfigurationProperties.secret)
         return JWT.create()
-            .withAudience(jwtConfiguration.audience)
-            .withIssuer(jwtConfiguration.issuer)
+            .withAudience(jwtConfigurationProperties.audience)
+            .withIssuer(jwtConfigurationProperties.issuer)
             .withClaim("userId", userId.toString())
             .withExpiresAt(Date(System.currentTimeMillis() + 600000)) // 10 minutes; TODO: Make this configurable
             .sign(algorithm)
     }
 
     override fun validateAccessToken(token: String): UUID? {
-        val algorithm = Algorithm.HMAC256(jwtConfiguration.secret)
+        val algorithm = Algorithm.HMAC256(jwtConfigurationProperties.secret)
         val verifier = JWT.require(algorithm)
-            .withAudience(jwtConfiguration.audience)
-            .withIssuer(jwtConfiguration.issuer)
+            .withAudience(jwtConfigurationProperties.audience)
+            .withIssuer(jwtConfigurationProperties.issuer)
             .build()
         val decodedJWT = verifier.verify(token)
 

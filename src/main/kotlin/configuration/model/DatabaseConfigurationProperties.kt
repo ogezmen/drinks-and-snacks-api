@@ -1,6 +1,6 @@
 package de.okan.drink_and_snack_api.configuration.model
 
-data class DatabaseConfiguration(
+data class DatabaseConfigurationProperties(
     val url: String,
     val driver: String,
     val username: String,

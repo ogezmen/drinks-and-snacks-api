@@ -1,18 +1,10 @@
 package de.okan.drink_and_snack_api
 
-import de.okan.drink_and_snack_api.auth.configuration.authConfiguration
-import de.okan.drink_and_snack_api.auth.configuration.authModule
-import de.okan.drink_and_snack_api.auth.configuration.jwtConfigurationModule
-import de.okan.drink_and_snack_api.auth.configuration.model.JwtConfiguration
-import de.okan.drink_and_snack_api.configuration.databaseConfigurationModule
-import de.okan.drink_and_snack_api.configuration.databaseModule
-import de.okan.drink_and_snack_api.configuration.model.DatabaseConfiguration
-import de.okan.drink_and_snack_api.configuration.migrateDatabase
-import de.okan.drink_and_snack_api.drink.configuration.drinkModule
-import de.okan.drink_and_snack_api.store.configuration.storeModule
-import de.okan.drink_and_snack_api.user.configuration.userModule
+import de.okan.drink_and_snack_api.configuration.*
+import de.okan.drink_and_snack_api.configuration.model.DatabaseConfigurationProperties
+import de.okan.drink_and_snack_api.configuration.model.JwtConfigurationProperties
 import io.ktor.server.application.*
-import io.ktor.server.routing.routing
+import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 import org.koin.ktor.plugin.Koin
 
@@ -34,13 +26,13 @@ fun Application.module() {
         )
     }
 
-    val databaseConfiguration by inject<DatabaseConfiguration>()
+    val databaseConfigurationProperties by inject<DatabaseConfigurationProperties>()
 
-    migrateDatabase(databaseConfiguration)
+    migrateDatabase(databaseConfigurationProperties)
 
-    val jwtConfiguration by inject<JwtConfiguration>()
+    val jwtConfigurationProperties by inject<JwtConfigurationProperties>()
 
-    authConfiguration(jwtConfiguration)
+    authConfiguration(jwtConfigurationProperties)
 
     configureRouting()
 
