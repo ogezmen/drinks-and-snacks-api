@@ -3,8 +3,8 @@ package de.okan.drink_and_snack_api.auth.configuration
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import de.okan.drink_and_snack_api.auth.configuration.model.JwtConfiguration
-import de.okan.drink_and_snack_api.auth.persistence.ExposedUserRepository
-import de.okan.drink_and_snack_api.auth.persistence.UserRepository
+import de.okan.drink_and_snack_api.user.persistence.ExposedUserRepository
+import de.okan.drink_and_snack_api.user.persistence.UserRepository
 import de.okan.drink_and_snack_api.auth.service.AuthService
 import de.okan.drink_and_snack_api.auth.service.BCryptPasswordService
 import de.okan.drink_and_snack_api.auth.service.DefaultAuthService

@@ -7,6 +7,8 @@ import de.okan.drink_and_snack_api.drink.api.setupDrinkRoutes
 import de.okan.drink_and_snack_api.drink.service.DrinkService
 import de.okan.drink_and_snack_api.store.api.setupStoreRoutes
 import de.okan.drink_and_snack_api.store.service.StoreService
+import de.okan.drink_and_snack_api.user.api.setupUserRoutes
+import de.okan.drink_and_snack_api.user.service.UserService
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.*
@@ -67,13 +69,15 @@ fun Route.setupRootRoutes() {
 fun Route.setupRoutes(
     storeService: StoreService = getKoin().get(),
     drinkService: DrinkService = getKoin().get(),
+    userService: UserService = getKoin().get(),
     authService: AuthService = getKoin().get(),
 ) {
     setupRootRoutes()
     setupSwaggerRoute()
+    setupAuthRoutes(authService)
+    setupUserRoutes(userService)
     setupStoreRoutes(storeService)
     setupDrinkRoutes(drinkService, storeService)
-    setupAuthRoutes(authService)
 }
 
 fun ApplicationCall.requireUUID(parameterName: String = "id"): UUID {

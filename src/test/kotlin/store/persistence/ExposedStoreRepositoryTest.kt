@@ -1,8 +1,8 @@
 package store.persistence
 
 import configuration.setupTestDatabase
-import de.okan.drink_and_snack_api.auth.domain.User
-import de.okan.drink_and_snack_api.auth.persistence.ExposedUserRepository
+import de.okan.drink_and_snack_api.user.domain.User
+import de.okan.drink_and_snack_api.user.persistence.ExposedUserRepository
 import de.okan.drink_and_snack_api.store.domain.Store
 import de.okan.drink_and_snack_api.store.persistence.ExposedStoreRepository
 import java.util.*

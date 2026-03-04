@@ -1,8 +1,8 @@
 package drink.persistence
 
 import configuration.setupTestDatabase
-import de.okan.drink_and_snack_api.auth.domain.User
-import de.okan.drink_and_snack_api.auth.persistence.ExposedUserRepository
+import de.okan.drink_and_snack_api.user.domain.User
+import de.okan.drink_and_snack_api.user.persistence.ExposedUserRepository
 import de.okan.drink_and_snack_api.drink.domain.Drink
 import de.okan.drink_and_snack_api.drink.domain.DrinkPackaging
 import de.okan.drink_and_snack_api.drink.persistence.DrinkFilters

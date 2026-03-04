@@ -1,4 +1,4 @@
-package de.okan.drink_and_snack_api.auth.persistence
+package de.okan.drink_and_snack_api.user.persistence
 
 import org.jetbrains.exposed.sql.Table
 

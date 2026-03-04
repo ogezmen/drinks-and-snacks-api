@@ -2,8 +2,8 @@ package auth.service
 
 import de.okan.drink_and_snack_api.auth.api.model.LoginRequest
 import de.okan.drink_and_snack_api.auth.api.model.RegisterRequest
-import de.okan.drink_and_snack_api.auth.domain.User
-import de.okan.drink_and_snack_api.auth.persistence.UserRepository
+import de.okan.drink_and_snack_api.user.domain.User
+import de.okan.drink_and_snack_api.user.persistence.UserRepository
 import de.okan.drink_and_snack_api.auth.service.DefaultAuthService
 import de.okan.drink_and_snack_api.auth.service.JwtService
 import de.okan.drink_and_snack_api.auth.service.PasswordService
