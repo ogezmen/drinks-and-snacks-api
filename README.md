@@ -25,7 +25,7 @@ To build or run the project, use one of the following tasks:
 | Task                                         | Description                                                          |
 |----------------------------------------------|----------------------------------------------------------------------|
 | `./gradlew test`                             | Run the tests                                                        |
-| `./gradlew test koverHtmlReport koverVerify` | Run the tests, generates report and verifies test coverage           |
+| `./gradlew test koverHtmlReport koverVerify` | Run the tests, generate reports and verify test coverage             |
 | `./gradlew build`                            | Build everything                                                     |
 | `./gradlew buildFatJar`                      | Build an executable JAR of the server with all dependencies included |
 | `./gradlew buildImage`                       | Build the docker image to use with the fat JAR                       |
