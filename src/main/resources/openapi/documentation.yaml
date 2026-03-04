@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
-  title: Drink & Snack API
+  title: Drinks & Snacks API
   version: 1.0.0
-  description: API for managing stores and their drinks
+  description: API for managing stores and their drinks and snacks
 
 servers:
   - url: http://localhost:8080
@@ -14,6 +14,9 @@ tags:
     description: Operations related to stores
   - name: Drinks
     description: Operations related to drinks
+
+security:
+  - bearerAuth: []
 
 paths:
 
@@ -35,6 +38,12 @@ paths:
       tags:
         - Users
       summary: Register new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
       responses:
         '201':
           description: User registered
@@ -46,6 +55,12 @@ paths:
       tags:
         - Users
       summary: Login user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
       responses:
         '200':
           description: Logged in
@@ -210,6 +225,12 @@ paths:
           description: Missing or malformed id
 
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
   schemas:
 
     StoreDTO:
@@ -269,13 +290,13 @@ components:
           type: string
         firstName:
           type: string
-        lastname:
+        lastName:
           type: string
       required:
         - username
         - password
         - firstName
-        - lastname
+        - lastName
 
     LoginRequest:
       type: object
