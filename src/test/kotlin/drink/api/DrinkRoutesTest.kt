@@ -5,6 +5,7 @@ import de.okan.drink_and_snack_api.configuration.UUIDSerializer
 import de.okan.drink_and_snack_api.configureRouting
 import de.okan.drink_and_snack_api.drink.api.model.CreateDrinkRequest
 import de.okan.drink_and_snack_api.drink.api.model.DrinkDTO
+import de.okan.drink_and_snack_api.drink.api.model.DrinkPackagingDTO
 import de.okan.drink_and_snack_api.drink.api.setupDrinkRoutes
 import de.okan.drink_and_snack_api.drink.service.DrinkService
 import de.okan.drink_and_snack_api.store.service.StoreService
@@ -73,14 +74,20 @@ class DrinkRoutesTest {
             DrinkDTO(
                 id = UUID.randomUUID(),
                 name = "Coke",
+                milliliters = 0,
+                alcoholPercentage = 0.0,
+                packaging = DrinkPackagingDTO.CAN
             ),
             DrinkDTO(
                 id = UUID.randomUUID(),
                 name = "Pepsi",
+                milliliters = 0,
+                alcoholPercentage = 0.0,
+                packaging = DrinkPackagingDTO.CAN
             )
         )
 
-        every { drinkService.getAllDrinks(storeId) } returns drinks
+        every { drinkService.getAllDrinks(any(), any()) } returns drinks
 
         setupTestApplication { client ->
             val response = client.get("/api/v1/stores/$storeId/drinks")
@@ -97,6 +104,9 @@ class DrinkRoutesTest {
         val drink = DrinkDTO(
             id = drinkId,
             name = "Coke",
+            milliliters = 0,
+            alcoholPercentage = 0.0,
+            packaging = DrinkPackagingDTO.CAN
         )
 
         every { drinkService.getDrinkById(drinkId, storeId) } returns drink
@@ -127,11 +137,17 @@ class DrinkRoutesTest {
     fun `should add a new drink to a store`() {
         val createDrinkRequest = CreateDrinkRequest(
             name = "Coke",
+            milliliters = 0,
+            alcoholPercentage = 0.0,
+            packaging = DrinkPackagingDTO.CAN
         )
 
         val createdDrink = DrinkDTO(
             id = UUID.randomUUID(),
             name = createDrinkRequest.name,
+            milliliters = createDrinkRequest.milliliters,
+            alcoholPercentage = createDrinkRequest.alcoholPercentage,
+            packaging = createDrinkRequest.packaging,
         )
 
         every { drinkService.createDrink(any(), any()) } returns createdDrink
@@ -156,6 +172,9 @@ class DrinkRoutesTest {
     fun `should add not a new drink to a store if user is not owner of store`() {
         val createDrinkRequest = CreateDrinkRequest(
             name = "Coke",
+            milliliters = 0,
+            alcoholPercentage = 0.0,
+            packaging = DrinkPackagingDTO.CAN
         )
 
         every { storeService.isOwnerOfStore(any(), any()) } returns false

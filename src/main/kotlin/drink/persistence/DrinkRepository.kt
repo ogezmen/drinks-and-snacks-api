@@ -1,4 +1,4 @@
-package de.okan.drink_and_snack_api.drink.repository
+package de.okan.drink_and_snack_api.drink.persistence
 
 import de.okan.drink_and_snack_api.drink.domain.Drink
 import java.util.UUID
@@ -12,10 +12,11 @@ interface DrinkRepository {
      * Retrieves every [Drink] associated to the given store ID
      *
      * @param storeId ID of the associated store
+     * @param filters optional for filtering by attributes
      *
      * @return a [List] of every [Drink] associated to the store
      */
-    fun findAll(storeId: UUID): List<Drink>
+    fun findAll(storeId: UUID, filters: DrinkFilters? = null): List<Drink>
 
     /**
      * Retrieves a [Drink] by ID associated to the given store ID

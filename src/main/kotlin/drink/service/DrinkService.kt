@@ -2,6 +2,7 @@ package de.okan.drink_and_snack_api.drink.service
 
 import de.okan.drink_and_snack_api.drink.api.model.CreateDrinkRequest
 import de.okan.drink_and_snack_api.drink.api.model.DrinkDTO
+import de.okan.drink_and_snack_api.drink.api.model.DrinkFiltersDTO
 import java.util.UUID
 
 /**
@@ -13,10 +14,11 @@ interface DrinkService {
      * Retrieves all drinks associated to a store.
      *
      * @param storeId the ID of the associated store
+     * @param filters optional for filtering by attributes
      *
      * @return a [List] of [DrinkDTO] representing all existing drinks.
      */
-    fun getAllDrinks(storeId: UUID): List<DrinkDTO>
+    fun getAllDrinks(storeId: UUID, filters: DrinkFiltersDTO? = null): List<DrinkDTO>
 
     /**
      * Retrieves a specific drink by its ID within a given store.

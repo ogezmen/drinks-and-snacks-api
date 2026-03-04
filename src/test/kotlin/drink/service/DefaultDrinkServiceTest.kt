@@ -1,8 +1,10 @@
 package drink.service
 
 import de.okan.drink_and_snack_api.drink.api.model.CreateDrinkRequest
+import de.okan.drink_and_snack_api.drink.api.model.DrinkPackagingDTO
 import de.okan.drink_and_snack_api.drink.domain.Drink
-import de.okan.drink_and_snack_api.drink.repository.DrinkRepository
+import de.okan.drink_and_snack_api.drink.domain.DrinkPackaging
+import de.okan.drink_and_snack_api.drink.persistence.DrinkRepository
 import de.okan.drink_and_snack_api.drink.service.DefaultDrinkService
 import io.mockk.every
 import io.mockk.mockk
@@ -20,8 +22,22 @@ class DefaultDrinkServiceTest {
     fun `should return all drinks`() {
         // Given
         val storeId = UUID.randomUUID()
-        val drink1 = Drink(UUID.randomUUID(), "Coca-Cola", storeId)
-        val drink2 = Drink(UUID.randomUUID(), "Pepsi", storeId)
+        val drink1 = Drink(
+            id = UUID.randomUUID(),
+            name = "Coca-Cola",
+            milliliters = 0,
+            alcoholPercentage = 0.0,
+            drinkPackaging = DrinkPackaging.CAN,
+            storeId = storeId,
+        )
+        val drink2 = Drink(
+            id = UUID.randomUUID(),
+            name = "Pepsi",
+            milliliters = 0,
+            alcoholPercentage = 0.0,
+            drinkPackaging = DrinkPackaging.CAN,
+            storeId = storeId,
+        )
 
         every { drinkRepository.findAll(any()) } returns listOf(drink1, drink2)
 
@@ -42,7 +58,14 @@ class DefaultDrinkServiceTest {
         val drinkId = UUID.randomUUID()
         val storeId = UUID.randomUUID()
 
-        val drink = Drink(drinkId, "Coca-Cola", storeId)
+        val drink = Drink(
+            id = drinkId,
+            name = "Coca-Cola",
+            milliliters = 0,
+            alcoholPercentage = 0.0,
+            drinkPackaging = DrinkPackaging.CAN,
+            storeId = storeId,
+        )
 
         every { drinkRepository.findById(drinkId, storeId) } returns drink
 
@@ -77,7 +100,10 @@ class DefaultDrinkServiceTest {
     fun `should create a new drink`() {
         // Given
         val createDrinkRequest = CreateDrinkRequest(
-            name = "Coca-Cola"
+            name = "Coca-Cola",
+            milliliters = 0,
+            alcoholPercentage = 0.0,
+            packaging = DrinkPackagingDTO.CAN,
         )
 
         val storeId = UUID.randomUUID()
@@ -102,7 +128,7 @@ class DefaultDrinkServiceTest {
         val drinkId = UUID.randomUUID()
         val storeId = UUID.randomUUID()
 
-        every { drinkRepository.deleteById(drinkId, storeId) } returns Unit
+        every { drinkRepository.deleteById(any(), any()) } returns Unit
 
         // When
         service.deleteDrink(drinkId, storeId)

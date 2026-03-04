@@ -18,7 +18,9 @@ fun Route.setupDrinkRoutes(
     route("/api/v1/stores/{storeId}/drinks") {
         get {
             val storeId = call.requireUUID("storeId")
-            call.respond(drinkService.getAllDrinks(storeId))
+            val filters = call.request.queryParameters.toDrinkFiltersDTO()
+            val drinks = drinkService.getAllDrinks(storeId, filters)
+            call.respond(drinks)
         }
 
         get("/{id}") {

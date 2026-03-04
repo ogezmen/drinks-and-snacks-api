@@ -151,6 +151,18 @@ paths:
       tags:
         - Drinks
       summary: Get all drinks for a store
+      parameters:
+        - name: alcoholic
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: packaging
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [CAN, BOTTLE]
       responses:
         '200':
           description: List of drinks
@@ -261,17 +273,43 @@ components:
           format: uuid
         name:
           type: string
+        milliliters:
+          type: integer
+        alcoholPercentage:
+          type: number
+          minimum: 0.0
+        alcoholic:
+          type: boolean
+        packaging:
+          type: string
+          enum: [CAN, BOTTLE]
       required:
         - id
         - name
+        - milliliters
+        - alcoholPercentage
+        - alcoholic
+        - packaging
 
     CreateDrinkRequest:
       type: object
       properties:
         name:
           type: string
+        milliliters:
+          type: integer
+        alcoholPercentage:
+          type: number
+          minimum: 0.0
+        packaging:
+          type: string
+          enum: [CAN, BOTTLE]
+
       required:
         - name
+        - milliliters
+        - alcoholPercentage
+        - packaging
 
     SessionDTO:
       type: object

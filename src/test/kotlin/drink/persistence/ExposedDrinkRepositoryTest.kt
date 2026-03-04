@@ -4,13 +4,16 @@ import configuration.setupTestDatabase
 import de.okan.drink_and_snack_api.auth.domain.User
 import de.okan.drink_and_snack_api.auth.persistence.ExposedUserRepository
 import de.okan.drink_and_snack_api.drink.domain.Drink
-import de.okan.drink_and_snack_api.drink.repository.ExposedDrinkRepository
+import de.okan.drink_and_snack_api.drink.domain.DrinkPackaging
+import de.okan.drink_and_snack_api.drink.persistence.DrinkFilters
+import de.okan.drink_and_snack_api.drink.persistence.ExposedDrinkRepository
 import de.okan.drink_and_snack_api.store.domain.Store
 import de.okan.drink_and_snack_api.store.persistence.ExposedStoreRepository
 import java.util.*
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
@@ -52,11 +55,17 @@ class ExposedDrinkRepositoryTest {
             id = UUID.randomUUID(),
             name = "Coke",
             storeId = storeId,
+            milliliters = 0,
+            alcoholPercentage = 0.0,
+            drinkPackaging = DrinkPackaging.CAN,
         )
         val drink2 = Drink(
             id = UUID.randomUUID(),
             name = "Pepsi",
             storeId = storeId,
+            milliliters = 0,
+            alcoholPercentage = 0.0,
+            drinkPackaging = DrinkPackaging.CAN,
         )
         repository.create(drink1, storeId)
         repository.create(drink2, storeId)
@@ -77,6 +86,9 @@ class ExposedDrinkRepositoryTest {
             id = UUID.randomUUID(),
             name = "Coke",
             storeId = storeId,
+            milliliters = 0,
+            alcoholPercentage = 0.0,
+            drinkPackaging = DrinkPackaging.CAN,
         )
 
         // When
@@ -90,12 +102,87 @@ class ExposedDrinkRepositoryTest {
     }
 
     @Test
+    fun `should only return non-alcoholic drinks`() {
+        // Given
+        val coke = Drink(
+            id = UUID.randomUUID(),
+            name = "Coke",
+            storeId = storeId,
+            milliliters = 0,
+            alcoholPercentage = 0.0,
+            drinkPackaging = DrinkPackaging.CAN,
+        )
+
+        val beer = Drink(
+            id = UUID.randomUUID(),
+            name = "Beer",
+            storeId = storeId,
+            milliliters = 0,
+            alcoholPercentage = 5.0,
+            drinkPackaging = DrinkPackaging.BOTTLE,
+        )
+
+        repository.create(coke, storeId)
+        repository.create(beer, storeId)
+
+        // When
+        val filters = DrinkFilters(
+            alcoholic = false,
+        )
+
+        val drinks = repository.findAll(storeId, filters)
+
+        // Then
+        assertEquals(1, drinks.size)
+        assertFalse(drinks[0].alcoholic)
+    }
+
+    @Test
+    fun `should only return drinks in a can`() {
+        // Given
+        val can = Drink(
+            id = UUID.randomUUID(),
+            name = "Coke",
+            storeId = storeId,
+            milliliters = 0,
+            alcoholPercentage = 0.0,
+            drinkPackaging = DrinkPackaging.CAN,
+        )
+
+        val bottle = Drink(
+            id = UUID.randomUUID(),
+            name = "Pepsi",
+            storeId = storeId,
+            milliliters = 0,
+            alcoholPercentage = 0.0,
+            drinkPackaging = DrinkPackaging.BOTTLE,
+        )
+
+        repository.create(can, storeId)
+        repository.create(bottle, storeId)
+
+        // When
+        val filters = DrinkFilters(
+            packaging = DrinkPackaging.CAN,
+        )
+
+        val drinks = repository.findAll(storeId, filters)
+
+        // Then
+        assertEquals(1, drinks.size)
+        assertEquals(DrinkPackaging.CAN, drinks[0].drinkPackaging)
+    }
+
+    @Test
     fun `should delete drink`() {
         // Given
         val drink = Drink(
             id = UUID.randomUUID(),
             name = "Pepsi",
             storeId = storeId,
+            milliliters = 0,
+            alcoholPercentage = 0.0,
+            drinkPackaging = DrinkPackaging.CAN,
         )
         repository.create(drink, storeId)
 
