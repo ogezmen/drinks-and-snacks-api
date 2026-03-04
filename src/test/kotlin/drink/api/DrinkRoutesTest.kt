@@ -1,7 +1,7 @@
 package drink.api
 
 import configuration.authTestConfiguration
-import de.okan.drink_and_snack_api.configuration.UUIDSerializer
+import configuration.runTestApplication
 import de.okan.drink_and_snack_api.configureRouting
 import de.okan.drink_and_snack_api.drink.api.model.CreateDrinkRequest
 import de.okan.drink_and_snack_api.drink.api.model.DrinkDTO
@@ -11,7 +11,6 @@ import de.okan.drink_and_snack_api.drink.service.DrinkService
 import de.okan.drink_and_snack_api.store.service.StoreService
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.post
@@ -19,14 +18,11 @@ import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
-import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.routing.routing
 import io.ktor.server.testing.testApplication
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.modules.SerializersModule
 import java.util.UUID
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -52,20 +48,7 @@ class DrinkRoutesTest {
                 )
             }
         }
-
-        val client = createClient {
-            install(ContentNegotiation) {
-                json(
-                    Json {
-                        serializersModule = SerializersModule {
-                            contextual(UUID::class, UUIDSerializer)
-                        }
-                    }
-                )
-            }
-        }
-
-        block(client)
+        runTestApplication(block)
     }
 
     @Test
