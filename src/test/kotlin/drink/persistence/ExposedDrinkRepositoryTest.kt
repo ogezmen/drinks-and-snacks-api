@@ -9,6 +9,7 @@ import de.okan.drink_and_snack_api.drink.persistence.DrinkFilters
 import de.okan.drink_and_snack_api.drink.persistence.ExposedDrinkRepository
 import de.okan.drink_and_snack_api.store.domain.Store
 import de.okan.drink_and_snack_api.store.persistence.ExposedStoreRepository
+import junit.framework.TestCase.assertTrue
 import java.util.*
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -102,7 +103,7 @@ class ExposedDrinkRepositoryTest {
     }
 
     @Test
-    fun `should only return non-alcoholic drinks`() {
+    fun `should filter drinks by alcoholic`() {
         // Given
         val coke = Drink(
             id = UUID.randomUUID(),
@@ -126,15 +127,28 @@ class ExposedDrinkRepositoryTest {
         repository.create(beer, storeId)
 
         // When
-        val filters = DrinkFilters(
+        val filterAlcoholic = DrinkFilters(
+            alcoholic = true,
+        )
+        val filterNonAlcoholic = DrinkFilters(
             alcoholic = false,
         )
+        val noFilter = DrinkFilters()
 
-        val drinks = repository.findAll(storeId, filters)
+        val alcoholicDrinks = repository.findAll(storeId, filterAlcoholic)
+        val nonAlcoholicDrinks = repository.findAll(storeId, filterNonAlcoholic)
+        val allDrinks = repository.findAll(storeId, noFilter)
 
         // Then
-        assertEquals(1, drinks.size)
-        assertFalse(drinks[0].alcoholic)
+        assertEquals(1, alcoholicDrinks.size)
+        assertTrue(alcoholicDrinks[0].alcoholic)
+        assertEquals("Beer", alcoholicDrinks[0].name)
+
+        assertEquals(1, nonAlcoholicDrinks.size)
+        assertFalse(nonAlcoholicDrinks[0].alcoholic)
+        assertEquals("Coke", nonAlcoholicDrinks[0].name)
+
+        assertEquals(2, allDrinks.size)
     }
 
     @Test
