@@ -12,6 +12,7 @@ import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.*
 import io.ktor.server.auth.jwt.JWTPrincipal
 import io.ktor.server.auth.principal
+import io.ktor.server.plugins.BadRequestException
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.plugins.swagger.swaggerUI
@@ -35,6 +36,9 @@ fun Application.configureRouting() {
     }
 
     install(StatusPages) {
+        exception<BadRequestException> { call, _ ->
+            call.respondText("Bad request", status = HttpStatusCode.BadRequest)
+        }
         exception<IllegalArgumentException> { call, cause ->
             call.respondText(cause.message ?: "Bad request", status = HttpStatusCode.BadRequest)
         }
