@@ -17,7 +17,7 @@ fun Drink.toDTO(): DrinkDTO = DrinkDTO(
 
 fun DrinkFiltersDTO.toRepositoryFilters() = DrinkFilters(
     alcoholic = this.alcoholic,
-    packaging = this.packagingDTO?.toDomain(),
+    packaging = this.packaging?.toDomain(),
 )
 
 fun DrinkPackaging.toDTO(): DrinkPackagingDTO = when(this) {

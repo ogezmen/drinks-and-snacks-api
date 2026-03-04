@@ -10,5 +10,5 @@ fun String.toDrinkPackaging(): DrinkPackagingDTO? {
 
 fun Parameters.toDrinkFiltersDTO() = DrinkFiltersDTO(
     alcoholic = this["alcoholic"]?.toBoolean(),
-    packagingDTO = this["packaging"]?.toDrinkPackaging(),
+    packaging = this["packaging"]?.toDrinkPackaging(),
 )
