@@ -3,7 +3,7 @@ package de.okan.drinks_and_snacks_api.user.api
 import de.okan.drinks_and_snacks_api.requireRoleFromJWT
 import de.okan.drinks_and_snacks_api.requireUUID
 import de.okan.drinks_and_snacks_api.requireUserIDFromJWT
-import de.okan.drinks_and_snacks_api.user.api.model.DeleteAccountRequest
+import de.okan.drinks_and_snacks_api.user.api.dto.DeleteAccountRequest
 import de.okan.drinks_and_snacks_api.user.service.UserService
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.auth.authenticate

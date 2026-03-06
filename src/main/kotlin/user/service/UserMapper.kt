@@ -1,7 +1,7 @@
 package de.okan.drinks_and_snacks_api.user.service
 
-import de.okan.drinks_and_snacks_api.user.api.model.RoleDTO
-import de.okan.drinks_and_snacks_api.user.api.model.UserDTO
+import de.okan.drinks_and_snacks_api.user.api.dto.RoleDTO
+import de.okan.drinks_and_snacks_api.user.api.dto.UserDTO
 import de.okan.drinks_and_snacks_api.user.domain.Role
 import de.okan.drinks_and_snacks_api.user.domain.User
 

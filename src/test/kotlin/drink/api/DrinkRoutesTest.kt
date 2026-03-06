@@ -3,9 +3,9 @@ package drink.api
 import configuration.authTestConfiguration
 import configuration.runTestApplication
 import de.okan.drinks_and_snacks_api.configureRouting
-import de.okan.drinks_and_snacks_api.drink.api.model.CreateDrinkRequest
-import de.okan.drinks_and_snacks_api.drink.api.model.DrinkDTO
-import de.okan.drinks_and_snacks_api.drink.api.model.DrinkPackagingDTO
+import de.okan.drinks_and_snacks_api.drink.api.dto.CreateDrinkRequest
+import de.okan.drinks_and_snacks_api.drink.api.dto.DrinkDTO
+import de.okan.drinks_and_snacks_api.drink.api.dto.DrinkPackagingDTO
 import de.okan.drinks_and_snacks_api.drink.api.setupDrinkRoutes
 import de.okan.drinks_and_snacks_api.drink.service.DrinkService
 import de.okan.drinks_and_snacks_api.store.service.StoreService

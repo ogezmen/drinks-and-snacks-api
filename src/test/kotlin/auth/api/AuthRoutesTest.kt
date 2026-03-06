@@ -1,9 +1,9 @@
 package auth.api
 
 import configuration.runTestApplication
-import de.okan.drinks_and_snacks_api.auth.api.model.LoginRequest
-import de.okan.drinks_and_snacks_api.auth.api.model.RegisterRequest
-import de.okan.drinks_and_snacks_api.auth.api.model.SessionDTO
+import de.okan.drinks_and_snacks_api.auth.api.dto.LoginRequest
+import de.okan.drinks_and_snacks_api.auth.api.dto.RegisterRequest
+import de.okan.drinks_and_snacks_api.auth.api.dto.SessionDTO
 import de.okan.drinks_and_snacks_api.auth.api.setupAuthRoutes
 import de.okan.drinks_and_snacks_api.configuration.authConfiguration
 import de.okan.drinks_and_snacks_api.configuration.model.JwtConfigurationProperties

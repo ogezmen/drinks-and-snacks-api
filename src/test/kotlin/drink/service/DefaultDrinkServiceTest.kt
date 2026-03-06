@@ -1,8 +1,8 @@
 package drink.service
 
-import de.okan.drinks_and_snacks_api.drink.api.model.CreateDrinkRequest
-import de.okan.drinks_and_snacks_api.drink.api.model.DrinkFiltersDTO
-import de.okan.drinks_and_snacks_api.drink.api.model.DrinkPackagingDTO
+import de.okan.drinks_and_snacks_api.drink.api.dto.CreateDrinkRequest
+import de.okan.drinks_and_snacks_api.drink.api.dto.DrinkFiltersDTO
+import de.okan.drinks_and_snacks_api.drink.api.dto.DrinkPackagingDTO
 import de.okan.drinks_and_snacks_api.drink.domain.Drink
 import de.okan.drinks_and_snacks_api.drink.domain.DrinkPackaging
 import de.okan.drinks_and_snacks_api.drink.persistence.DrinkRepository

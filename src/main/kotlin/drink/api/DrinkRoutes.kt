@@ -1,6 +1,6 @@
 package de.okan.drinks_and_snacks_api.drink.api
 
-import de.okan.drinks_and_snacks_api.drink.api.model.CreateDrinkRequest
+import de.okan.drinks_and_snacks_api.drink.api.dto.CreateDrinkRequest
 import de.okan.drinks_and_snacks_api.drink.service.DrinkService
 import de.okan.drinks_and_snacks_api.requireUUID
 import de.okan.drinks_and_snacks_api.requireUserIDFromJWT

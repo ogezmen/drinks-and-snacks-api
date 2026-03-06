@@ -1,6 +1,6 @@
 package store.service
 
-import de.okan.drinks_and_snacks_api.store.api.model.CreateStoreRequest
+import de.okan.drinks_and_snacks_api.store.api.dto.CreateStoreRequest
 import de.okan.drinks_and_snacks_api.store.domain.Store
 import de.okan.drinks_and_snacks_api.store.persistence.StoreRepository
 import de.okan.drinks_and_snacks_api.store.service.DefaultStoreService

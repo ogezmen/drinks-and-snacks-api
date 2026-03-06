@@ -1,7 +1,7 @@
 package de.okan.drinks_and_snacks_api.drink.api
 
-import de.okan.drinks_and_snacks_api.drink.api.model.DrinkFiltersDTO
-import de.okan.drinks_and_snacks_api.drink.api.model.DrinkPackagingDTO
+import de.okan.drinks_and_snacks_api.drink.api.dto.DrinkFiltersDTO
+import de.okan.drinks_and_snacks_api.drink.api.dto.DrinkPackagingDTO
 import io.ktor.http.Parameters
 
 fun String.toDrinkPackaging(): DrinkPackagingDTO? {

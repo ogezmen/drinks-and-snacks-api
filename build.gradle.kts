@@ -24,7 +24,7 @@ kover {
                     "de.okan.drinks_and_snacks_api.ApplicationKt*",
                     "de.okan.drinks_and_snacks_api.RoutingKt*",
                     "*.configuration.*",
-                    "*.model.*",
+                    "*.dto.*",
                 )
             }
         }

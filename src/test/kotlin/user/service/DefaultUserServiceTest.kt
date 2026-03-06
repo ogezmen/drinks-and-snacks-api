@@ -1,7 +1,7 @@
 package user.service
 
 import de.okan.drinks_and_snacks_api.auth.service.PasswordService
-import de.okan.drinks_and_snacks_api.user.api.model.DeleteAccountRequest
+import de.okan.drinks_and_snacks_api.user.api.dto.DeleteAccountRequest
 import de.okan.drinks_and_snacks_api.user.domain.Role
 import de.okan.drinks_and_snacks_api.user.domain.User
 import de.okan.drinks_and_snacks_api.user.persistence.UserRepository

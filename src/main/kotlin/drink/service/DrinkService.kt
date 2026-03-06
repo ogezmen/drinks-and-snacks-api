@@ -1,8 +1,8 @@
 package de.okan.drinks_and_snacks_api.drink.service
 
-import de.okan.drinks_and_snacks_api.drink.api.model.CreateDrinkRequest
-import de.okan.drinks_and_snacks_api.drink.api.model.DrinkDTO
-import de.okan.drinks_and_snacks_api.drink.api.model.DrinkFiltersDTO
+import de.okan.drinks_and_snacks_api.drink.api.dto.CreateDrinkRequest
+import de.okan.drinks_and_snacks_api.drink.api.dto.DrinkDTO
+import de.okan.drinks_and_snacks_api.drink.api.dto.DrinkFiltersDTO
 import java.util.UUID
 
 /**
