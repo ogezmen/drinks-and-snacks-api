@@ -6,14 +6,23 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.util.UUID
 
 class ExposedUserRepository(
     private val database: Database,
 ) : UserRepository {
-    override fun findAll(): List<User> {
-        TODO("Not yet implemented")
+    override fun findAll(): List<User> = transaction(database) {
+        UsersTable.selectAll().map {
+            User(
+                id = it[UsersTable.id],
+                username = it[UsersTable.username],
+                passwordHash = it[UsersTable.passwordHash],
+                firstName = it[UsersTable.firstName],
+                lastName = it[UsersTable.lastName],
+            )
+        }
     }
 
     override fun findById(id: UUID): User? = transaction(database) {

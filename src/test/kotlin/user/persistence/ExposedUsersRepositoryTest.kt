@@ -21,6 +21,34 @@ class ExposedUsersRepositoryTest {
     }
 
     @Test
+    fun `should return all users`() {
+        val user1 = User(
+            id = UUID.randomUUID(),
+            username = "username",
+            passwordHash = "password".reversed(),
+            firstName = "firstName",
+            lastName = "lastName",
+        )
+
+        val user2 = User(
+            id = UUID.randomUUID(),
+            username = "username2",
+            passwordHash = "password2".reversed(),
+            firstName = "firstName2",
+            lastName = "lastName2",
+        )
+
+        repository.create(user1)
+        repository.create(user2)
+
+        val users = repository.findAll()
+
+        assertEquals(2, users.size)
+        assertEquals(user1, users[0])
+        assertEquals(user2, users[1])
+    }
+
+    @Test
     fun `save and find by username and id`() {
 
         val id = UUID.randomUUID()
