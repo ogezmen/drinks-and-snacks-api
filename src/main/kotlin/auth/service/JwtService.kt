@@ -15,7 +15,7 @@ interface JwtService {
      *
      * @return a signed JWT access token
      */
-    fun generateAccessToken(userId: UUID): String
+    fun generateAccessToken(userId: String, roles: Set<String>): String
 
     /**
      * Validates the given access token.

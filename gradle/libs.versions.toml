@@ -23,6 +23,8 @@ ktor-server-openapi = { module = "io.ktor:ktor-server-openapi", version.ref = "k
 ktor-server-swagger = { module = "io.ktor:ktor-server-swagger", version.ref = "ktor" }
 ktor-server-routing-openapi = { module = "io.ktor:ktor-server-routing-openapi", version.ref = "ktor" }
 
+koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
+
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 
@@ -30,8 +32,7 @@ exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "e
 exposed-dao = { module = "org.jetbrains.exposed:exposed-dao", version.ref = "exposed" }
 exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
 
-koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
-
+postgres = { module = "org.postgresql:postgresql", version = "42.7.7" }
 h2 = { module = "com.h2database:h2", version = "2.2.222" }
 
 flyway-core = { module = "org.flywaydb:flyway-core", version = "9.22.3"}

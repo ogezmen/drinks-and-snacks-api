@@ -36,6 +36,7 @@ class ExposedDrinkRepositoryTest {
             passwordHash = "test",
             firstName = "test",
             lastName = "test",
+            roles = setOf(),
         )
         userRepository.create(user)
 

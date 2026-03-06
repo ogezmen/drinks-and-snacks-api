@@ -8,4 +8,5 @@ data class User(
     val passwordHash: String,
     val firstName: String,
     val lastName: String,
+    val roles: Set<Role>
 )

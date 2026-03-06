@@ -22,6 +22,7 @@ class ExposedStoreRepositoryTest {
             passwordHash = "test",
             firstName = "test",
             lastName = "test",
+            roles = setOf(),
         )
 
         val userRepository = ExposedUserRepository(database)

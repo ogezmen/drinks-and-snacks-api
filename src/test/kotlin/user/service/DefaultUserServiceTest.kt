@@ -2,6 +2,7 @@ package user.service
 
 import de.okan.drink_and_snack_api.auth.service.PasswordService
 import de.okan.drink_and_snack_api.user.api.model.DeleteAccountRequest
+import de.okan.drink_and_snack_api.user.domain.Role
 import de.okan.drink_and_snack_api.user.domain.User
 import de.okan.drink_and_snack_api.user.persistence.UserRepository
 import de.okan.drink_and_snack_api.user.service.DefaultUserService
@@ -28,6 +29,7 @@ class DefaultUserServiceTest {
             passwordHash = "passwordHash".reversed(),
             firstName = "firstName",
             lastName = "lastName",
+            roles = setOf(),
         )
         val user2 = User(
             id = UUID.randomUUID(),
@@ -35,6 +37,7 @@ class DefaultUserServiceTest {
             passwordHash = "passwordHash2".reversed(),
             firstName = "firstName2",
             lastName = "lastName2",
+            roles = setOf(),
         )
 
         every { userRepository.findAll() } returns listOf(user1, user2)
@@ -56,6 +59,7 @@ class DefaultUserServiceTest {
             passwordHash = "password".reversed(),
             firstName = "firstName",
             lastName = "lastName",
+            roles = setOf(Role.SELLER, Role.ADMIN),
         )
 
         every { userRepository.findById(id) } returns user
@@ -89,6 +93,7 @@ class DefaultUserServiceTest {
             passwordHash = "password".reversed(),
             firstName = "firstName",
             lastName = "lastName",
+            roles = setOf(),
         )
 
         every { userRepository.findById(any()) } returns user
@@ -113,6 +118,7 @@ class DefaultUserServiceTest {
             passwordHash = "password".reversed(),
             firstName = "firstName",
             lastName = "lastName",
+            roles = setOf(),
         )
 
         every { userRepository.findById(any()) } returns user
@@ -150,6 +156,7 @@ class DefaultUserServiceTest {
             passwordHash = "password".reversed(),
             firstName = "firstName",
             lastName = "lastName",
+            roles = setOf(),
         )
 
         every { userRepository.findById(any()) } returns user

@@ -50,6 +50,7 @@ class UserRoutesTest {
             username = "username",
             firstName = "firstName",
             lastName = "lastName",
+            roles = setOf()
         )
 
         every { userService.getUserById(userId) } returns userDTO
@@ -128,6 +129,7 @@ class UserRoutesTest {
             username = "username",
             firstName = "firstName",
             lastName = "lastName",
+            roles = setOf()
         )
 
         every { userService.getUserById(any()) } returns userDTO

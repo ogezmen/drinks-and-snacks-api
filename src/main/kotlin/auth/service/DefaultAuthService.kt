@@ -25,11 +25,15 @@ class DefaultAuthService(
             passwordHash = passwordService.hash(registerRequest.password),
             firstName = registerRequest.firstName,
             lastName = registerRequest.lastName,
+            roles = setOf(),
         )
 
         val createdUser = userRepository.create(user)
 
-        val accessToken = jwtService.generateAccessToken(createdUser.id)
+        val accessToken = jwtService.generateAccessToken(
+            userId = createdUser.id.toString(),
+            roles = createdUser.roles.map { it.toString() }.toSet(),
+        )
 
         return SessionDTO(
             accessToken = accessToken,
@@ -44,7 +48,10 @@ class DefaultAuthService(
             "Invalid username or password"
         }
 
-        val accessToken = jwtService.generateAccessToken(user.id)
+        val accessToken = jwtService.generateAccessToken(
+            userId = user.id.toString(),
+            roles = user.roles.map { it.toString() }.toSet(),
+        )
 
         return SessionDTO(
             accessToken = accessToken,

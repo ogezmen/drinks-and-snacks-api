@@ -7,6 +7,7 @@ import de.okan.drink_and_snack_api.user.persistence.UserRepository
 import de.okan.drink_and_snack_api.auth.service.DefaultAuthService
 import de.okan.drink_and_snack_api.auth.service.JwtService
 import de.okan.drink_and_snack_api.auth.service.PasswordService
+import de.okan.drink_and_snack_api.user.domain.Role
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -36,16 +37,18 @@ class DefaultAuthServiceTest {
         )
 
         val randomId = UUID.randomUUID()
+        val roles = setOf(Role.SELLER)
 
         every { userRepository.findByUsername(any()) } returns null
         every { passwordService.hash(any()) } returns "encryptedPassword"
-        every { jwtService.generateAccessToken(any()) } returns "accessToken"
+        every { jwtService.generateAccessToken(any(), any()) } returns "accessToken"
         every { userRepository.create(any()) } returns User(
             id = randomId,
             username = registerRequest.username,
             passwordHash = "encryptedPassword",
             firstName = registerRequest.firstName,
             lastName = registerRequest.lastName,
+            roles = roles,
         )
 
         val sessionDTO = authService.register(registerRequest)
@@ -53,7 +56,10 @@ class DefaultAuthServiceTest {
         verify { userRepository.findByUsername(registerRequest.username) }
         verify { passwordService.hash(registerRequest.password) }
         verify { userRepository.create(any()) }
-        verify { jwtService.generateAccessToken(randomId) }
+        verify { jwtService.generateAccessToken(
+            userId = randomId.toString(),
+            roles = roles.map { it.toString() }.toSet())
+        }
 
         assertEquals("accessToken", sessionDTO.accessToken)
     }
@@ -73,6 +79,7 @@ class DefaultAuthServiceTest {
             passwordHash = "encryptedPassword",
             firstName = "Test",
             lastName = "User",
+            roles = setOf(),
         )
 
         authService.register(registerRequest)
@@ -91,16 +98,17 @@ class DefaultAuthServiceTest {
             passwordHash = "encryptedPassword",
             firstName = "Test",
             lastName = "User",
+            roles = setOf(),
         )
 
         every { userRepository.findByUsername(any()) } returns user
         every { passwordService.matches(any(), any())} returns true
-        every { jwtService.generateAccessToken(any()) } returns "accessToken"
+        every { jwtService.generateAccessToken(any(), any()) } returns "accessToken"
 
         val sessionDTO = authService.login(loginRequest)
 
         verify { userRepository.findByUsername(loginRequest.username) }
-        verify { jwtService.generateAccessToken(user.id) }
+        verify { jwtService.generateAccessToken(user.id.toString(), setOf()) }
 
         assertEquals("accessToken", sessionDTO.accessToken)
     }
@@ -131,6 +139,7 @@ class DefaultAuthServiceTest {
             passwordHash = "encryptedPassword",
             firstName = "Test",
             lastName = "User",
+            roles = setOf(),
         )
 
         every { userRepository.findByUsername(any()) } returns user

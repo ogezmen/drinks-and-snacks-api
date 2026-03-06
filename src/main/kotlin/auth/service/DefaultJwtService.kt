@@ -9,12 +9,13 @@ import java.util.UUID
 class DefaultJwtService(
     private val jwtConfigurationProperties: JwtConfigurationProperties
 ) : JwtService {
-    override fun generateAccessToken(userId: UUID): String {
+    override fun generateAccessToken(userId: String, roles: Set<String>): String {
         val algorithm = Algorithm.HMAC256(jwtConfigurationProperties.secret)
         return JWT.create()
             .withAudience(jwtConfigurationProperties.audience)
             .withIssuer(jwtConfigurationProperties.issuer)
-            .withClaim("userId", userId.toString())
+            .withClaim("userId", userId)
+            .withArrayClaim("roles", roles.toTypedArray())
             .withExpiresAt(Date(System.currentTimeMillis() + 600000)) // 10 minutes; TODO: Make this configurable
             .sign(algorithm)
     }

@@ -57,13 +57,15 @@ dependencies {
 
     implementation(libs.ktor.server.config.yaml)
 
+    implementation(libs.koin.ktor)
+
     implementation(libs.logback.classic)
 
     implementation(libs.exposed.core)
     implementation(libs.exposed.dao)
     implementation(libs.exposed.jdbc)
 
-    implementation(libs.koin.ktor)
+    implementation(libs.postgres)
     implementation(libs.h2)
 
     implementation(libs.flyway.core)

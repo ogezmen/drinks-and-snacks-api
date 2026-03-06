@@ -26,7 +26,7 @@ class DefaultJwtServiceTest {
     @Test
     fun `generate access token and validate`() {
         val userId = UUID.randomUUID()
-        val token = jwtService.generateAccessToken(userId)
+        val token = jwtService.generateAccessToken(userId.toString(), setOf())
 
         val validatedUserId = jwtService.validateAccessToken(token)
 
@@ -49,7 +49,7 @@ class DefaultJwtServiceTest {
         val jwtService2 = DefaultJwtService(jwtConfigurationProperties2)
 
         val userId = UUID.randomUUID()
-        val token2 = jwtService2.generateAccessToken(userId)
+        val token2 = jwtService2.generateAccessToken(userId.toString(), setOf())
 
         jwtService.validateAccessToken(token2)
     }

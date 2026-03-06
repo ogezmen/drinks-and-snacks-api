@@ -1,6 +1,7 @@
 package user.persistence
 
 import configuration.setupTestDatabase
+import de.okan.drink_and_snack_api.user.domain.Role
 import de.okan.drink_and_snack_api.user.domain.User
 import de.okan.drink_and_snack_api.user.persistence.ExposedUserRepository
 import java.util.UUID
@@ -28,6 +29,7 @@ class ExposedUsersRepositoryTest {
             passwordHash = "password".reversed(),
             firstName = "firstName",
             lastName = "lastName",
+            roles = setOf(Role.SELLER),
         )
 
         val user2 = User(
@@ -36,6 +38,7 @@ class ExposedUsersRepositoryTest {
             passwordHash = "password2".reversed(),
             firstName = "firstName2",
             lastName = "lastName2",
+            roles = setOf(),
         )
 
         repository.create(user1)
@@ -59,6 +62,7 @@ class ExposedUsersRepositoryTest {
             passwordHash = "testPasswordHash",
             firstName = "testUserFirstName",
             lastName = "testUserLastName",
+            roles = setOf(),
         )
 
         val createdUser = repository.create(user)
@@ -81,6 +85,7 @@ class ExposedUsersRepositoryTest {
             passwordHash = "testPasswordHash",
             firstName = "testUserFirstName",
             lastName = "testUserLastName",
+            roles = setOf(),
         )
 
         repository.create(user)
