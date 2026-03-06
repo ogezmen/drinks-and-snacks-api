@@ -9,6 +9,13 @@ import java.util.UUID
 interface UserRepository {
 
     /**
+     * Retries every [User]
+     *
+     * @return a [List] with every [User]
+     */
+    fun findAll(): List<User>
+
+    /**
      * Retrieves a [User] by their unique identifier
      *
      * @param id the user's unique identifier

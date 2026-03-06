@@ -11,7 +11,7 @@ class DefaultUserService(
     val passwordService: PasswordService
 ) : UserService {
     override fun getUsers(): List<UserDTO> {
-        TODO("Not yet implemented")
+        return userRepository.findAll().map { it.toDTO() }
     }
 
     override fun getUserById(id: UUID): UserDTO? {

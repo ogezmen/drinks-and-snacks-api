@@ -12,6 +12,9 @@ import java.util.UUID
 class ExposedUserRepository(
     private val database: Database,
 ) : UserRepository {
+    override fun findAll(): List<User> {
+        TODO("Not yet implemented")
+    }
 
     override fun findById(id: UUID): User? = transaction(database) {
         UsersTable.select { UsersTable.id eq id }.mapNotNull {
