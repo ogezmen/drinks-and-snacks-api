@@ -10,6 +10,9 @@ class DefaultUserService(
     val userRepository: UserRepository,
     val passwordService: PasswordService
 ) : UserService {
+    override fun getUsers(): List<UserDTO> {
+        TODO("Not yet implemented")
+    }
 
     override fun getUserById(id: UUID): UserDTO? {
         return userRepository.findById(id)?.toDTO()
@@ -22,6 +25,10 @@ class DefaultUserService(
             "Wrong password"
         }
 
+        userRepository.deleteById(id)
+    }
+
+    override fun deleteUserById(id: UUID) {
         userRepository.deleteById(id)
     }
 }

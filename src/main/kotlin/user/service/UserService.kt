@@ -10,12 +10,33 @@ import java.util.UUID
 interface UserService {
 
     /**
+     * Retrieves all users
+     *
+     * @return a [List] of [UserDTO] representing registered all users
+     */
+    fun getUsers(): List<UserDTO>
+
+    /**
      * Retrieves a specific user by their ID
+     *
+     * @param id the unique identifier of the user
+     *
+     * @return the corresponding [UserDTO] if found, or `null` if no store exists with the given ID
      */
     fun getUserById(id: UUID): UserDTO?
 
     /**
-     * Deletes a specific drink by their ID
+     * Deletes a specific user by their ID
+     *
+     * @param id the unique identifier of the user to delete
+     * @param deleteAccountRequest the data required for deleting the user
      */
     fun deleteUserById(id: UUID, deleteAccountRequest: DeleteAccountRequest)
+
+    /**
+     * Deletes a specific user by their ID
+     *
+     * @param id the unique identifier of the user to delete
+     */
+    fun deleteUserById(id: UUID)
 }

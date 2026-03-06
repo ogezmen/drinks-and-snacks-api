@@ -1,5 +1,6 @@
 package de.okan.drink_and_snack_api
 
+import com.auth0.jwt.interfaces.Claim
 import de.okan.drink_and_snack_api.auth.api.setupAuthRoutes
 import de.okan.drink_and_snack_api.auth.service.AuthService
 import de.okan.drink_and_snack_api.configuration.UUIDSerializer
@@ -86,13 +87,23 @@ fun ApplicationCall.requireUUID(parameterName: String = "id"): UUID {
         ?: throw IllegalArgumentException("Missing or malformed $parameterName")
 }
 
-fun ApplicationCall.requireUserIDFromJWT(): UUID {
-
+fun ApplicationCall.requireClaimFromJWT(claimName: String): Claim {
     val principal = principal<JWTPrincipal>()
     return principal
         ?.payload
-        ?.getClaim("userId")
-        ?.asString()
-        ?.let { UUID.fromString(it) }
-        ?: throw IllegalArgumentException("Missing id in claims")
+        ?.getClaim(claimName)
+        ?: throw IllegalArgumentException("Missing $claimName in claims")
+}
+
+fun ApplicationCall.requireUserIDFromJWT(): UUID {
+
+    return requireClaimFromJWT("userId")
+        .asString()
+        .let { UUID.fromString(it) }
+}
+
+fun ApplicationCall.requireRoleFromJWT(): List<String> {
+
+    return requireClaimFromJWT("roles")
+        .asList(String::class.java)
 }

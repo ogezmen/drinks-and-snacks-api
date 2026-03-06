@@ -1,5 +1,7 @@
 package de.okan.drink_and_snack_api.user.api
 
+import de.okan.drink_and_snack_api.requireRoleFromJWT
+import de.okan.drink_and_snack_api.requireUUID
 import de.okan.drink_and_snack_api.requireUserIDFromJWT
 import de.okan.drink_and_snack_api.user.api.model.DeleteAccountRequest
 import de.okan.drink_and_snack_api.user.service.UserService
@@ -33,6 +35,52 @@ fun Route.setupUserRoutes(userService: UserService) {
 
                     call.respond(HttpStatusCode.NoContent)
                 }
+            }
+
+            get {
+                call.requireUserIDFromJWT()
+                val roles = call.requireRoleFromJWT()
+
+                if (!roles.contains("ADMIN")) {
+                    call.respond(HttpStatusCode.Unauthorized)
+                    return@get
+                }
+
+                val users = userService.getUsers()
+
+                call.respond(message = users, status = HttpStatusCode.OK)
+            }
+
+            get("/{id}") {
+                val id = call.requireUUID()
+
+                call.requireUserIDFromJWT()
+                val roles = call.requireRoleFromJWT()
+
+                if (!roles.contains("ADMIN")) {
+                    call.respond(HttpStatusCode.Unauthorized)
+                    return@get
+                }
+
+                val user = userService.getUserById(id) ?: throw NoSuchElementException("User with ID $id not found")
+
+
+                call.respond(user)
+            }
+
+            delete("/{id}") {
+                val id = call.requireUUID()
+
+                call.requireUserIDFromJWT()
+                val roles = call.requireRoleFromJWT()
+
+                if (!roles.contains("ADMIN")) {
+                    call.respond(HttpStatusCode.Unauthorized)
+                    return@delete
+                }
+
+                userService.deleteUserById(id)
+                call.respond(HttpStatusCode.NoContent)
             }
         }
     }
