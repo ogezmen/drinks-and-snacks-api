@@ -1,6 +1,5 @@
 package de.okan.drink_and_snack_api.user.api.model
 
-import de.okan.drink_and_snack_api.de.okan.drink_and_snack_api.user.api.model.RoleDTO
 import kotlinx.serialization.Serializable
 
 @Serializable
