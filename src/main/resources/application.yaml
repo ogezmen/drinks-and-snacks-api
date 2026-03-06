@@ -1,7 +1,7 @@
 ktor:
     application:
         modules:
-            - de.okan.drink_and_snack_api.ApplicationKt.module
+            - de.okan.drinks_and_snacks_api.ApplicationKt.module
     deployment:
         port: ${PORT}
 

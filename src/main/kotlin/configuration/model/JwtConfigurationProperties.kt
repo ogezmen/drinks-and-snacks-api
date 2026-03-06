@@ -1,4 +1,4 @@
-package de.okan.drink_and_snack_api.configuration.model
+package de.okan.drinks_and_snacks_api.configuration.model
 
 data class JwtConfigurationProperties(
     val secret: String,

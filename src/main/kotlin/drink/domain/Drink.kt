@@ -1,4 +1,4 @@
-package de.okan.drink_and_snack_api.drink.domain
+package de.okan.drinks_and_snacks_api.drink.domain
 
 import java.util.UUID
 

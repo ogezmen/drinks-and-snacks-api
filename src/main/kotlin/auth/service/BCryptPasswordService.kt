@@ -1,4 +1,4 @@
-package de.okan.drink_and_snack_api.auth.service
+package de.okan.drinks_and_snacks_api.auth.service
 
 import org.mindrot.jbcrypt.BCrypt
 

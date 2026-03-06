@@ -1,13 +1,13 @@
 package drink.service
 
-import de.okan.drink_and_snack_api.drink.api.model.CreateDrinkRequest
-import de.okan.drink_and_snack_api.drink.api.model.DrinkFiltersDTO
-import de.okan.drink_and_snack_api.drink.api.model.DrinkPackagingDTO
-import de.okan.drink_and_snack_api.drink.domain.Drink
-import de.okan.drink_and_snack_api.drink.domain.DrinkPackaging
-import de.okan.drink_and_snack_api.drink.persistence.DrinkRepository
-import de.okan.drink_and_snack_api.drink.service.DefaultDrinkService
-import de.okan.drink_and_snack_api.drink.service.toRepositoryFilters
+import de.okan.drinks_and_snacks_api.drink.api.model.CreateDrinkRequest
+import de.okan.drinks_and_snacks_api.drink.api.model.DrinkFiltersDTO
+import de.okan.drinks_and_snacks_api.drink.api.model.DrinkPackagingDTO
+import de.okan.drinks_and_snacks_api.drink.domain.Drink
+import de.okan.drinks_and_snacks_api.drink.domain.DrinkPackaging
+import de.okan.drinks_and_snacks_api.drink.persistence.DrinkRepository
+import de.okan.drinks_and_snacks_api.drink.service.DefaultDrinkService
+import de.okan.drinks_and_snacks_api.drink.service.toRepositoryFilters
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

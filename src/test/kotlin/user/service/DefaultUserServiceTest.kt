@@ -1,11 +1,11 @@
 package user.service
 
-import de.okan.drink_and_snack_api.auth.service.PasswordService
-import de.okan.drink_and_snack_api.user.api.model.DeleteAccountRequest
-import de.okan.drink_and_snack_api.user.domain.Role
-import de.okan.drink_and_snack_api.user.domain.User
-import de.okan.drink_and_snack_api.user.persistence.UserRepository
-import de.okan.drink_and_snack_api.user.service.DefaultUserService
+import de.okan.drinks_and_snacks_api.auth.service.PasswordService
+import de.okan.drinks_and_snacks_api.user.api.model.DeleteAccountRequest
+import de.okan.drinks_and_snacks_api.user.domain.Role
+import de.okan.drinks_and_snacks_api.user.domain.User
+import de.okan.drinks_and_snacks_api.user.persistence.UserRepository
+import de.okan.drinks_and_snacks_api.user.service.DefaultUserService
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

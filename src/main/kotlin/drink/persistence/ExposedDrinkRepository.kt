@@ -1,6 +1,6 @@
-package de.okan.drink_and_snack_api.drink.persistence
+package de.okan.drinks_and_snacks_api.drink.persistence
 
-import de.okan.drink_and_snack_api.drink.domain.Drink
+import de.okan.drinks_and_snacks_api.drink.domain.Drink
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.and

@@ -1,9 +1,9 @@
-package de.okan.drink_and_snack_api.store.service
+package de.okan.drinks_and_snacks_api.store.service
 
-import de.okan.drink_and_snack_api.store.api.model.CreateStoreRequest
-import de.okan.drink_and_snack_api.store.domain.Store
-import de.okan.drink_and_snack_api.store.persistence.StoreRepository
-import de.okan.drink_and_snack_api.store.service.model.StoreDTO
+import de.okan.drinks_and_snacks_api.store.api.model.CreateStoreRequest
+import de.okan.drinks_and_snacks_api.store.domain.Store
+import de.okan.drinks_and_snacks_api.store.persistence.StoreRepository
+import de.okan.drinks_and_snacks_api.store.service.model.StoreDTO
 import java.util.UUID
 
 class DefaultStoreService(

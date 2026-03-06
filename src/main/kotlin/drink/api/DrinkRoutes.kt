@@ -1,10 +1,10 @@
-package de.okan.drink_and_snack_api.drink.api
+package de.okan.drinks_and_snacks_api.drink.api
 
-import de.okan.drink_and_snack_api.drink.api.model.CreateDrinkRequest
-import de.okan.drink_and_snack_api.drink.service.DrinkService
-import de.okan.drink_and_snack_api.requireUUID
-import de.okan.drink_and_snack_api.requireUserIDFromJWT
-import de.okan.drink_and_snack_api.store.service.StoreService
+import de.okan.drinks_and_snacks_api.drink.api.model.CreateDrinkRequest
+import de.okan.drinks_and_snacks_api.drink.service.DrinkService
+import de.okan.drinks_and_snacks_api.requireUUID
+import de.okan.drinks_and_snacks_api.requireUserIDFromJWT
+import de.okan.drinks_and_snacks_api.store.service.StoreService
 import io.ktor.http.*
 import io.ktor.server.auth.*
 import io.ktor.server.request.*

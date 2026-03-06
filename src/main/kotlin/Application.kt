@@ -1,8 +1,8 @@
-package de.okan.drink_and_snack_api
+package de.okan.drinks_and_snacks_api
 
-import de.okan.drink_and_snack_api.configuration.*
-import de.okan.drink_and_snack_api.configuration.model.DatabaseConfigurationProperties
-import de.okan.drink_and_snack_api.configuration.model.JwtConfigurationProperties
+import de.okan.drinks_and_snacks_api.configuration.*
+import de.okan.drinks_and_snacks_api.configuration.model.DatabaseConfigurationProperties
+import de.okan.drinks_and_snacks_api.configuration.model.JwtConfigurationProperties
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject

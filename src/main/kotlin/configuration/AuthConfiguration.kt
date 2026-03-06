@@ -1,8 +1,8 @@
-package de.okan.drink_and_snack_api.configuration
+package de.okan.drinks_and_snacks_api.configuration
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
-import de.okan.drink_and_snack_api.configuration.model.JwtConfigurationProperties
+import de.okan.drinks_and_snacks_api.configuration.model.JwtConfigurationProperties
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*

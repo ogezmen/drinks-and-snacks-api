@@ -1,6 +1,6 @@
 package configuration
 
-import de.okan.drink_and_snack_api.configuration.UUIDSerializer
+import de.okan.drinks_and_snacks_api.configuration.UUIDSerializer
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json

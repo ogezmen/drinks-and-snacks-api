@@ -1,15 +1,15 @@
-package de.okan.drink_and_snack_api
+package de.okan.drinks_and_snacks_api
 
 import com.auth0.jwt.interfaces.Claim
-import de.okan.drink_and_snack_api.auth.api.setupAuthRoutes
-import de.okan.drink_and_snack_api.auth.service.AuthService
-import de.okan.drink_and_snack_api.configuration.UUIDSerializer
-import de.okan.drink_and_snack_api.drink.api.setupDrinkRoutes
-import de.okan.drink_and_snack_api.drink.service.DrinkService
-import de.okan.drink_and_snack_api.store.api.setupStoreRoutes
-import de.okan.drink_and_snack_api.store.service.StoreService
-import de.okan.drink_and_snack_api.user.api.setupUserRoutes
-import de.okan.drink_and_snack_api.user.service.UserService
+import de.okan.drinks_and_snacks_api.auth.api.setupAuthRoutes
+import de.okan.drinks_and_snacks_api.auth.service.AuthService
+import de.okan.drinks_and_snacks_api.configuration.UUIDSerializer
+import de.okan.drinks_and_snacks_api.drink.api.setupDrinkRoutes
+import de.okan.drinks_and_snacks_api.drink.service.DrinkService
+import de.okan.drinks_and_snacks_api.store.api.setupStoreRoutes
+import de.okan.drinks_and_snacks_api.store.service.StoreService
+import de.okan.drinks_and_snacks_api.user.api.setupUserRoutes
+import de.okan.drinks_and_snacks_api.user.service.UserService
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.*

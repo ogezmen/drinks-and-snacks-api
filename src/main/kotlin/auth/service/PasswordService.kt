@@ -1,4 +1,4 @@
-package de.okan.drink_and_snack_api.auth.service
+package de.okan.drinks_and_snacks_api.auth.service
 
 /**
  * Service responsible for securely hashing and verifying user passwords.

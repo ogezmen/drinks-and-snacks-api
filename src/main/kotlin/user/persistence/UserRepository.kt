@@ -1,6 +1,6 @@
-package de.okan.drink_and_snack_api.user.persistence
+package de.okan.drinks_and_snacks_api.user.persistence
 
-import de.okan.drink_and_snack_api.user.domain.User
+import de.okan.drinks_and_snacks_api.user.domain.User
 import java.util.UUID
 
 /**

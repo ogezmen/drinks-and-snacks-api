@@ -1,7 +1,7 @@
-import de.okan.drink_and_snack_api.configuration.authConfiguration
-import de.okan.drink_and_snack_api.configuration.model.JwtConfigurationProperties
-import de.okan.drink_and_snack_api.configureRouting
-import de.okan.drink_and_snack_api.setupRootRoutes
+import de.okan.drinks_and_snacks_api.configuration.authConfiguration
+import de.okan.drinks_and_snacks_api.configuration.model.JwtConfigurationProperties
+import de.okan.drinks_and_snacks_api.configureRouting
+import de.okan.drinks_and_snacks_api.setupRootRoutes
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.routing.routing

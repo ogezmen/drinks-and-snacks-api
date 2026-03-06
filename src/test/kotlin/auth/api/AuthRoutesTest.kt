@@ -1,14 +1,14 @@
 package auth.api
 
 import configuration.runTestApplication
-import de.okan.drink_and_snack_api.auth.api.model.LoginRequest
-import de.okan.drink_and_snack_api.auth.api.model.RegisterRequest
-import de.okan.drink_and_snack_api.auth.api.model.SessionDTO
-import de.okan.drink_and_snack_api.auth.api.setupAuthRoutes
-import de.okan.drink_and_snack_api.configuration.authConfiguration
-import de.okan.drink_and_snack_api.configuration.model.JwtConfigurationProperties
-import de.okan.drink_and_snack_api.auth.service.AuthService
-import de.okan.drink_and_snack_api.configureRouting
+import de.okan.drinks_and_snacks_api.auth.api.model.LoginRequest
+import de.okan.drinks_and_snacks_api.auth.api.model.RegisterRequest
+import de.okan.drinks_and_snacks_api.auth.api.model.SessionDTO
+import de.okan.drinks_and_snacks_api.auth.api.setupAuthRoutes
+import de.okan.drinks_and_snacks_api.configuration.authConfiguration
+import de.okan.drinks_and_snacks_api.configuration.model.JwtConfigurationProperties
+import de.okan.drinks_and_snacks_api.auth.service.AuthService
+import de.okan.drinks_and_snacks_api.configureRouting
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*

@@ -2,11 +2,11 @@ package store.api
 
 import configuration.authTestConfiguration
 import configuration.runTestApplication
-import de.okan.drink_and_snack_api.configureRouting
-import de.okan.drink_and_snack_api.store.api.model.CreateStoreRequest
-import de.okan.drink_and_snack_api.store.api.setupStoreRoutes
-import de.okan.drink_and_snack_api.store.service.StoreService
-import de.okan.drink_and_snack_api.store.service.model.StoreDTO
+import de.okan.drinks_and_snacks_api.configureRouting
+import de.okan.drinks_and_snacks_api.store.api.model.CreateStoreRequest
+import de.okan.drinks_and_snacks_api.store.api.setupStoreRoutes
+import de.okan.drinks_and_snacks_api.store.service.StoreService
+import de.okan.drinks_and_snacks_api.store.service.model.StoreDTO
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*

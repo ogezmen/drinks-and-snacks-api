@@ -2,11 +2,11 @@ package user.api
 
 import configuration.authTestConfiguration
 import configuration.runTestApplication
-import de.okan.drink_and_snack_api.configureRouting
-import de.okan.drink_and_snack_api.user.api.model.DeleteAccountRequest
-import de.okan.drink_and_snack_api.user.api.model.UserDTO
-import de.okan.drink_and_snack_api.user.api.setupUserRoutes
-import de.okan.drink_and_snack_api.user.service.UserService
+import de.okan.drinks_and_snacks_api.configureRouting
+import de.okan.drinks_and_snacks_api.user.api.model.DeleteAccountRequest
+import de.okan.drinks_and_snacks_api.user.api.model.UserDTO
+import de.okan.drinks_and_snacks_api.user.api.setupUserRoutes
+import de.okan.drinks_and_snacks_api.user.service.UserService
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.delete

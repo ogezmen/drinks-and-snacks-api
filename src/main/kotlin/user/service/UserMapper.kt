@@ -1,9 +1,9 @@
-package de.okan.drink_and_snack_api.user.service
+package de.okan.drinks_and_snacks_api.user.service
 
-import de.okan.drink_and_snack_api.user.api.model.RoleDTO
-import de.okan.drink_and_snack_api.user.api.model.UserDTO
-import de.okan.drink_and_snack_api.user.domain.Role
-import de.okan.drink_and_snack_api.user.domain.User
+import de.okan.drinks_and_snacks_api.user.api.model.RoleDTO
+import de.okan.drinks_and_snacks_api.user.api.model.UserDTO
+import de.okan.drinks_and_snacks_api.user.domain.Role
+import de.okan.drinks_and_snacks_api.user.domain.User
 
 fun Role.toDTO() = when(this) {
     Role.SELLER -> RoleDTO.SELLER

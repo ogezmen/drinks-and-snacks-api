@@ -1,4 +1,4 @@
-package de.okan.drink_and_snack_api.drink.api.model
+package de.okan.drinks_and_snacks_api.drink.api.model
 
 data class DrinkFiltersDTO(
     val alcoholic: Boolean? = null,

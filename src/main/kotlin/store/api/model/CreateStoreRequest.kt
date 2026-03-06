@@ -1,4 +1,4 @@
-package de.okan.drink_and_snack_api.store.api.model
+package de.okan.drinks_and_snacks_api.store.api.model
 
 import kotlinx.serialization.Serializable
 

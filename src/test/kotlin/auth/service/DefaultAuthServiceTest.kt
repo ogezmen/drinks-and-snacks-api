@@ -1,13 +1,13 @@
 package auth.service
 
-import de.okan.drink_and_snack_api.auth.api.model.LoginRequest
-import de.okan.drink_and_snack_api.auth.api.model.RegisterRequest
-import de.okan.drink_and_snack_api.user.domain.User
-import de.okan.drink_and_snack_api.user.persistence.UserRepository
-import de.okan.drink_and_snack_api.auth.service.DefaultAuthService
-import de.okan.drink_and_snack_api.auth.service.JwtService
-import de.okan.drink_and_snack_api.auth.service.PasswordService
-import de.okan.drink_and_snack_api.user.domain.Role
+import de.okan.drinks_and_snacks_api.auth.api.model.LoginRequest
+import de.okan.drinks_and_snacks_api.auth.api.model.RegisterRequest
+import de.okan.drinks_and_snacks_api.user.domain.User
+import de.okan.drinks_and_snacks_api.user.persistence.UserRepository
+import de.okan.drinks_and_snacks_api.auth.service.DefaultAuthService
+import de.okan.drinks_and_snacks_api.auth.service.JwtService
+import de.okan.drinks_and_snacks_api.auth.service.PasswordService
+import de.okan.drinks_and_snacks_api.user.domain.Role
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

@@ -1,6 +1,6 @@
 package auth.service
 
-import de.okan.drink_and_snack_api.auth.service.BCryptPasswordService
+import de.okan.drinks_and_snacks_api.auth.service.BCryptPasswordService
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals

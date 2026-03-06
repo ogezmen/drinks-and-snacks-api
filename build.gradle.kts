@@ -5,7 +5,7 @@ plugins {
     kotlin("plugin.serialization") version "2.0.0"
 }
 
-group = "de.okan.drink_and_snack_api"
+group = "de.okan.drinks_and_snacks_api"
 version = "0.0.1"
 
 application {
@@ -21,8 +21,8 @@ kover {
         filters {
             excludes {
                 classes(
-                    "de.okan.drink_and_snack_api.ApplicationKt*",
-                    "de.okan.drink_and_snack_api.RoutingKt*",
+                    "de.okan.drinks_and_snacks_api.ApplicationKt*",
+                    "de.okan.drinks_and_snacks_api.RoutingKt*",
                     "*.configuration.*",
                     "*.model.*",
                 )

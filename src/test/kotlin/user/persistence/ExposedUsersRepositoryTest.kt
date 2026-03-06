@@ -1,9 +1,9 @@
 package user.persistence
 
 import configuration.setupTestDatabase
-import de.okan.drink_and_snack_api.user.domain.Role
-import de.okan.drink_and_snack_api.user.domain.User
-import de.okan.drink_and_snack_api.user.persistence.ExposedUserRepository
+import de.okan.drinks_and_snacks_api.user.domain.Role
+import de.okan.drinks_and_snacks_api.user.domain.User
+import de.okan.drinks_and_snacks_api.user.persistence.ExposedUserRepository
 import java.util.UUID
 import kotlin.test.BeforeTest
 import kotlin.test.Test

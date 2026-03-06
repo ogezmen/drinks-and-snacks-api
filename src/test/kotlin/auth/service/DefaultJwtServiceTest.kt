@@ -2,8 +2,8 @@ package auth.service
 
 import com.auth0.jwt.exceptions.JWTDecodeException
 import com.auth0.jwt.exceptions.SignatureVerificationException
-import de.okan.drink_and_snack_api.configuration.model.JwtConfigurationProperties
-import de.okan.drink_and_snack_api.auth.service.DefaultJwtService
+import de.okan.drinks_and_snacks_api.configuration.model.JwtConfigurationProperties
+import de.okan.drinks_and_snacks_api.auth.service.DefaultJwtService
 import java.util.UUID
 import kotlin.test.BeforeTest
 import kotlin.test.Test

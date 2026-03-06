@@ -1,10 +1,10 @@
-package de.okan.drink_and_snack_api.auth.service
+package de.okan.drinks_and_snacks_api.auth.service
 
-import de.okan.drink_and_snack_api.auth.api.model.LoginRequest
-import de.okan.drink_and_snack_api.auth.api.model.RegisterRequest
-import de.okan.drink_and_snack_api.auth.api.model.SessionDTO
-import de.okan.drink_and_snack_api.user.domain.User
-import de.okan.drink_and_snack_api.user.persistence.UserRepository
+import de.okan.drinks_and_snacks_api.auth.api.model.LoginRequest
+import de.okan.drinks_and_snacks_api.auth.api.model.RegisterRequest
+import de.okan.drinks_and_snacks_api.auth.api.model.SessionDTO
+import de.okan.drinks_and_snacks_api.user.domain.User
+import de.okan.drinks_and_snacks_api.user.persistence.UserRepository
 import java.util.UUID
 
 class DefaultAuthService(

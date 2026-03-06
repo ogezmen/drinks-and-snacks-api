@@ -1,7 +1,7 @@
 package configuration
 
-import de.okan.drink_and_snack_api.configuration.migrateDatabase
-import de.okan.drink_and_snack_api.configuration.model.DatabaseConfigurationProperties
+import de.okan.drinks_and_snacks_api.configuration.migrateDatabase
+import de.okan.drinks_and_snacks_api.configuration.model.DatabaseConfigurationProperties
 import org.jetbrains.exposed.sql.Database
 import java.util.UUID
 

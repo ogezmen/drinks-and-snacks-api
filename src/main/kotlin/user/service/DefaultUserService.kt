@@ -1,9 +1,9 @@
-package de.okan.drink_and_snack_api.user.service
+package de.okan.drinks_and_snacks_api.user.service
 
-import de.okan.drink_and_snack_api.auth.service.PasswordService
-import de.okan.drink_and_snack_api.user.api.model.DeleteAccountRequest
-import de.okan.drink_and_snack_api.user.api.model.UserDTO
-import de.okan.drink_and_snack_api.user.persistence.UserRepository
+import de.okan.drinks_and_snacks_api.auth.service.PasswordService
+import de.okan.drinks_and_snacks_api.user.api.model.DeleteAccountRequest
+import de.okan.drinks_and_snacks_api.user.api.model.UserDTO
+import de.okan.drinks_and_snacks_api.user.persistence.UserRepository
 import java.util.UUID
 
 class DefaultUserService(

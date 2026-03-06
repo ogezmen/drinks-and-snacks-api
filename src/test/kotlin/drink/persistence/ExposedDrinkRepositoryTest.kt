@@ -1,14 +1,14 @@
 package drink.persistence
 
 import configuration.setupTestDatabase
-import de.okan.drink_and_snack_api.user.domain.User
-import de.okan.drink_and_snack_api.user.persistence.ExposedUserRepository
-import de.okan.drink_and_snack_api.drink.domain.Drink
-import de.okan.drink_and_snack_api.drink.domain.DrinkPackaging
-import de.okan.drink_and_snack_api.drink.persistence.DrinkFilters
-import de.okan.drink_and_snack_api.drink.persistence.ExposedDrinkRepository
-import de.okan.drink_and_snack_api.store.domain.Store
-import de.okan.drink_and_snack_api.store.persistence.ExposedStoreRepository
+import de.okan.drinks_and_snacks_api.user.domain.User
+import de.okan.drinks_and_snacks_api.user.persistence.ExposedUserRepository
+import de.okan.drinks_and_snacks_api.drink.domain.Drink
+import de.okan.drinks_and_snacks_api.drink.domain.DrinkPackaging
+import de.okan.drinks_and_snacks_api.drink.persistence.DrinkFilters
+import de.okan.drinks_and_snacks_api.drink.persistence.ExposedDrinkRepository
+import de.okan.drinks_and_snacks_api.store.domain.Store
+import de.okan.drinks_and_snacks_api.store.persistence.ExposedStoreRepository
 import junit.framework.TestCase.assertTrue
 import java.util.*
 import kotlin.test.BeforeTest

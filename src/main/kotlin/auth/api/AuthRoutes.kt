@@ -1,8 +1,8 @@
-package de.okan.drink_and_snack_api.auth.api
+package de.okan.drinks_and_snacks_api.auth.api
 
-import de.okan.drink_and_snack_api.auth.api.model.LoginRequest
-import de.okan.drink_and_snack_api.auth.api.model.RegisterRequest
-import de.okan.drink_and_snack_api.auth.service.AuthService
+import de.okan.drinks_and_snacks_api.auth.api.model.LoginRequest
+import de.okan.drinks_and_snacks_api.auth.api.model.RegisterRequest
+import de.okan.drinks_and_snacks_api.auth.service.AuthService
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond

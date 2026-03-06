@@ -1,10 +1,10 @@
-package de.okan.drink_and_snack_api.user.api
+package de.okan.drinks_and_snacks_api.user.api
 
-import de.okan.drink_and_snack_api.requireRoleFromJWT
-import de.okan.drink_and_snack_api.requireUUID
-import de.okan.drink_and_snack_api.requireUserIDFromJWT
-import de.okan.drink_and_snack_api.user.api.model.DeleteAccountRequest
-import de.okan.drink_and_snack_api.user.service.UserService
+import de.okan.drinks_and_snacks_api.requireRoleFromJWT
+import de.okan.drinks_and_snacks_api.requireUUID
+import de.okan.drinks_and_snacks_api.requireUserIDFromJWT
+import de.okan.drinks_and_snacks_api.user.api.model.DeleteAccountRequest
+import de.okan.drinks_and_snacks_api.user.service.UserService
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.auth.authenticate
 import io.ktor.server.request.receive
