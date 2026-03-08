@@ -46,10 +46,12 @@ class StoreRoutesTest {
             StoreDTO(
                 id = UUID.randomUUID(),
                 name = "Store 1",
+                ownerUsername = "user1",
             ),
             StoreDTO(
                 id = UUID.randomUUID(),
                 name = "Store 2",
+                ownerUsername = "user2",
             )
         )
 
@@ -72,6 +74,7 @@ class StoreRoutesTest {
         val store = StoreDTO(
             id = storeId,
             name = "Store 1",
+            ownerUsername = "User1",
         )
 
         every { storeService.getStoreById(any()) } returns store
@@ -119,6 +122,7 @@ class StoreRoutesTest {
         val createdStore = StoreDTO(
             id = UUID.randomUUID(),
             name = createStoreRequest.name,
+            ownerUsername = "User1",
         )
 
         every { storeService.createStore(any(), any()) } returns createdStore

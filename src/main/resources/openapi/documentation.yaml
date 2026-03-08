@@ -318,9 +318,12 @@ components:
           format: uuid
         name:
           type: string
+        ownerUsername:
+          type: string
       required:
         - id
         - name
+        - ownerUsername
 
     CreateStoreRequest:
       type: object

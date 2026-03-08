@@ -6,5 +6,5 @@ data class Store(
     val id: UUID,
     val name: String,
     val ownerUserId: UUID,
-    val ownerUsername: String?,
+    val ownerUsername: String? = null,
 )

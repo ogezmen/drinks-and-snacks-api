@@ -18,7 +18,6 @@ class DefaultStoreService(
             id = UUID.randomUUID(),
             name = createStoreRequest.name,
             ownerUserId = ownerUserId,
-            ownerUsername = null,
         )
 
         val savedStore = storeRepository.create(storeEntity)

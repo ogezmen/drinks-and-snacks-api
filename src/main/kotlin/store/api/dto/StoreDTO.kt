@@ -8,4 +8,5 @@ import java.util.UUID
 data class StoreDTO(
     @Contextual val id: UUID,
     val name: String,
+    val ownerUsername: String? = null,
 )
