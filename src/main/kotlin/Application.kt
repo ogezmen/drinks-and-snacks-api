@@ -36,6 +36,8 @@ fun Application.module() {
 
     configureRouting()
 
+    configureRequestValidation()
+
     routing {
         setupRoutes()
     }
